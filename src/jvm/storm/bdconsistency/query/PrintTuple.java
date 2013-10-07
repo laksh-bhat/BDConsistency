@@ -2,6 +2,7 @@ package bdconsistency.query;
 
 import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Values;
+import storm.trident.operation.BaseFilter;
 import storm.trident.operation.BaseFunction;
 import storm.trident.operation.Function;
 import storm.trident.operation.TridentCollector;
@@ -14,13 +15,10 @@ import java.text.MessageFormat;
  * Date: 10/7/13
  * Time: 8:24 AM
  */
-public class PrintTuple extends BaseFunction {
+public class PrintTuple extends BaseFilter {
     @Override
-    public void execute(TridentTuple tuple, TridentCollector collector) {
-        for (int i = 0; i < tuple.size(); i++) {
-            System.out.print(MessageFormat.format("{0}\t", tuple.getValue(i)));
-        }
-        System.out.println();
-        collector.emit(new Values(tuple));
+    public boolean isKeep(TridentTuple tuple) {
+        System.out.println(tuple);
+        return true;
     }
 }

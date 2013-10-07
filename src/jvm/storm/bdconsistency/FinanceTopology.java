@@ -38,7 +38,7 @@ public class FinanceTopology {
                         new bdconsistency.TradeConstructor.AskTradeConstructor(),
                         new Fields("brokerId", "trade")
                 )//.partitionBy(new Fields("brokerId"))
-                .each(new PrintTuple(), new Fields("brokerId", "trade"))
+                .each(new Fields("brokerId", "trade"), new PrintTuple())
                 .partitionPersist(new AsksStateFactory(), new Fields("trade"), new AsksUpdater());
 
         TridentState bids = topology.newStream("bidsSpout", bidsBatchSpout)
@@ -47,7 +47,7 @@ public class FinanceTopology {
                         new bdconsistency.TradeConstructor.BidTradeConstructor(),
                         new Fields("brokerId", "trade")
                 )//.partitionBy(new Fields("brokerId"))
-                .each(new PrintTuple(), new Fields("brokerId", "trade"))
+                .each(new Fields("brokerId", "trade"), new PrintTuple())
                 .partitionPersist(new BidsStateFactory(), new Fields("trade"), new BidsUpdater());
 
         //query
@@ -56,7 +56,7 @@ public class FinanceTopology {
             Stream stream = topology.newStream("querySpout", new QuerySpout())
                     .stateQuery(asks, new BrokerEqualityQuery.SelectStarFromAsks(), new Fields("asks"))
                     .stateQuery(bids, new BrokerEqualityQuery.AsksBidsEquiJoinByBrokerIdPredicate(), new Fields("brokerId", "volume"))
-                    .each(new PrintTuple(), new Fields(""))
+                    .each(new Fields("brokerId", "volume"), new PrintTuple())
                     ;
         }
         assert (args[0] != null);
