@@ -19,9 +19,9 @@ public class AsksUpdater extends BaseStateUpdater<BidsState> {
             Object trade = t.getValueByField("trade");
             if(trade instanceof Trade){
                 int operation = ((Trade)trade).getOperation();
-                long version =  ((Trade)trade).getTimestamp();
-                if(operation == 1) state.addTrade(version, (Trade) trade);
-                else state.removeTrade(version, (Trade) trade);
+                long brokerId =  ((Trade)trade).getBrokerId();
+                if(operation == 1) state.addTrade(brokerId, (Trade) trade);
+                else state.removeTrade(brokerId, (Trade) trade);
             }
         }
     }

@@ -32,7 +32,7 @@ public class FinanceTopology {
         TridentTopology topology = new TridentTopology();
 
         TridentState asks = topology.newStream("askSpout", asksBatchSpout)
-                .parallelismHint(16)
+                //.parallelismHint(8)
                 .each(new Fields("tradeString"),
                         new bdconsistency.TradeConstructor.AskTradeConstructor(),
                         new Fields("brokerId", "trade")
@@ -40,7 +40,7 @@ public class FinanceTopology {
                 .partitionPersist(new AsksStateFactory(), new Fields("trade"), new AsksUpdater());
 
         TridentState bids = topology.newStream("bidsSpout", bidsBatchSpout)
-                .parallelismHint(8)
+                //.parallelismHint(8)
                 .each(new Fields("tradeString"),
                         new bdconsistency.TradeConstructor.BidTradeConstructor(),
                         new Fields("brokerId", "trade")
@@ -79,7 +79,7 @@ public class FinanceTopology {
                     List<String> batchOfTuples = new ArrayList<String>();
                     while (scanner.hasNextLine()) {
                         if(batchOfTuples.size() >= BATCH_SIZE) {
-                            System.out.println(batchOfTuples.get(0));
+                            /*System.out.println(batchOfTuples.get(0));*/
                             batch.feed(batchOfTuples);
                             batchOfTuples.clear();
                         }

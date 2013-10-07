@@ -5,8 +5,6 @@ import storm.trident.operation.BaseFunction;
 import storm.trident.operation.TridentCollector;
 import storm.trident.tuple.TridentTuple;
 
-import java.io.Serializable;
-
 public class TradeConstructor {
 
     public static class AskTradeConstructor extends BaseFunction {
