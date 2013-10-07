@@ -85,6 +85,10 @@ public class FinanceTopology {
                             /*System.out.println(batchOfTuples.get(0));*/
                             batch.feed(batchOfTuples);
                             batchOfTuples.clear();
+                            try {
+                                Thread.sleep(100);
+                                System.out.println("Sleeping for 100 ms");
+                            } catch (InterruptedException ignore) {}
                         }
                         batchOfTuples.add(scanner.nextLine());
                     }
