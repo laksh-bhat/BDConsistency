@@ -4,9 +4,9 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$/../src">
       <sourceFolder url="file://$MODULE_DIR$/../src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../src/jvm/storm" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../src/jvm" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/../src/clj" />
-      <excludeFolder url="file://$MODULE_DIR$/../src/jvm/storm" />
-      <excludeFolder url="file://$MODULE_DIR$/../src/jvm/storm/starter" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
