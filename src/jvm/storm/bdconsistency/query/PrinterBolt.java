@@ -15,7 +15,7 @@ import java.text.MessageFormat;
  * Date: 10/7/13
  * Time: 8:24 AM
  */
-public class PrintTuple extends BaseFilter {
+public class PrinterBolt extends BaseFilter {
     @Override
     public boolean isKeep(TridentTuple tuple) {
         System.out.println(tuple);

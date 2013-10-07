@@ -1,18 +1,20 @@
 package bdconsistency;
 
+import backtype.storm.Config;
+import backtype.storm.StormSubmitter;
+import backtype.storm.generated.StormTopology;
 import backtype.storm.tuple.Fields;
 import bdconsistency.ask.AsksStateFactory;
 import bdconsistency.ask.AsksUpdater;
 import bdconsistency.bid.BidsStateFactory;
 import bdconsistency.bid.BidsUpdater;
 import bdconsistency.query.BrokerEqualityQuery;
-import bdconsistency.query.PrintTuple;
+import bdconsistency.query.PrinterBolt;
 import bdconsistency.query.QuerySpout;
 import storm.trident.Stream;
 import storm.trident.TridentState;
 import storm.trident.TridentTopology;
 import storm.trident.testing.FeederBatchSpout;
-import storm.trident.testing.FeederCommitterBatchSpout;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -38,7 +40,7 @@ public class FinanceTopology {
                         new bdconsistency.TradeConstructor.AskTradeConstructor(),
                         new Fields("brokerId", "trade")
                 )//.partitionBy(new Fields("brokerId"))
-                .each(new Fields("brokerId", "trade"), new PrintTuple())
+                .each(new Fields("brokerId", "trade"), new PrinterBolt())
                 .partitionPersist(new AsksStateFactory(), new Fields("trade"), new AsksUpdater());
 
         TridentState bids = topology.newStream("bidsSpout", bidsBatchSpout)
@@ -47,8 +49,11 @@ public class FinanceTopology {
                         new bdconsistency.TradeConstructor.BidTradeConstructor(),
                         new Fields("brokerId", "trade")
                 )//.partitionBy(new Fields("brokerId"))
-                .each(new Fields("brokerId", "trade"), new PrintTuple())
+                .each(new Fields("brokerId", "trade"), new PrinterBolt())
                 .partitionPersist(new BidsStateFactory(), new Fields("trade"), new BidsUpdater());
+
+        assert (args[0] != null);
+        startStreaming(asksBatchSpout, bidsBatchSpout, args[0], args[0]);
 
         //query
         {
@@ -56,11 +61,14 @@ public class FinanceTopology {
             Stream stream = topology.newStream("querySpout", new QuerySpout())
                     .stateQuery(asks, new BrokerEqualityQuery.SelectStarFromAsks(), new Fields("asks"))
                     .stateQuery(bids, new BrokerEqualityQuery.AsksBidsEquiJoinByBrokerIdPredicate(), new Fields("brokerId", "volume"))
-                    .each(new Fields("brokerId", "volume"), new PrintTuple())
+                    .each(new Fields("brokerId", "volume"), new PrinterBolt())
                     ;
         }
-        assert (args[0] != null);
-        startStreaming(asksBatchSpout, bidsBatchSpout, args[0], args[0]);
+
+        Config conf = new Config();
+        conf.setNumWorkers(20);
+        conf.setMaxSpoutPending(5000);
+        StormSubmitter.submitTopology("FinanceTopology", conf, topology.build());
     }
 
     private static void startStreaming(FeederBatchSpout asksBatchSpout, FeederBatchSpout bidsBatchSpout, String asksFileName, String bidsFileName) {
@@ -82,7 +90,7 @@ public class FinanceTopology {
                     List<String> batchOfTuples = new ArrayList<String>();
                     while (scanner.hasNextLine()) {
                         if(batchOfTuples.size() >= BATCH_SIZE) {
-                            /*System.out.println(batchOfTuples.get(0));*/
+                            System.out.println(batchOfTuples.get(0));
                             batch.feed(batchOfTuples);
                             batchOfTuples.clear();
                             try {
@@ -100,5 +108,5 @@ public class FinanceTopology {
     }
 
 
-    private static final int BATCH_SIZE = 10;
+    private static final int BATCH_SIZE = 2;
 }
