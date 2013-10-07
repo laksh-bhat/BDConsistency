@@ -11,6 +11,7 @@ import bdconsistency.query.QuerySpout;
 import storm.trident.Stream;
 import storm.trident.TridentState;
 import storm.trident.TridentTopology;
+import storm.trident.testing.FeederBatchSpout;
 import storm.trident.testing.FeederCommitterBatchSpout;
 
 import java.io.File;
@@ -26,8 +27,8 @@ public class FinanceTopology {
         ArrayList<String> fields = new ArrayList<String>();
         fields.add("tradeString");
 
-        final FeederCommitterBatchSpout asksBatchSpout = new FeederCommitterBatchSpout(fields);
-        final FeederCommitterBatchSpout bidsBatchSpout = new FeederCommitterBatchSpout(fields);
+        final FeederBatchSpout asksBatchSpout = new FeederBatchSpout(fields);
+        final FeederBatchSpout bidsBatchSpout = new FeederBatchSpout(fields);
 
         TridentTopology topology = new TridentTopology();
 
@@ -62,7 +63,7 @@ public class FinanceTopology {
         startStreaming(asksBatchSpout, bidsBatchSpout, args[0], args[0]);
     }
 
-    private static void startStreaming(FeederCommitterBatchSpout asksBatchSpout, FeederCommitterBatchSpout bidsBatchSpout, String asksFileName, String bidsFileName) {
+    private static void startStreaming(FeederBatchSpout asksBatchSpout, FeederBatchSpout bidsBatchSpout, String asksFileName, String bidsFileName) {
         feedSpoutWithTradeFromFile(asksFileName, asksBatchSpout, "AsksFeeder");
         feedSpoutWithTradeFromFile(bidsFileName, bidsBatchSpout, "BidsFeeder");
     }
@@ -70,7 +71,7 @@ public class FinanceTopology {
     private static void feedSpoutWithTradeFromFile
     (
         final String fileName,
-        final FeederCommitterBatchSpout batch,
+        final FeederBatchSpout batch,
         final String threadName
     ) {
         new Thread(threadName) {
