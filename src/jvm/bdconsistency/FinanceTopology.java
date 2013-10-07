@@ -35,27 +35,25 @@ public class FinanceTopology {
         TridentState asks = topology.newStream("askSpout", asksBatchSpout)
                 .parallelismHint(16)
                 .each(new Fields("financialTransaction"),
-                        new TradeConstructor(),
-                        new Fields("trade")
+                        new TradeConstructor.AskTradeConstructor(),
+                        new Fields("brokerId", "trade")
                 ).partitionBy(new Fields("brokerId"))
                 .partitionPersist(new AsksStateFactory(), new Fields("trade"), new AsksUpdater());
 
         TridentState bids = topology.newStream("bidsSpout", bidsBatchSpout)
                 .parallelismHint(8)
                 .each(new Fields("financialTransaction"),
-                        new TradeConstructor(),
-                        new Fields("trade")
+                        new TradeConstructor.BidTradeConstructor(),
+                        new Fields("brokerId", "trade")
                 ).partitionBy(new Fields("brokerId"))
                 .partitionPersist(new BidsStateFactory(), new Fields("trade"), new BidsUpdater());
 
         //query
         {
-            // This has to be done using ticktuple somehow
-            List<Object> queries = new ArrayList<Object>();
-            queries.add("broker-equi-join");
+            // This has to be done using TickTuple somehow
             Stream stream = topology.newStream("querySpout", new QuerySpout())
                     .stateQuery(asks, new BrokerEqualityQuery.SelectStarFromAsks(), new Fields("asks"))
-                    .stateQuery(bids, new BrokerEqualityQuery.AsksBidsEquiJoinByBrokerIdPredicate(), new Fields("broker", "volume"))
+                    .stateQuery(bids, new BrokerEqualityQuery.AsksBidsEquiJoinByBrokerIdPredicate(), new Fields("brokerId", "volume"))
                     .each(new PrintTuple(), new Fields(""))
                     ;
         }
@@ -64,8 +62,8 @@ public class FinanceTopology {
     }
 
     private static void startStreaming(FeederCommitterBatchSpout asksBatchSpout, FeederCommitterBatchSpout bidsBatchSpout) {
-        feedSpoutWithTradeFromFile("asks-fileName", asksBatchSpout, "AsksFeeder");
-        feedSpoutWithTradeFromFile("bids-fileName", bidsBatchSpout, "BidsFeeder");
+        feedSpoutWithTradeFromFile("/damsl/software/storm/code/BDConsistency/resources/", asksBatchSpout, "AsksFeeder");
+        feedSpoutWithTradeFromFile("/damsl/software/storm/code/BDConsistency/resources/", bidsBatchSpout, "BidsFeeder");
     }
 
     private static void feedSpoutWithTradeFromFile
