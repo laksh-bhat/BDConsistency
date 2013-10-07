@@ -1,6 +1,7 @@
 package bdconsistency.query;
 
 import backtype.storm.tuple.Fields;
+import backtype.storm.tuple.Values;
 import storm.trident.operation.BaseFunction;
 import storm.trident.operation.Function;
 import storm.trident.operation.TridentCollector;
@@ -20,5 +21,6 @@ public class PrintTuple extends BaseFunction {
             System.out.print(MessageFormat.format("{0}\t", tuple.getValue(i)));
         }
         System.out.println();
+        collector.emit(new Values(tuple));
     }
 }

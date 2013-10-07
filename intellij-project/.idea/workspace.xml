@@ -4,10 +4,8 @@
     <list default="true" id="3ce62a69-14b0-48fd-b6e9-6b6be8644430" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../BDConsistency" afterPath="$PROJECT_DIR$/../BDConsistency" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" afterPath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ask/AsksUpdater.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ask/AsksUpdater.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bid/BidsUpdater.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bid/BidsUpdater.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/TradeConstructor.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/TradeConstructor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/PrintTuple.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/PrintTuple.java" />
     </list>
     <ignored path="storm.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,7 +37,7 @@
     <file path="/RnaSplicer.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381085756719" ignored="false" />
     <file path="$PROJECT_DIR$/../../compgenomics/src/asgmt3/GeneOrderEnumerator.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381091974459" ignored="false" />
     <file path="/GeneOrderEnumerator.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381091550734" ignored="false" />
-    <file path="/PrintTuple.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381159679267" ignored="false" />
+    <file path="/PrintTuple.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381187191190" ignored="false" />
     <file path="/QuerySpout.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381161693933" ignored="false" />
     <file path="/Dummy.txt" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381163721401" ignored="false" />
     <file path="/AsksStateFactory.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381164261094" ignored="false" />
@@ -112,15 +110,6 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Trade.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/Trade.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="13" selection-start="130" selection-end="130" vertical-scroll-proportion="0.0">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -203,10 +192,19 @@
       <file leaf-file-name="FinanceTopology.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="58" selection-start="1762" selection-end="1762" vertical-scroll-proportion="0.37463698">
+            <state line="48" column="110" selection-start="2045" selection-end="2045" vertical-scroll-proportion="0.44046468">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PrintTuple.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/PrintTuple.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="15" column="13" selection-start="374" selection-end="374" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -238,13 +236,13 @@
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bid/BidsStateFactory.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/BrokerEqualityQuery.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/BrokerTradeFilter.java" />
-        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/PrintTuple.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/test.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/QuerySpout.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/TradeConstructor.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ask/AsksUpdater.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bid/BidsUpdater.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java" />
+        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/PrintTuple.java" />
       </list>
     </option>
   </component>
@@ -690,13 +688,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/PrintTuple.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="13" selection-start="352" selection-end="352" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/BrokerTradeFilter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="17" column="44" selection-start="386" selection-end="422" vertical-scroll-proportion="0.0">
@@ -781,9 +772,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/PrintTuple.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="13" selection-start="374" selection-end="374" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="58" selection-start="1762" selection-end="1762" vertical-scroll-proportion="0.37463698">
+        <state line="48" column="110" selection-start="2045" selection-end="2045" vertical-scroll-proportion="0.44046468">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
