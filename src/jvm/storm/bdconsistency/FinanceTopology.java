@@ -77,12 +77,13 @@ public class FinanceTopology {
                 try {
                     Scanner scanner = new Scanner(new File(fileName));
                     List<String> batchOfTuples = new ArrayList<String>();
-                    while (scanner.hasNext()) {
-                        for (int i = 0; i < BATCH_SIZE; i++) {
-                            batchOfTuples.add(scanner.next());
+                    while (scanner.hasNextLine()) {
+                        if(batchOfTuples.size() >= BATCH_SIZE) {
+                            System.out.println(batchOfTuples.get(0));
+                            batch.feed(batchOfTuples);
+                            batchOfTuples.clear();
                         }
-                        batch.feed(batchOfTuples);
-                        batchOfTuples.clear();
+                        batchOfTuples.add(scanner.nextLine());
                     }
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
