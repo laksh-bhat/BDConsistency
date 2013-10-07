@@ -1,6 +1,7 @@
 package jvm.bdconsistency.ask;
 
 import backtype.storm.task.IMetricsContext;
+import jvm.bdconsistency.bid.BidsState;
 import storm.trident.state.State;
 import storm.trident.state.StateFactory;
 
@@ -14,6 +15,6 @@ import java.util.Map;
  public class AsksStateFactory implements StateFactory {
     @Override
     public State makeState(Map conf, IMetricsContext metrics, int partitionIndex, int numPartitions) {
-        return new jvm.bdconsistency.ask.BidsState();
+        return new BidsState();
     }
 }
