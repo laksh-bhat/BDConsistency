@@ -6,6 +6,7 @@ import backtype.storm.generated.StormTopology;
 import backtype.storm.tuple.Fields;
 import bdconsistency.ask.AsksStateFactory;
 import bdconsistency.ask.AsksUpdater;
+import bdconsistency.ask.FileStreamingSpout;
 import bdconsistency.bid.BidsStateFactory;
 import bdconsistency.bid.BidsUpdater;
 import bdconsistency.query.BrokerEqualityQuery;
@@ -14,6 +15,7 @@ import bdconsistency.query.QuerySpout;
 import storm.trident.Stream;
 import storm.trident.TridentState;
 import storm.trident.TridentTopology;
+import storm.trident.spout.IBatchSpout;
 import storm.trident.testing.FeederBatchSpout;
 
 import java.io.File;
@@ -25,12 +27,8 @@ import java.util.Scanner;
 public class FinanceTopology {
 
     public static void main(String[] args) throws Exception {
-
-        ArrayList<String> fields = new ArrayList<String>();
-        fields.add("tradeString");
-
-        final FeederBatchSpout asksBatchSpout = new FeederBatchSpout(fields);
-        final FeederBatchSpout bidsBatchSpout = new FeederBatchSpout(fields);
+        final IBatchSpout asksBatchSpout = new FileStreamingSpout(args[0]);
+        final IBatchSpout bidsBatchSpout = new FileStreamingSpout(args[0]);
 
         TridentTopology topology = new TridentTopology();
 
@@ -66,8 +64,8 @@ public class FinanceTopology {
         }*/
 
         Config conf = new Config();
-        conf.setNumWorkers(20);
-        conf.setMaxSpoutPending(5000);
+        conf.setNumWorkers(2);
+        conf.setMaxSpoutPending(1000);
         StormSubmitter.submitTopology("FinanceTopology", conf, topology.build());
     }
 
