@@ -61,8 +61,7 @@ public class FinanceTopology {
             Stream stream = topology.newStream("querySpout", new QuerySpout())
                     .stateQuery(asks, new BrokerEqualityQuery.SelectStarFromAsks(), new Fields("asks"))
                     .stateQuery(bids, new BrokerEqualityQuery.AsksBidsEquiJoinByBrokerIdPredicate(), new Fields("brokerId", "volume"))
-                    .each(new Fields("brokerId", "volume"), new PrinterBolt())
-                    ;
+                    .each(new Fields("brokerId", "volume"), new PrinterBolt());
         }
 
         Config conf = new Config();
@@ -77,34 +76,35 @@ public class FinanceTopology {
     }
 
     private static void feedSpoutWithTradeFromFile
-    (
-        final String fileName,
-        final FeederBatchSpout batch,
-        final String threadName
-    ) {
-        new Thread(threadName) {
+            (
+                    final String fileName,
+                    final FeederBatchSpout batch,
+                    final String threadName
+            ) {
+       /* new Thread(threadName) {
             @Override
-            public void run() {
-                try {
-                    Scanner scanner = new Scanner(new File(fileName));
-                    List<String> batchOfTuples = new ArrayList<String>();
-                    while (scanner.hasNextLine()) {
-                        if(batchOfTuples.size() >= BATCH_SIZE) {
-                            System.out.println(batchOfTuples.get(0));
-                            batch.feed(batchOfTuples);
-                            batchOfTuples.clear();
-                            try {
-                                Thread.sleep(100);
-                                System.out.println("Sleeping for 100 ms");
-                            } catch (InterruptedException ignore) {}
-                        }
-                        batchOfTuples.add(scanner.nextLine());
+            public void run() {*/
+        try {
+            Scanner scanner = new Scanner(new File(fileName));
+            List<String> batchOfTuples = new ArrayList<String>();
+            while (scanner.hasNextLine()) {
+                if (batchOfTuples.size() >= BATCH_SIZE) {
+                    System.out.println(batchOfTuples.get(0));
+                    batch.feed(batchOfTuples);
+                    batchOfTuples.clear();
+                    try {
+                        Thread.sleep(100);
+                        System.out.println("Sleeping for 100 ms");
+                    } catch (InterruptedException ignore) {
                     }
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
                 }
+                batchOfTuples.add(scanner.nextLine());
             }
-        }.start();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+/*            }
+        }.start();*/
     }
 
 

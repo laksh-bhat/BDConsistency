@@ -5,8 +5,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../BDConsistency" afterPath="$PROJECT_DIR$/../BDConsistency" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" afterPath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="G:\code\BDConsistency\src\jvm\storm\bdconsistency\query\PrintTuple.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/PrinterBolt.java" />
     </list>
     <ignored path="storm.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -162,7 +160,7 @@
       <file leaf-file-name="FinanceTopology.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="67" column="110" selection-start="2878" selection-end="2878" vertical-scroll-proportion="0.8683446">
+            <state line="88" column="84" selection-start="3785" selection-end="3785" vertical-scroll-proportion="0.5392062">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -760,7 +758,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="110" selection-start="2878" selection-end="2878" vertical-scroll-proportion="0.8683446">
+        <state line="88" column="84" selection-start="3785" selection-end="3785" vertical-scroll-proportion="0.5392062">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
