@@ -13,7 +13,7 @@ public class AxFinderFilter {
     public static class PriceBasedFilter  extends BaseFilter{
         @Override
         public boolean isKeep(TridentTuple tuple) {
-            return tuple.getLongByField("priceDiff") > 1000;
+            return tuple.getLongByField("price-diff") > 1000;
         }
     }
 

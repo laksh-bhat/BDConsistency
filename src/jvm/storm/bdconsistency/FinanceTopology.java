@@ -27,13 +27,13 @@ public class FinanceTopology {
         TridentTopology topology = new TridentTopology();
 
         TridentState asks = topology.newStream("askSpout", asksBatchSpout)
-                .each(new Fields("tradeString"), new PrinterBolt())
+                //.each(new Fields("tradeString"), new PrinterBolt())
                 .parallelismHint(8)
                 .each(new Fields("tradeString"),
                         new bdconsistency.TradeConstructor.AskTradeConstructor(),
                         new Fields("brokerId", "trade")
                 ).partitionBy(new Fields("brokerId"))
-                .each(new Fields("brokerId", "trade"), new PrinterBolt())
+                //.each(new Fields("brokerId", "trade"), new PrinterBolt())
                 .partitionPersist(new AsksStateFactory(), new Fields("trade"), new AsksUpdater());
 
         TridentState bids = topology.newStream("bidsSpout", bidsBatchSpout)
@@ -42,7 +42,7 @@ public class FinanceTopology {
                         new bdconsistency.TradeConstructor.BidTradeConstructor(),
                         new Fields("brokerId", "trade")
                 ).partitionBy(new Fields("brokerId"))
-                .each(new Fields("brokerId", "trade"), new PrinterBolt())
+                //.each(new Fields("brokerId", "trade"), new PrinterBolt())
                 .partitionPersist(new BidsStateFactory(), new Fields("trade"), new BidsUpdater());
 
         //query
@@ -50,16 +50,18 @@ public class FinanceTopology {
             // This has to be done using TickTuple somehow
             Stream stream = topology.newStream("querySpout", new QuerySpout())
                     .stateQuery(asks, new BrokerEqualityQuery.SelectStarFromAsks(), new Fields("table", "brokerId", "price", "volume"))
-                    .stateQuery(bids, new BrokerEqualityQuery.AsksEquiJoinBidsOnBrokerIdAndGroupByBrokerId(), new Fields("brokerId", "volume", "priceDiff"))
-                    .each(new Fields("brokerId", "volume", "priceDiff"), new AxFinderFilter.PriceBasedFilter())
-                    .each(new Fields("brokerId", "volume"), new PrinterBolt());
-            stream.groupBy(new Fields("brokerId"));
+                    .partitionBy(new Fields("brokerId"))
+                    .stateQuery(bids, new BrokerEqualityQuery.AsksEquiJoinBidsOnBrokerIdAndGroupByBrokerId(), new Fields("broker", "volume", "price-diff"))
+                    .partitionBy(new Fields("brokerId"))
+                    .each(new Fields("broker", "volume-sum", "price-diff"), new AxFinderFilter.PriceBasedFilter())
+                    .each(new Fields("broker", "volume-sum"), new PrinterBolt());
+            stream.groupBy(new Fields("broker"));
         }
 
         Config conf = new Config();
         conf.setNumWorkers(10);
-        conf.put(RichSpoutBatchExecutor.MAX_BATCH_SIZE_CONF, 100);
-        conf.setMaxSpoutPending(100);
+        conf.put(RichSpoutBatchExecutor.MAX_BATCH_SIZE_CONF, 10000);
+        conf.setMaxSpoutPending(50000);
         StormSubmitter.submitTopology("FinanceTopology", conf, topology.build());
     }
 /*
