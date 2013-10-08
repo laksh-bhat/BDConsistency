@@ -21,20 +21,29 @@ import java.util.Map;
  */
 
 public class BrokerEqualityQuery {
-    public static class SelectStarFromAsks extends BaseQueryFunction<AsksState, Trade> {
-        public List<Trade> batchRetrieve(AsksState asksState, List<TridentTuple> inputs) {
+    public static class SelectStarFromAsks extends BaseQueryFunction<AsksState, List<Trade>> {
+        public List<List<Trade>> batchRetrieve(AsksState asksState, List<TridentTuple> inputs) {
             System.out.println("SelectStarFromAsks - " + inputs.size());
             ArrayList<Trade> askTable = new ArrayList<Trade>();
             for (List<Trade> l : asksState.getAsks().values())
                 for (Trade t : l)
                     askTable.add(t);
-            return askTable;
+            List<List<Trade>> returnList = new ArrayList<List<Trade>>();
+            returnList.add(askTable);
+            return returnList;
         }
 
         @Override
+        public void execute(TridentTuple tuple, List<Trade> result, TridentCollector collector) {
+            for (Trade t : result) {
+                collector.emit(new Values(t.getTable(), t.getBrokerId(), t.getPrice(), t.getVolume()));
+            }
+        }
+
+/*        @Override
         public void execute(TridentTuple tuple, Trade result, TridentCollector collector) {
             collector.emit(new Values(result.getTable(), result.getBrokerId(), result.getPrice(), result.getVolume()));
-        }
+        }*/
     }
 
     public static class AsksEquiJoinBidsOnBrokerIdAndGroupByBrokerId extends BaseQueryFunction<BidsState, List<Long>> {
