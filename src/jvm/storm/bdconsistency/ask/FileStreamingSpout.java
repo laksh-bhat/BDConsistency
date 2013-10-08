@@ -26,7 +26,7 @@ public class FileStreamingSpout implements IBatchSpout {
     private String fileName = "/damsl/software/storm/code/BDConsistency/resources/big_axfinder_agenda.csv";
 
     public FileStreamingSpout(String fileName) throws IOException {
-        this(100, fileName);
+        this(10, fileName);
     }
 
     public FileStreamingSpout(int batchSize, String fileName) throws IOException {

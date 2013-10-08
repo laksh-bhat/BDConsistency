@@ -1,6 +1,7 @@
 package bdconsistency;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 /**
  * User: lbhat@damsl
@@ -10,6 +11,7 @@ import java.io.Serializable;
 public class Trade implements Serializable{
 
     public Trade(String[] message) {
+        System.out.println(Arrays.toString(message));
         this.table      = message[0];
         this.operation  = Integer.valueOf(message[1]);
         this.timestamp  = Long.valueOf(message[2]);

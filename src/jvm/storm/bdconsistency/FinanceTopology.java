@@ -42,7 +42,7 @@ public class FinanceTopology {
                 .each(new Fields("brokerId", "trade"), new PrinterBolt())
                 .partitionPersist(new AsksStateFactory(), new Fields("trade"), new AsksUpdater());
 
-       /* TridentState bids = topology.newStream("bidsSpout", bidsBatchSpout)
+        TridentState bids = topology.newStream("bidsSpout", bidsBatchSpout)
                 //.parallelismHint(8)
                 .each(new Fields("tradeString"),
                         new bdconsistency.TradeConstructor.BidTradeConstructor(),
@@ -51,7 +51,7 @@ public class FinanceTopology {
                 .each(new Fields("brokerId", "trade"), new PrinterBolt())
                 .partitionPersist(new BidsStateFactory(), new Fields("trade"), new BidsUpdater());
 
-        assert (args[0] != null);
+        /*assert (args[0] != null);
         startStreaming(asksBatchSpout, bidsBatchSpout, args[0], args[0]);
 
         //query
