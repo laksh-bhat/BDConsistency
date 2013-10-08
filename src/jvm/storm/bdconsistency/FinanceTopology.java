@@ -53,7 +53,7 @@ public class FinanceTopology {
 
         /*assert (args[0] != null);
         startStreaming(asksBatchSpout, bidsBatchSpout, args[0], args[0]);
-
+         */
         //query
         {
             // This has to be done using TickTuple somehow
@@ -61,7 +61,7 @@ public class FinanceTopology {
                     .stateQuery(asks, new BrokerEqualityQuery.SelectStarFromAsks(), new Fields("asks"))
                     .stateQuery(bids, new BrokerEqualityQuery.AsksBidsEquiJoinByBrokerIdPredicate(), new Fields("brokerId", "volume"))
                     .each(new Fields("brokerId", "volume"), new PrinterBolt());
-        }*/
+        }
 
         Config conf = new Config();
         conf.setNumWorkers(2);

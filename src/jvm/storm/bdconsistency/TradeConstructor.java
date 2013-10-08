@@ -10,9 +10,9 @@ public class TradeConstructor {
     public static class AskTradeConstructor extends BaseFunction {
         @Override
         public void execute(TridentTuple tuple, TridentCollector collector) {
-            String tradeString = (String) tuple.getValueByField("tradeString");
+            String tradeString = tuple.getString(0);
             if (tradeString.startsWith("ASKS")) {
-                bdconsistency.Trade trade = new bdconsistency.Trade(tradeString.split("|"));
+                bdconsistency.Trade trade = new bdconsistency.Trade(tradeString.split("\\|"));
                 collector.emit(new Values(trade.getBrokerId(), trade));
             }
         }
@@ -21,9 +21,9 @@ public class TradeConstructor {
     public static class BidTradeConstructor extends BaseFunction {
         @Override
         public void execute(TridentTuple tuple, TridentCollector collector) {
-            String transactionString = (String) tuple.getValueByField("tradeString");
-            if (transactionString.startsWith("BIDS")) {
-                bdconsistency.Trade trade = new Trade(transactionString.split("|"));
+            String tradeString = tuple.getString(0);
+            if (tradeString.startsWith("BIDS")) {
+                bdconsistency.Trade trade = new Trade(tradeString.split("\\|"));
                 collector.emit(new Values(trade.getBrokerId(), trade));
             }
         }
