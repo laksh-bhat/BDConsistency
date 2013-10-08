@@ -5,29 +5,81 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Scanner;
 
-import storm.trident.operation.TridentCollector;
-import storm.trident.spout.IBatchSpout;
+import backtype.storm.spout.SpoutOutputCollector;
+import backtype.storm.topology.IRichSpout;
+import backtype.storm.topology.OutputFieldsDeclarer;
 import backtype.storm.Config;
 import backtype.storm.task.TopologyContext;
 import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Values;
 
 @SuppressWarnings({ "serial", "rawtypes" })
-public class FileStreamingSpout implements IBatchSpout {
-    private int batchSize;
+public class FileStreamingSpout implements IRichSpout {
+    SpoutOutputCollector _collector;
     private Scanner scanner;
-    private String fileName = "/damsl/software/storm/code/BDConsistency/resources/big_axfinder_agenda.csv";
+    private String fileName;// = "/damsl/software/storm/code/BDConsistency/resources/big_axfinder_agenda.csv";
 
     public FileStreamingSpout(String fileName) throws IOException {
-        this(10, fileName);
-    }
-
-    public FileStreamingSpout(int batchSize, String fileName) throws IOException {
-        this.batchSize = batchSize;
         this.fileName = fileName;
     }
 
-    @SuppressWarnings("unchecked")
+    @Override
+    public void declareOutputFields(OutputFieldsDeclarer declarer) {
+        declarer.declare(new Fields("tradeString"));
+    }
+
+    @Override
+    public Map<String, Object> getComponentConfiguration() {
+        return new Config();
+    }
+
+    @Override
+    public void open(Map conf, TopologyContext context, SpoutOutputCollector collector) {
+        _collector = collector;
+        System.err.println("Open Spout instance");
+        try {
+            scanner = new Scanner(new File(fileName));
+        } catch(IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void close() {
+        scanner.close();
+    }
+
+    @Override
+    public void activate() {
+        if(scanner != null)
+            scanner.close();
+        scanner = new Scanner(fileName);
+    }
+
+    @Override
+    public void deactivate() {
+        scanner.reset();
+    }
+
+    @Override
+    public void nextTuple() {
+        try {
+            Thread.sleep(100);
+            _collector.emit(new Values(scanner.nextLine()));
+        } catch (InterruptedException ignore) {}
+    }
+
+    @Override
+    public void ack(Object msgId) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void fail(Object msgId) {
+        scanner.close();
+    }
+
+ /*   @SuppressWarnings("unchecked")
     @Override
     public void open(Map conf, TopologyContext context) {
         System.err.println("Open Spout instance");
@@ -49,11 +101,6 @@ public class FileStreamingSpout implements IBatchSpout {
     }
 
     @Override
-    public void close() {
-        // nothing to do here
-    }
-
-    @Override
     public Map getComponentConfiguration() {
         // no particular configuration here
         return new Config();
@@ -70,5 +117,5 @@ public class FileStreamingSpout implements IBatchSpout {
             scanner = new Scanner(fileName);
         }
         return new Values(scanner.nextLine());
-    }
+    }*/
 }

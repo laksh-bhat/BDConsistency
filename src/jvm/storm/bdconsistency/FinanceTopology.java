@@ -16,6 +16,8 @@ import storm.trident.Stream;
 import storm.trident.TridentState;
 import storm.trident.TridentTopology;
 import storm.trident.spout.IBatchSpout;
+import storm.trident.spout.ITridentSpout;
+import storm.trident.spout.RichSpoutBatchExecutor;
 import storm.trident.testing.FeederBatchSpout;
 
 import java.io.File;
@@ -27,27 +29,27 @@ import java.util.Scanner;
 public class FinanceTopology {
 
     public static void main(String[] args) throws Exception {
-        final IBatchSpout asksBatchSpout = new FileStreamingSpout(args[0]);
-        final IBatchSpout bidsBatchSpout = new FileStreamingSpout(args[0]);
+        final ITridentSpout asksBatchSpout = new RichSpoutBatchExecutor(new FileStreamingSpout(args[0]));
+        final ITridentSpout bidsBatchSpout = new RichSpoutBatchExecutor(new FileStreamingSpout(args[0]));
 
         TridentTopology topology = new TridentTopology();
 
         TridentState asks = topology.newStream("askSpout", asksBatchSpout)
                 .each(new Fields("tradeString"), new PrinterBolt())
-                //.parallelismHint(8)
+                .parallelismHint(8)
                 .each(new Fields("tradeString"),
                         new bdconsistency.TradeConstructor.AskTradeConstructor(),
                         new Fields("brokerId", "trade")
-                )//.partitionBy(new Fields("brokerId"))
+                ).partitionBy(new Fields("brokerId"))
                 .each(new Fields("brokerId", "trade"), new PrinterBolt())
                 .partitionPersist(new AsksStateFactory(), new Fields("trade"), new AsksUpdater());
 
         TridentState bids = topology.newStream("bidsSpout", bidsBatchSpout)
-                //.parallelismHint(8)
+                .parallelismHint(8)
                 .each(new Fields("tradeString"),
                         new bdconsistency.TradeConstructor.BidTradeConstructor(),
                         new Fields("brokerId", "trade")
-                )//.partitionBy(new Fields("brokerId"))
+                ).partitionBy(new Fields("brokerId"))
                 .each(new Fields("brokerId", "trade"), new PrinterBolt())
                 .partitionPersist(new BidsStateFactory(), new Fields("trade"), new BidsUpdater());
 
@@ -61,14 +63,16 @@ public class FinanceTopology {
                     .stateQuery(asks, new BrokerEqualityQuery.SelectStarFromAsks(), new Fields("asks"))
                     .stateQuery(bids, new BrokerEqualityQuery.AsksBidsEquiJoinByBrokerIdPredicate(), new Fields("brokerId", "volume"))
                     .each(new Fields("brokerId", "volume"), new PrinterBolt());
+            stream.groupBy(new Fields("brokerId"));
         }
 
         Config conf = new Config();
-        conf.setNumWorkers(2);
-        conf.setMaxSpoutPending(1000);
+        conf.setNumWorkers(10);
+        conf.put(RichSpoutBatchExecutor.MAX_BATCH_SIZE_CONF, 100);
+        conf.setMaxSpoutPending(100);
         StormSubmitter.submitTopology("FinanceTopology", conf, topology.build());
     }
-
+/*
     private static void startStreaming(FeederBatchSpout asksBatchSpout, FeederBatchSpout bidsBatchSpout, String asksFileName, String bidsFileName) {
         feedSpoutWithTradeFromFile(asksFileName, asksBatchSpout, "AsksFeeder");
         feedSpoutWithTradeFromFile(bidsFileName, bidsBatchSpout, "BidsFeeder");
@@ -80,9 +84,9 @@ public class FinanceTopology {
                     final FeederBatchSpout batch,
                     final String threadName
             ) {
-       /* new Thread(threadName) {
+       *//* new Thread(threadName) {
             @Override
-            public void run() {*/
+            public void run() {*//*
         try {
             Scanner scanner = new Scanner(new File(fileName));
             List<String> batchOfTuples = new ArrayList<String>();
@@ -102,10 +106,9 @@ public class FinanceTopology {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-/*            }
-        }.start();*/
-    }
+*//*            }
+        }.start();*//*
+    }*/
 
 
-    private static final int BATCH_SIZE = 2;
 }

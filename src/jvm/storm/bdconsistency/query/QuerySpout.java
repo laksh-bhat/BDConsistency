@@ -6,6 +6,7 @@ import backtype.storm.task.TopologyContext;
 import backtype.storm.topology.IRichSpout;
 import backtype.storm.topology.OutputFieldsDeclarer;
 import backtype.storm.tuple.Fields;
+import backtype.storm.tuple.Values;
 import org.apache.log4j.Logger;
 
 import java.util.Map;
@@ -27,7 +28,7 @@ public class QuerySpout implements IRichSpout {
     @Override
     public Map<String, Object> getComponentConfiguration() {
         Config conf = new Config();
-        int tickFrequencyInSeconds = 10;
+        int tickFrequencyInSeconds = 1;
         conf.put(Config.TOPOLOGY_TICK_TUPLE_FREQ_SECS, tickFrequencyInSeconds);
         return conf;
     }
@@ -54,7 +55,7 @@ public class QuerySpout implements IRichSpout {
 
     @Override
     public void nextTuple() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        _collector.emit(new Values(""));
     }
 
     @Override
