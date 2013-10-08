@@ -51,17 +51,17 @@ public class FinanceTopology {
             Stream stream = topology.newStream("querySpout", new QuerySpout())
                     .stateQuery(asks, new BrokerEqualityQuery.SelectStarFromAsks(), new Fields("table", "brokerId", "price", "volume"))
                     .partitionBy(new Fields("brokerId"))
-                    .stateQuery(bids, new BrokerEqualityQuery.AsksEquiJoinBidsOnBrokerIdAndGroupByBrokerId(), new Fields("broker", "volume", "price-diff"))
+                    .stateQuery(bids, new BrokerEqualityQuery.AsksEquiJoinBidsOnBrokerIdAndGroupByBrokerId(), new Fields("broker", "volume-sum", "price-diff"))
                     .partitionBy(new Fields("brokerId"))
-                    .each(new Fields("broker", "volume-sum", "price-diff"), new AxFinderFilter.PriceBasedFilter())
+                    //.each(new Fields("broker", "volume-sum", "price-diff"), new AxFinderFilter.PriceBasedFilter())
                     .each(new Fields("broker", "volume-sum"), new PrinterBolt());
             stream.groupBy(new Fields("broker"));
         }
 
         Config conf = new Config();
         conf.setNumWorkers(10);
-        conf.put(RichSpoutBatchExecutor.MAX_BATCH_SIZE_CONF, 10000);
-        conf.setMaxSpoutPending(50000);
+        conf.put(RichSpoutBatchExecutor.MAX_BATCH_SIZE_CONF, 1000);
+        conf.setMaxSpoutPending(500);
         StormSubmitter.submitTopology("FinanceTopology", conf, topology.build());
     }
 /*

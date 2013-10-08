@@ -41,12 +41,15 @@ public class BrokerEqualityQuery {
         @Override
         public List<List<Long>> batchRetrieve(BidsState state, List<TridentTuple> inputs) {
             Map<Long, List<Trade>> bidsTable = state.getBids();
-            Map<Long, TridentTuple> asksTable = new HashMap<Long, TridentTuple>();
+            Map<Long, List<TridentTuple>> asksTable = new HashMap<Long, List<TridentTuple>>();
             for (TridentTuple tuple : inputs) {
                 long broker  = tuple.getLongByField("brokerId");
-                asksTable.put(broker, tuple);
+                if(!asksTable.containsKey(broker))
+                    asksTable.put(broker, new ArrayList<TridentTuple>());
+                asksTable.get(broker).add(tuple);
             }
-            List<List<Long>> result = new ArrayList<List<Long>>();
+
+            List<List<Long>> result = new ArrayList<List<Long>>(inputs.size());
             for (long broker : asksTable.keySet()) {
                 long asksVolume = 0, asksPrice = 0, bidsVolume = 0, bidsPrice = 0;
                 for (Object ask : asksTable.get(broker)) {
@@ -57,21 +60,20 @@ public class BrokerEqualityQuery {
                     bidsVolume += bid.getVolume();
                     bidsPrice += bid.getPrice();
                 }
-                //if (asksPrice - bidsPrice > 1000 || bidsPrice - asksPrice > 1000){
                 List<Long> resultRow = new ArrayList<Long>();
                 resultRow.add(broker);
                 resultRow.add(asksVolume - bidsVolume);
                 resultRow.add(Math.abs(asksPrice-bidsPrice));
 
                 result.add(resultRow);
-                //}
             }
             return result;
         }
 
         @Override
         public void execute(TridentTuple tuple, List<Long> result, TridentCollector collector) {
-            collector.emit(new Values(result));
+            if(result.get(2) > 1000)
+                collector.emit(new Values(result));
         }
     }
 }
