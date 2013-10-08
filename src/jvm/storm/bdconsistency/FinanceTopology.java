@@ -49,10 +49,10 @@ public class FinanceTopology {
         {
             // This has to be done using TickTuple somehow
             Stream stream = topology.newStream("querySpout", new QuerySpout())
-                    .each(new Fields("querySpout"), new PrinterBolt())
-                    .stateQuery(asks, new BrokerEqualityQuery.SelectStarFromAsks(), new Fields("table", "brokerId", "price", "volume"))
+                    //.each(new Fields("query"), new PrinterBolt())
+                    .stateQuery(asks, new Fields("query"), new BrokerEqualityQuery.SelectStarFromAsks(), new Fields("table", "brokerId", "price", "volume"))
                     .partitionBy(new Fields("brokerId"))
-                    .stateQuery(bids, new BrokerEqualityQuery.AsksEquiJoinBidsOnBrokerIdAndGroupByBrokerId(), new Fields("broker", "volume-sum", "price-diff"))
+                    .stateQuery(bids, new Fields("table", "brokerId", "price", "volume"), new BrokerEqualityQuery.AsksEquiJoinBidsOnBrokerIdAndGroupByBrokerId(), new Fields("broker", "volume-sum", "price-diff"))
                     .partitionBy(new Fields("brokerId"))
                     //.each(new Fields("broker", "volume-sum", "price-diff"), new AxFinderFilter.PriceBasedFilter())
                     .each(new Fields("broker", "volume-sum"), new PrinterBolt());
@@ -60,7 +60,7 @@ public class FinanceTopology {
         }
 
         Config conf = new Config();
-        conf.setNumWorkers(10);
+        conf.setNumWorkers(20);
         conf.put(RichSpoutBatchExecutor.MAX_BATCH_SIZE_CONF, 1000);
         conf.setMaxSpoutPending(500);
         StormSubmitter.submitTopology("FinanceTopology", conf, topology.build());
