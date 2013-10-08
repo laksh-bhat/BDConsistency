@@ -36,7 +36,7 @@ public class BrokerEqualityQuery {
         }
     }
 
-    public static class AsksBidsEquiJoinByBrokerIdPredicate extends BaseQueryFunction<BidsState, List<Long>> {
+    public static class AsksEquiJoinBidsOnBrokerIdAndGroupByBrokerId extends BaseQueryFunction<BidsState, List<Long>> {
 
         @Override
         public List<List<Long>> batchRetrieve(BidsState state, List<TridentTuple> inputs) {
@@ -47,7 +47,7 @@ public class BrokerEqualityQuery {
                 asksTable.put(broker, tuple);
             }
             List<List<Long>> result = new ArrayList<List<Long>>();
-            for (long broker : bidsTable.size() < asksTable.size() ? bidsTable.keySet() : asksTable.keySet()) {
+            for (long broker : asksTable.keySet()) {
                 long asksVolume = 0, asksPrice = 0, bidsVolume = 0, bidsPrice = 0;
                 for (Object ask : asksTable.get(broker)) {
                     asksVolume += ((TridentTuple)ask).getLongByField("volume");
@@ -57,13 +57,14 @@ public class BrokerEqualityQuery {
                     bidsVolume += bid.getVolume();
                     bidsPrice += bid.getPrice();
                 }
-                if (asksPrice - bidsPrice > 1000 || bidsPrice - asksPrice > 1000){
-                    List<Long> resultRow = new ArrayList<Long>();
-                    resultRow.add(broker);
-                    resultRow.add(asksVolume - bidsVolume);
+                //if (asksPrice - bidsPrice > 1000 || bidsPrice - asksPrice > 1000){
+                List<Long> resultRow = new ArrayList<Long>();
+                resultRow.add(broker);
+                resultRow.add(asksVolume - bidsVolume);
+                resultRow.add(Math.abs(asksPrice-bidsPrice));
 
-                    result.add(resultRow);
-                }
+                result.add(resultRow);
+                //}
             }
             return result;
         }

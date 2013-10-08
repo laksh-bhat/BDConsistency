@@ -2,29 +2,21 @@ package bdconsistency;
 
 import backtype.storm.Config;
 import backtype.storm.StormSubmitter;
-import backtype.storm.generated.StormTopology;
 import backtype.storm.tuple.Fields;
 import bdconsistency.ask.AsksStateFactory;
 import bdconsistency.ask.AsksUpdater;
 import bdconsistency.ask.FileStreamingSpout;
 import bdconsistency.bid.BidsStateFactory;
 import bdconsistency.bid.BidsUpdater;
+import bdconsistency.query.AxFinderFilter;
 import bdconsistency.query.BrokerEqualityQuery;
 import bdconsistency.query.PrinterBolt;
 import bdconsistency.query.QuerySpout;
 import storm.trident.Stream;
 import storm.trident.TridentState;
 import storm.trident.TridentTopology;
-import storm.trident.spout.IBatchSpout;
 import storm.trident.spout.ITridentSpout;
 import storm.trident.spout.RichSpoutBatchExecutor;
-import storm.trident.testing.FeederBatchSpout;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 public class FinanceTopology {
 
@@ -58,7 +50,8 @@ public class FinanceTopology {
             // This has to be done using TickTuple somehow
             Stream stream = topology.newStream("querySpout", new QuerySpout())
                     .stateQuery(asks, new BrokerEqualityQuery.SelectStarFromAsks(), new Fields("table", "brokerId", "price", "volume"))
-                    .stateQuery(bids, new BrokerEqualityQuery.AsksBidsEquiJoinByBrokerIdPredicate(), new Fields("brokerId", "volume"))
+                    .stateQuery(bids, new BrokerEqualityQuery.AsksEquiJoinBidsOnBrokerIdAndGroupByBrokerId(), new Fields("brokerId", "volume", "priceDiff"))
+                    .each(new Fields("brokerId", "volume", "priceDiff"), new AxFinderFilter.PriceBasedFilter())
                     .each(new Fields("brokerId", "volume"), new PrinterBolt());
             stream.groupBy(new Fields("brokerId"));
         }
