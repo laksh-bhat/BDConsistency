@@ -35,6 +35,7 @@ public class FinanceTopology {
         TridentTopology topology = new TridentTopology();
 
         TridentState asks = topology.newStream("askSpout", asksBatchSpout)
+                .each(new Fields("tradeString"), new PrinterBolt())
                 //.parallelismHint(8)
                 .each(new Fields("tradeString"),
                         new bdconsistency.TradeConstructor.AskTradeConstructor(),
@@ -43,7 +44,7 @@ public class FinanceTopology {
                 .each(new Fields("brokerId", "trade"), new PrinterBolt())
                 .partitionPersist(new AsksStateFactory(), new Fields("trade"), new AsksUpdater());
 
-        TridentState bids = topology.newStream("bidsSpout", bidsBatchSpout)
+       /* TridentState bids = topology.newStream("bidsSpout", bidsBatchSpout)
                 //.parallelismHint(8)
                 .each(new Fields("tradeString"),
                         new bdconsistency.TradeConstructor.BidTradeConstructor(),
@@ -62,7 +63,7 @@ public class FinanceTopology {
                     .stateQuery(asks, new BrokerEqualityQuery.SelectStarFromAsks(), new Fields("asks"))
                     .stateQuery(bids, new BrokerEqualityQuery.AsksBidsEquiJoinByBrokerIdPredicate(), new Fields("brokerId", "volume"))
                     .each(new Fields("brokerId", "volume"), new PrinterBolt());
-        }
+        }*/
 
         Config conf = new Config();
         conf.setNumWorkers(20);
