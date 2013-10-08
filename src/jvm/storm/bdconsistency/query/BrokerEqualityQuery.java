@@ -7,6 +7,7 @@ import bdconsistency.bid.BidsState;
 import storm.trident.operation.TridentCollector;
 import storm.trident.state.BaseQueryFunction;
 import storm.trident.tuple.TridentTuple;
+import storm.trident.tuple.TridentTupleView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,59 +21,56 @@ import java.util.Map;
  */
 
 public class BrokerEqualityQuery {
-    public static class SelectStarFromAsks extends BaseQueryFunction<AsksState, Map<Long, List<Trade>>> {
-        public List<Map<Long, List<Trade>>> batchRetrieve(AsksState asksState, List<TridentTuple> inputs) {
-            ArrayList<Map<Long, List<Trade>>> askTable = new ArrayList<Map<Long, List<Trade>>>();
-            askTable.add(asksState.getAsks());
+    public static class SelectStarFromAsks extends BaseQueryFunction<AsksState, Trade> {
+        public List<Trade> batchRetrieve(AsksState asksState, List<TridentTuple> inputs) {
+            ArrayList<Trade> askTable = new ArrayList<Trade>();
+            for (List<Trade> l : asksState.getAsks().values())
+                for (Trade t : l)
+                    askTable.add(t);
             return askTable;
         }
 
         @Override
-        public void execute(TridentTuple tuple, Map<Long, List<Trade>> askTable, TridentCollector collector) {
-            collector.emit(new Values(askTable));
+        public void execute(TridentTuple tuple, Trade result, TridentCollector collector) {
+            collector.emit(new Values(result.getTable(), result.getBrokerId(), result.getPrice(), result.getVolume()));
         }
     }
 
-    public static class AsksBidsEquiJoinByBrokerIdPredicate extends BaseQueryFunction<BidsState, HashMap<Long, Long>> {
+    public static class AsksBidsEquiJoinByBrokerIdPredicate extends BaseQueryFunction<BidsState, List<Long>> {
 
         @Override
-        public List<HashMap<Long, Long>> batchRetrieve(BidsState state, List<TridentTuple> inputs) {
-            Map<Long, List<Trade>> asksTable = null, bidsTable = state.getBids();
-            // We expect only one input tuple containing the asks table
-            for (TridentTuple input : inputs) {
-                if (input.getValueByField("asks") instanceof Map) {
-                    asksTable = (Map<Long, List<Trade>>) input.getValueByField("asks");
-                    break;
-                }
+        public List<List<Long>> batchRetrieve(BidsState state, List<TridentTuple> inputs) {
+            Map<Long, List<Trade>> bidsTable = state.getBids();
+            Map<Long, TridentTuple> asksTable = new HashMap<Long, TridentTuple>();
+            for (TridentTuple tuple : inputs) {
+                long broker  = tuple.getLongByField("brokerId");
+                asksTable.put(broker, tuple);
             }
-            assert (asksTable != null);
-
-            HashMap<Long, Long> result = new HashMap<Long, Long>();
-            for (long broker : bidsTable.size() > asksTable.size() ? bidsTable.keySet() : asksTable.keySet()) {
+            List<List<Long>> result = new ArrayList<List<Long>>();
+            for (long broker : bidsTable.size() < asksTable.size() ? bidsTable.keySet() : asksTable.keySet()) {
                 long asksVolume = 0, asksPrice = 0, bidsVolume = 0, bidsPrice = 0;
-                for (Trade ask : asksTable.get(broker)) {
-                    asksVolume += ask.getVolume();
-                    asksPrice += ask.getPrice();
+                for (Object ask : asksTable.get(broker)) {
+                    asksVolume += ((TridentTuple)ask).getLongByField("volume");
+                    asksPrice += ((TridentTuple)ask).getLongByField("price");
                 }
-                for (Trade bid : bidsTable.get(broker)) {
+                for (Trade bid : bidsTable.get(broker)){
                     bidsVolume += bid.getVolume();
                     bidsPrice += bid.getPrice();
                 }
-                if (asksPrice - bidsPrice > 1000 || bidsPrice - asksPrice > 1000)
-                    result.put(broker, asksVolume - bidsVolume);
+                if (asksPrice - bidsPrice > 1000 || bidsPrice - asksPrice > 1000){
+                    List<Long> resultRow = new ArrayList<Long>();
+                    resultRow.add(broker);
+                    resultRow.add(asksVolume - bidsVolume);
+
+                    result.add(resultRow);
+                }
             }
-
-            ArrayList<HashMap<Long, Long>> resultList = new ArrayList<HashMap<Long, Long>>();
-            resultList.add(result);
-
-            return resultList;
+            return result;
         }
 
         @Override
-        public void execute(TridentTuple tuple, HashMap<Long, Long> result, TridentCollector collector) {
-            for (Long broker : result.keySet()) {
-                collector.emit(new Values(broker, result.get(broker)));
-            }
+        public void execute(TridentTuple tuple, List<Long> result, TridentCollector collector) {
+            collector.emit(new Values(result));
         }
     }
 }
