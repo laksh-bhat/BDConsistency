@@ -23,6 +23,7 @@ import java.util.Map;
 public class BrokerEqualityQuery {
     public static class SelectStarFromAsks extends BaseQueryFunction<AsksState, Trade> {
         public List<Trade> batchRetrieve(AsksState asksState, List<TridentTuple> inputs) {
+            System.out.println("SelectStarFromAsks - " + inputs.size());
             ArrayList<Trade> askTable = new ArrayList<Trade>();
             for (List<Trade> l : asksState.getAsks().values())
                 for (Trade t : l)
@@ -40,6 +41,7 @@ public class BrokerEqualityQuery {
 
         @Override
         public List<List<Long>> batchRetrieve(BidsState state, List<TridentTuple> inputs) {
+            System.out.println("AsksEquiJoinBidsOnBrokerIdAndGroupByBrokerId -- " + inputs.get(0) );
             Map<Long, List<Trade>> bidsTable = state.getBids();
             Map<Long, List<TridentTuple>> asksTable = new HashMap<Long, List<TridentTuple>>();
             for (TridentTuple tuple : inputs) {

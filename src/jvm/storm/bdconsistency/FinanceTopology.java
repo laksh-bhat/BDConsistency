@@ -49,6 +49,7 @@ public class FinanceTopology {
         {
             // This has to be done using TickTuple somehow
             Stream stream = topology.newStream("querySpout", new QuerySpout())
+                    .each(new Fields("querySpout"), new PrinterBolt())
                     .stateQuery(asks, new BrokerEqualityQuery.SelectStarFromAsks(), new Fields("table", "brokerId", "price", "volume"))
                     .partitionBy(new Fields("brokerId"))
                     .stateQuery(bids, new BrokerEqualityQuery.AsksEquiJoinBidsOnBrokerIdAndGroupByBrokerId(), new Fields("broker", "volume-sum", "price-diff"))

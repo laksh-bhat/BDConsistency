@@ -18,7 +18,7 @@ import java.text.MessageFormat;
 public class PrinterBolt extends BaseFilter {
     @Override
     public boolean isKeep(TridentTuple tuple) {
-        System.out.println(tuple.getValues());
+        System.out.println(tuple);
         return true;
     }
 }
