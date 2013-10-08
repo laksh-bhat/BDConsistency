@@ -15,6 +15,7 @@ import bdconsistency.query.QuerySpout;
 import storm.trident.Stream;
 import storm.trident.TridentState;
 import storm.trident.TridentTopology;
+import storm.trident.operation.builtin.MapGet;
 import storm.trident.spout.ITridentSpout;
 import storm.trident.spout.RichSpoutBatchExecutor;
 
@@ -50,7 +51,7 @@ public class FinanceTopology {
             // This has to be done using TickTuple somehow
             Stream stream = topology.newStream("querySpout", new QuerySpout())
                     //.each(new Fields("query"), new PrinterBolt())
-                    .stateQuery(asks, new Fields("query"), new BrokerEqualityQuery.SelectStarFromAsks(), new Fields("table", "brokerId", "price", "volume"))
+                    .stateQuery(asks, new Fields("query"), new MapGet()/*BrokerEqualityQuery.SelectStarFromAsks()*/, new Fields("table", "brokerId", "price", "volume"))
                     .partitionBy(new Fields("brokerId"))
                     .stateQuery(bids, new Fields("table", "brokerId", "price", "volume"), new BrokerEqualityQuery.AsksEquiJoinBidsOnBrokerIdAndGroupByBrokerId(), new Fields("broker", "volume-sum", "price-diff"))
                     .partitionBy(new Fields("brokerId"))

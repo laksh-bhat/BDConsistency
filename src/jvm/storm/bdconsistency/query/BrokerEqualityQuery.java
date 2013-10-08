@@ -21,6 +21,7 @@ import java.util.Map;
  */
 
 public class BrokerEqualityQuery {
+
     public static class SelectStarFromAsks extends BaseQueryFunction<AsksState, List<Trade>> {
         public List<List<Trade>> batchRetrieve(AsksState asksState, List<TridentTuple> inputs) {
             System.out.println("SelectStarFromAsks - " + inputs.size());

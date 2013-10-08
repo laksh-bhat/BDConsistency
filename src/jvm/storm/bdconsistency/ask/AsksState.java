@@ -1,7 +1,10 @@
 package bdconsistency.ask;
 
 import bdconsistency.Trade;
+import storm.trident.TridentState;
 import storm.trident.state.State;
+import storm.trident.state.map.IBackingMap;
+import storm.trident.state.map.ReadOnlyMapState;
 
 import java.util.*;
 
@@ -10,7 +13,7 @@ import java.util.*;
  * Date: 10/3/13
  * Time: 11:53 PM
  */
-public class AsksState implements State {
+public class AsksState implements ReadOnlyMapState, IBackingMap {
     public AsksState() {
         asks = new HashMap<Long, List<Trade>>();
     }
@@ -54,4 +57,21 @@ public class AsksState implements State {
 
     // Basically a multi-map
     private Map<Long, List<Trade>> asks;
+
+    @Override
+    public List<List<Trade>> multiGet(List<List<Object>> keys) {
+        System.out.println("MultiGet");
+        ArrayList<Trade> askTable = new ArrayList<Trade>();
+        for (List<Trade> l : this.getAsks().values())
+            for (Trade t : l)
+                askTable.add(t);
+        List<List<Trade>> returnList = new ArrayList<List<Trade>>();
+        returnList.add(askTable);
+        return returnList;
+    }
+
+    @Override
+    public void multiPut(List<List<Object>> keys, List vals) {
+        System.out.println("MultiPut");
+    }
 }
