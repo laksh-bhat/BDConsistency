@@ -1,7 +1,6 @@
 package bdconsistency.ask;
 
 import bdconsistency.Trade;
-import bdconsistency.bid.BidsState;
 import storm.trident.operation.TridentCollector;
 import storm.trident.state.BaseStateUpdater;
 import storm.trident.tuple.TridentTuple;
@@ -13,8 +12,8 @@ import java.util.List;
  * Date: 10/4/13
  * Time: 2:48 AM
  */
-public class AsksUpdater extends BaseStateUpdater<BidsState> {
-    public void updateState(BidsState state, List<TridentTuple> tuples, TridentCollector collector) {
+public class AsksUpdater extends BaseStateUpdater<AsksState> {
+    public void updateState(AsksState state, List<TridentTuple> tuples, TridentCollector collector) {
         for(TridentTuple t: tuples) {
             Object trade = t.getValueByField("trade");
             if(trade instanceof Trade){

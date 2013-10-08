@@ -53,9 +53,6 @@ public class FinanceTopology {
                 .each(new Fields("brokerId", "trade"), new PrinterBolt())
                 .partitionPersist(new BidsStateFactory(), new Fields("trade"), new BidsUpdater());
 
-        /*assert (args[0] != null);
-        startStreaming(asksBatchSpout, bidsBatchSpout, args[0], args[0]);
-         */
         //query
         {
             // This has to be done using TickTuple somehow

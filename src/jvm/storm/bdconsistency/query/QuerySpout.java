@@ -39,32 +39,25 @@ public class QuerySpout implements IRichSpout {
     }
 
     @Override
-    public void close() {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
+    public void close() {}
 
     @Override
-    public void activate() {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
+    public void activate() {}
 
     @Override
-    public void deactivate() {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
+    public void deactivate() {}
 
     @Override
     public void nextTuple() {
-        _collector.emit(new Values(""));
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException ignore) {}
+        _collector.emit(new Values("__tick__"));
     }
 
     @Override
-    public void ack(Object msgId) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
+    public void ack(Object msgId) {}
 
     @Override
-    public void fail(Object msgId) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
+    public void fail(Object msgId) {}
 }

@@ -71,7 +71,6 @@ public class FileStreamingSpout implements IRichSpout {
 
     @Override
     public void ack(Object msgId) {
-        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
