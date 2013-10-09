@@ -26,7 +26,7 @@ public class FinanceTopology {
         final TridentTopology topology     = new TridentTopology();
 
 
-        Stream tradeStream = topology.newStream("askSpout", fileBatchSpout)
+        Stream tradeStream = topology.newStream("tradeSpout", fileBatchSpout)
                 //.each(new Fields("tradeString"), new PrinterBolt())
                 .parallelismHint(8);
 
@@ -35,25 +35,26 @@ public class FinanceTopology {
                         new bdconsistency.TradeConstructor.AskTradeConstructor(),
                         new Fields("brokerId", "trade")
                 ).partitionBy(new Fields("brokerId"))
-                //.each(new Fields("brokerId", "trade"), new PrinterBolt())
+                /*//.each(new Fields("brokerId", "trade"), new PrinterBolt())*/
                 .partitionPersist(new AsksStateFactory(), new Fields("trade"), new AsksUpdater());
 
         TridentState bids = tradeStream
-                .each(  new Fields("tradeString"),
+                .each(new Fields("tradeString"),
                         new bdconsistency.TradeConstructor.BidTradeConstructor(),
                         new Fields("brokerId", "trade")
                 ).partitionBy(new Fields("brokerId"))
-                //.each(new Fields("brokerId", "trade"), new PrinterBolt())
+                /*//.each(new Fields("brokerId", "trade"), new PrinterBolt())*/
                 .partitionPersist(new BidsStateFactory(), new Fields("trade"), new BidsUpdater());
 
         // AxFinder Query
         // This has to be done using TickTuple somehow
-        Stream asksStream = topology.newStream("querySpout", new QuerySpout())
-                .each(new Fields("query"), new PrinterBolt())
-                .stateQuery
+        Stream asksStream = /*topology.newStream("querySpout", new QuerySpout())
+                .each(new Fields("query"), new PrinterBolt())*/
+                tradeStream.stateQuery
                         (
                                 asks,
-                                new Fields("query"),
+                                /*new Fields("query"),*/
+                                new Fields("tradeString"),
                                 new BrokerEqualityQuery.SelectStarFromAsks(),
                                 new Fields("table", "brokerId", "price", "volume")
                         )
