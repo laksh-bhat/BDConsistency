@@ -5,8 +5,10 @@ import backtype.storm.LocalDRPC;
 import backtype.storm.StormSubmitter;
 import backtype.storm.generated.StormTopology;
 import backtype.storm.tuple.Fields;
+import bdconsistency.ask.AsksStateFactory;
 import bdconsistency.ask.AsksUpdater;
 import bdconsistency.ask.FileStreamingSpout;
+import bdconsistency.bid.BidsStateFactory;
 import bdconsistency.bid.BidsUpdater;
 import bdconsistency.query.*;
 import storm.trident.TridentState;
@@ -24,9 +26,6 @@ public class FinanceTopology {
         final ITridentSpout bidsSpout = new RichSpoutBatchExecutor(new FileStreamingSpout(fileName));
 
         // In this state we will save the table
-        StateFactory askStateFactory = new MemoryMapState.Factory();
-        StateFactory bidStateFactory = new MemoryMapState.Factory();
-
         TridentState asks = topology
                 .newStream("spout1", asksSpout)
                 .each(new Fields("tradeString"), new PrinterBolt())
@@ -34,7 +33,7 @@ public class FinanceTopology {
                         new TradeConstructor.AskTradeConstructor(),
                         new Fields("brokerId", "trade")
                 )
-                .partitionPersist(askStateFactory, new Fields("trade"), new AsksUpdater());
+                .partitionPersist(new AsksStateFactory(), new Fields("trade"), new AsksUpdater());
 
         TridentState bids = topology
                 .newStream("spout2", bidsSpout)
@@ -43,7 +42,7 @@ public class FinanceTopology {
                         new TradeConstructor.BidTradeConstructor(),
                         new Fields("brokerId", "trade")
                 )
-                .partitionPersist(bidStateFactory, new Fields("trade"), new BidsUpdater());
+                .partitionPersist(new BidsStateFactory(), new Fields("trade"), new BidsUpdater());
 
         // DRPC Service
 
