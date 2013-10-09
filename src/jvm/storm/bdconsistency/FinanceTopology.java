@@ -48,32 +48,35 @@ public class FinanceTopology {
 
         // AxFinder Query
         // This has to be done using TickTuple somehow
-        Stream stream = topology.newStream("querySpout", new QuerySpout())
+        Stream asksStream = topology.newStream("querySpout", new QuerySpout())
                 //.each(new Fields("query"), new PrinterBolt())
                 .stateQuery
-                        (
-                                asks,
-                                new Fields("query"),
-                                new BrokerEqualityQuery.SelectStarFromAsks(),
-                                new Fields("table", "brokerId", "price", "volume")
-                        )
-                .partitionBy(new Fields("brokerId"))
-                .stateQuery
                     (
-                        bids,
-                        new Fields("table", "brokerId", "price", "volume"),
-                        new BrokerEqualityQuery.AsksEquiJoinBidsOnBrokerIdAndGroupByBrokerId(),
-                        new Fields("broker", "volume-sum", "price-diff")
+                        asks,
+                        new Fields("query"),
+                        new BrokerEqualityQuery.SelectStarFromAsks(),
+                        new Fields("table", "brokerId", "price", "volume")
                     )
                 .partitionBy(new Fields("brokerId"))
-                        //.each(new Fields("broker", "volume-sum", "price-diff"), new AxFinderFilter.PriceBasedFilter())
-                .each(new Fields("broker", "volume-sum"), new PrinterBolt());
+                .each(new Fields("table", "brokerId", "price", "volume"), new PrinterBolt());
 
-        stream.groupBy(new Fields("broker"));
+        Stream joinStream = asksStream.stateQuery
+                (
+                    bids,
+                    new Fields("table", "brokerId", "price", "volume"),
+                    new BrokerEqualityQuery.AsksEquiJoinBidsOnBrokerIdAndGroupByBrokerId(),
+                    new Fields("broker", "volume-sum", "price-diff")
+                )
+                .partitionBy(new Fields("brokerId"));
+
+                        //.each(new Fields("broker", "volume-sum", "price-diff"), new AxFinderFilter.PriceBasedFilter())
+        joinStream.each(new Fields("broker", "volume-sum"), new PrinterBolt());
+
+        asksStream.groupBy(new Fields("broker"));
 
         Config conf = new Config();
         conf.setNumWorkers(20);
-        conf.put(RichSpoutBatchExecutor.MAX_BATCH_SIZE_CONF, 1000);
+        conf.put(RichSpoutBatchExecutor.MAX_BATCH_SIZE_CONF, 100);
         conf.setMaxSpoutPending(500);
         StormSubmitter.submitTopology("FinanceTopology", conf, topology.build());
     }
