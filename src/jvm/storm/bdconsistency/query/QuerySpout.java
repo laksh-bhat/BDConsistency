@@ -17,7 +17,6 @@ import java.util.Map;
  * Time: 8:51 AM
  */
 public class QuerySpout implements IRichSpout {
-    public static Logger LOG = Logger.getLogger(QuerySpout.class);
     SpoutOutputCollector _collector;
 
     @Override

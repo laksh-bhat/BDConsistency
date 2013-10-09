@@ -24,10 +24,10 @@ public class FinanceTopology {
     public static void main(String[] args) throws Exception {
         final ITridentSpout asksBatchSpout = new RichSpoutBatchExecutor(new FileStreamingSpout(args[0]));
         final ITridentSpout bidsBatchSpout = new RichSpoutBatchExecutor(new FileStreamingSpout(args[0]));
+        final TridentTopology topology     = new TridentTopology();
 
-        TridentTopology topology = new TridentTopology();
-
-        TridentState asks = topology.newStream("askSpout", asksBatchSpout)
+        TridentState asks = topology.newStaticState(new AsksStateFactory());
+        asks = topology.newStream("askSpout", asksBatchSpout)
                 //.each(new Fields("tradeString"), new PrinterBolt())
                 .parallelismHint(8)
                 .each(new Fields("tradeString"),
@@ -39,26 +39,37 @@ public class FinanceTopology {
 
         TridentState bids = topology.newStream("bidsSpout", bidsBatchSpout)
                 .parallelismHint(8)
-                .each(new Fields("tradeString"),
+                .each(  new Fields("tradeString"),
                         new bdconsistency.TradeConstructor.BidTradeConstructor(),
                         new Fields("brokerId", "trade")
                 ).partitionBy(new Fields("brokerId"))
                 //.each(new Fields("brokerId", "trade"), new PrinterBolt())
                 .partitionPersist(new BidsStateFactory(), new Fields("trade"), new BidsUpdater());
 
-        //query
-        {
-            // This has to be done using TickTuple somehow
-            Stream stream = topology.newStream("querySpout", new QuerySpout())
-                    //.each(new Fields("query"), new PrinterBolt())
-                    .stateQuery(asks, new Fields("query"), new MapGet()/*BrokerEqualityQuery.SelectStarFromAsks()*/, new Fields("table", "brokerId", "price", "volume"))
-                    .partitionBy(new Fields("brokerId"))
-                    .stateQuery(bids, new Fields("table", "brokerId", "price", "volume"), new BrokerEqualityQuery.AsksEquiJoinBidsOnBrokerIdAndGroupByBrokerId(), new Fields("broker", "volume-sum", "price-diff"))
-                    .partitionBy(new Fields("brokerId"))
-                    //.each(new Fields("broker", "volume-sum", "price-diff"), new AxFinderFilter.PriceBasedFilter())
-                    .each(new Fields("broker", "volume-sum"), new PrinterBolt());
-            stream.groupBy(new Fields("broker"));
-        }
+        // AxFinder Query
+        // This has to be done using TickTuple somehow
+        Stream stream = topology.newStream("querySpout", new QuerySpout())
+                //.each(new Fields("query"), new PrinterBolt())
+                .stateQuery
+                        (
+                                asks,
+                                new Fields("query"),
+                                new BrokerEqualityQuery.SelectStarFromAsks(),
+                                new Fields("table", "brokerId", "price", "volume")
+                        )
+                .partitionBy(new Fields("brokerId"))
+                .stateQuery
+                    (
+                        bids,
+                        new Fields("table", "brokerId", "price", "volume"),
+                        new BrokerEqualityQuery.AsksEquiJoinBidsOnBrokerIdAndGroupByBrokerId(),
+                        new Fields("broker", "volume-sum", "price-diff")
+                    )
+                .partitionBy(new Fields("brokerId"))
+                        //.each(new Fields("broker", "volume-sum", "price-diff"), new AxFinderFilter.PriceBasedFilter())
+                .each(new Fields("broker", "volume-sum"), new PrinterBolt());
+
+        stream.groupBy(new Fields("broker"));
 
         Config conf = new Config();
         conf.setNumWorkers(20);
