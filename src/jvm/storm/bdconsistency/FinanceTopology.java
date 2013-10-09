@@ -51,12 +51,12 @@ public class FinanceTopology {
         Stream asksStream = topology.newStream("querySpout", new QuerySpout())
                 //.each(new Fields("query"), new PrinterBolt())
                 .stateQuery
-                    (
-                        asks,
-                        new Fields("query"),
-                        new BrokerEqualityQuery.SelectStarFromAsks(),
-                        new Fields("table", "brokerId", "price", "volume")
-                    )
+                        (
+                                asks,
+                                new Fields("query"),
+                                new BrokerEqualityQuery.SelectStarFromAsks(),
+                                new Fields("table", "brokerId", "price", "volume")
+                        )
                 .partitionBy(new Fields("brokerId"))
                 .each(new Fields("table", "brokerId", "price", "volume"), new PrinterBolt());
 
@@ -67,12 +67,9 @@ public class FinanceTopology {
                     new BrokerEqualityQuery.AsksEquiJoinBidsOnBrokerIdAndGroupByBrokerId(),
                     new Fields("broker", "volume-sum", "price-diff")
                 )
-                .partitionBy(new Fields("brokerId"));
-
+                .partitionBy(new Fields("brokerId"))
+                .each(new Fields("broker", "volume-sum"), new PrinterBolt());
                         //.each(new Fields("broker", "volume-sum", "price-diff"), new AxFinderFilter.PriceBasedFilter())
-        joinStream.each(new Fields("broker", "volume-sum"), new PrinterBolt());
-
-        asksStream.groupBy(new Fields("broker"));
 
         Config conf = new Config();
         conf.setNumWorkers(20);
