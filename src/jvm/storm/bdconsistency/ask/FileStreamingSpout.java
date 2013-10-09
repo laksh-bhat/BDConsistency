@@ -19,7 +19,7 @@ public class FileStreamingSpout implements IRichSpout {
     private Scanner scanner;
     private String fileName;// = "/damsl/software/storm/code/BDConsistency/resources/big_axfinder_agenda.csv";
 
-    public FileStreamingSpout(String fileName) throws IOException {
+    public FileStreamingSpout(String fileName) {
         this.fileName = fileName;
     }
 
