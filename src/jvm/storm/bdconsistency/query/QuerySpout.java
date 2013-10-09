@@ -27,7 +27,7 @@ public class QuerySpout implements IRichSpout {
     @Override
     public Map<String, Object> getComponentConfiguration() {
         Config conf = new Config();
-        int tickFrequencyInSeconds = 1;
+        int tickFrequencyInSeconds = 10;
         conf.put(Config.TOPOLOGY_TICK_TUPLE_FREQ_SECS, tickFrequencyInSeconds);
         return conf;
     }
@@ -51,7 +51,7 @@ public class QuerySpout implements IRichSpout {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException ignore) {}
-        _collector.emit(new Values("__tick__"));
+        _collector.emit(new Values("__query__"));
     }
 
     @Override

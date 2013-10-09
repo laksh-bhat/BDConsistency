@@ -22,14 +22,15 @@ import storm.trident.spout.RichSpoutBatchExecutor;
 public class FinanceTopology {
 
     public static void main(String[] args) throws Exception {
-        final ITridentSpout asksBatchSpout = new RichSpoutBatchExecutor(new FileStreamingSpout(args[0]));
-        final ITridentSpout bidsBatchSpout = new RichSpoutBatchExecutor(new FileStreamingSpout(args[0]));
+        final ITridentSpout fileBatchSpout = new RichSpoutBatchExecutor(new FileStreamingSpout(args[0]));
         final TridentTopology topology     = new TridentTopology();
 
-        TridentState asks = topology.newStaticState(new AsksStateFactory());
-        asks = topology.newStream("askSpout", asksBatchSpout)
+
+        Stream tradeStream = topology.newStream("askSpout", fileBatchSpout)
                 //.each(new Fields("tradeString"), new PrinterBolt())
-                .parallelismHint(8)
+                .parallelismHint(8);
+
+        TridentState asks = tradeStream
                 .each(new Fields("tradeString"),
                         new bdconsistency.TradeConstructor.AskTradeConstructor(),
                         new Fields("brokerId", "trade")
@@ -37,8 +38,7 @@ public class FinanceTopology {
                 //.each(new Fields("brokerId", "trade"), new PrinterBolt())
                 .partitionPersist(new AsksStateFactory(), new Fields("trade"), new AsksUpdater());
 
-        TridentState bids = topology.newStream("bidsSpout", bidsBatchSpout)
-                .parallelismHint(8)
+        TridentState bids = tradeStream
                 .each(  new Fields("tradeString"),
                         new bdconsistency.TradeConstructor.BidTradeConstructor(),
                         new Fields("brokerId", "trade")
@@ -49,7 +49,7 @@ public class FinanceTopology {
         // AxFinder Query
         // This has to be done using TickTuple somehow
         Stream asksStream = topology.newStream("querySpout", new QuerySpout())
-                //.each(new Fields("query"), new PrinterBolt())
+                .each(new Fields("query"), new PrinterBolt())
                 .stateQuery
                         (
                                 asks,
@@ -60,7 +60,7 @@ public class FinanceTopology {
                 .partitionBy(new Fields("brokerId"))
                 .each(new Fields("table", "brokerId", "price", "volume"), new PrinterBolt());
 
-        Stream joinStream = asksStream.stateQuery
+       /* Stream joinStream = asksStream.stateQuery
                 (
                     bids,
                     new Fields("table", "brokerId", "price", "volume"),
@@ -69,7 +69,7 @@ public class FinanceTopology {
                 )
                 .partitionBy(new Fields("brokerId"))
                 .each(new Fields("broker", "volume-sum"), new PrinterBolt());
-                        //.each(new Fields("broker", "volume-sum", "price-diff"), new AxFinderFilter.PriceBasedFilter())
+                        //.each(new Fields("broker", "volume-sum", "price-diff"), new AxFinderFilter.PriceBasedFilter())*/
 
         Config conf = new Config();
         conf.setNumWorkers(20);
