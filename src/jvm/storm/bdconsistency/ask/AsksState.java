@@ -11,6 +11,7 @@ import java.util.*;
  */
 public class AsksState implements State {
     public AsksState() {
+        System.out.println("Asks State Constructed");
         asks = new HashMap<Long, List<Trade>>();
     }
 

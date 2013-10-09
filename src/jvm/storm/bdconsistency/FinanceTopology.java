@@ -1,6 +1,7 @@
 package bdconsistency;
 
 import backtype.storm.Config;
+import backtype.storm.LocalCluster;
 import backtype.storm.LocalDRPC;
 import backtype.storm.StormSubmitter;
 import backtype.storm.generated.StormTopology;
@@ -66,8 +67,8 @@ public class FinanceTopology {
         conf.setMaxSpoutPending(20);
 
         LocalDRPC drpc = new LocalDRPC();
-        //LocalCluster cluster = new LocalCluster();
-        StormSubmitter.submitTopology("AXFinder", conf, buildTopology(drpc, args[0]));
+        LocalCluster cluster = new LocalCluster();
+        cluster.submitTopology("AXFinder", conf, buildTopology(drpc, args[0]));
         // Query 100 times for
         for(int i = 0; i < 100; i++) {
             Thread.sleep(1000);

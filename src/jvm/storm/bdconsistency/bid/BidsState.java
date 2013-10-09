@@ -12,6 +12,7 @@ import java.util.*;
  */
 public class BidsState implements State {
     public BidsState() {
+        System.out.println("Bids State Constructed");
         bids = new HashMap<Long, List<Trade>>();
     }
 
