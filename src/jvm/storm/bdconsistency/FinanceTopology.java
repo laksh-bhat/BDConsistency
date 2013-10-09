@@ -18,25 +18,28 @@ import storm.trident.testing.MemoryMapState;
 
 public class FinanceTopology {
 
-    public static StormTopology buildTopology(LocalDRPC drpc, String file) {
+    public static StormTopology buildTopology(LocalDRPC drpc, String fileName) {
         TridentTopology topology = new TridentTopology();
-        final ITridentSpout fileBatchSpout = new RichSpoutBatchExecutor(new FileStreamingSpout(file));
+        final ITridentSpout asksSpout = new RichSpoutBatchExecutor(new FileStreamingSpout(fileName));
+        final ITridentSpout bidsSpout = new RichSpoutBatchExecutor(new FileStreamingSpout(fileName));
 
         // In this state we will save the table
         StateFactory askStateFactory = new MemoryMapState.Factory();
         StateFactory bidStateFactory = new MemoryMapState.Factory();
 
         TridentState asks = topology
-                .newStream("spout1", fileBatchSpout)
-                .each(  new Fields("tradeString"),
+                .newStream("spout1", asksSpout)
+                .each(new Fields("tradeString"), new PrinterBolt())
+                .each(new Fields("tradeString"),
                         new TradeConstructor.AskTradeConstructor(),
                         new Fields("brokerId", "trade")
-                     )
+                )
                 .partitionPersist(askStateFactory, new Fields("trade"), new AsksUpdater());
 
         TridentState bids = topology
-                .newStream("spout2", fileBatchSpout)
-                .each(  new Fields("tradeString"),
+                .newStream("spout2", bidsSpout)
+                .each(new Fields("tradeString"), new PrinterBolt())
+                .each(new Fields("tradeString"),
                         new TradeConstructor.BidTradeConstructor(),
                         new Fields("brokerId", "trade")
                 )
@@ -46,6 +49,7 @@ public class FinanceTopology {
 
         topology
                 .newDRPCStream("AXF", drpc)
+                .each(new Fields("args"), new PrinterBolt())
                 .stateQuery(asks, new Fields("args"), new BrokerEqualityQuery.SelectStarFromAsks(), new Fields("asks"))
                 .stateQuery(bids, new Fields("args"), new BrokerEqualityQuery.SelectStarFromBids(), new Fields("bids"))
 
@@ -67,8 +71,8 @@ public class FinanceTopology {
         StormSubmitter.submitTopology("AXFinder", conf, buildTopology(drpc, args[0]));
         // Query 100 times for
         for(int i = 0; i < 100; i++) {
-            System.out.println("Result for AXF query is -> " + drpc.execute("AXF", "sfo"));
             Thread.sleep(1000);
+            System.out.println("Result for AXF query is -> " + drpc.execute("AXF", "sfo"));
         }
     }
 }
