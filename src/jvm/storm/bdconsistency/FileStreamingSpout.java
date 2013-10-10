@@ -17,7 +17,7 @@ import backtype.storm.tuple.Values;
 public class FileStreamingSpout implements IRichSpout {
     SpoutOutputCollector _collector;
     private Scanner scanner;
-    private String fileName;// = "/damsl/software/storm/code/BDConsistency/resources/big_axfinder_agenda.csv";
+    private String fileName;
 
     public FileStreamingSpout(String fileName) {
         this.fileName = fileName;
@@ -77,44 +77,4 @@ public class FileStreamingSpout implements IRichSpout {
     public void fail(Object msgId) {
         scanner.close();
     }
-
- /*   @SuppressWarnings("unchecked")
-    @Override
-    public void open(Map conf, TopologyContext context) {
-        System.err.println("Open Spout instance");
-        try {
-            scanner = new Scanner(new File(fileName));
-        } catch(IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Override
-    public void emitBatch(long batchId, TridentCollector collector) {
-        for(int i = 0; i < batchSize; i++) collector.emit(getNextTuple());
-    }
-
-    @Override
-    public void ack(long batchId) {
-        // nothing to do here
-    }
-
-    @Override
-    public Map getComponentConfiguration() {
-        // no particular configuration here
-        return new Config();
-    }
-
-    @Override
-    public Fields getOutputFields() {
-        return new Fields("tradeString");
-    }
-
-    private Values getNextTuple() {
-        if(!scanner.hasNextLine()) {
-            scanner.close();
-            scanner = new Scanner(fileName);
-        }
-        return new Values(scanner.nextLine());
-    }*/
 }
