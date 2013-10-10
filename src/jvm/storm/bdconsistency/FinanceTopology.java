@@ -3,6 +3,7 @@ package bdconsistency;
 import backtype.storm.Config;
 import backtype.storm.LocalCluster;
 import backtype.storm.LocalDRPC;
+import backtype.storm.StormSubmitter;
 import backtype.storm.generated.StormTopology;
 import backtype.storm.tuple.Fields;
 import bdconsistency.ask.AsksStateFactory;
@@ -58,11 +59,11 @@ public class FinanceTopology {
 
         LocalDRPC drpc = new LocalDRPC();
         LocalCluster cluster = new LocalCluster();
-        cluster.submitTopology("AXFinder", conf, buildTopology(drpc, args[0]));
+        StormSubmitter.submitTopology("AXFinder", conf, buildTopology(drpc, args[0]));
         // Query 100 times for
         for(int i = 0; i < 100; i++) {
             Thread.sleep(1000);
-            System.out.println("Result for AXF query is -> " + drpc.execute("AXF", "sfo"));
+            System.out.println("Result for AXF query is -> " + drpc.execute("AXF", "axfinder"));
         }
     }
 }
