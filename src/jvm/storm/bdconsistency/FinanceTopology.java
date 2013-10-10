@@ -30,14 +30,21 @@ public class FinanceTopology {
         TridentState asks = topology
                 .newStream("spout1", asksSpout)
                 .each(new Fields("tradeString"), new AxFinderFilter.AsksFilter())
+                .shuffle()
+                .parallelismHint(5)
                 //.each(new Fields("tradeString"), new PrinterBolt())
-                .partitionPersist(new AsksStateFactory(), new Fields("tradeString"), new AsksUpdater());
+                .partitionPersist(new AsksStateFactory(), new Fields("tradeString"), new AsksUpdater())
+                .parallelismHint(5);
 
         TridentState bids = topology
                 .newStream("spout2", bidsSpout)
                 .each(new Fields("tradeString"), new AxFinderFilter.BidsFilter())
+                .shuffle()
+                .parallelismHint(5)
                 //.each(new Fields("tradeString"), new PrinterBolt())
-                .partitionPersist(new BidsStateFactory(), new Fields("tradeString"), new BidsUpdater());
+                .partitionPersist(new BidsStateFactory(), new Fields("tradeString"), new BidsUpdater())
+                .parallelismHint(5)
+                ;
 
         // DRPC Service
         topology

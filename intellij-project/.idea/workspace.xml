@@ -11,7 +11,7 @@
     <file path="$PROJECT_DIR$/../../compgenomics/src/asgmt2/compgen-answers.txt" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1380574467967" ignored="false" />
     <file path="/compgen-answers.txt" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1380574467967" ignored="false" />
     <file path="/SingleJoinExample.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1380558741906" ignored="false" />
-    <file path="/FinanceTopology.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381383733007" ignored="false" />
+    <file path="/FinanceTopology.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381421739162" ignored="false" />
     <file path="/AskSpout.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381201067384" ignored="false" />
     <file path="/TransactionMessage.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1380882421063" ignored="false" />
     <file path="/fragment.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381364179376" ignored="false" />
@@ -109,7 +109,7 @@
       <file leaf-file-name="FinanceTopology.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="77" column="83" selection-start="3159" selection-end="3159" vertical-scroll-proportion="0.4704797">
+            <state line="65" column="86" selection-start="2851" selection-end="2851" vertical-scroll-proportion="0.4704797">
               <folding />
             </state>
           </provider>
@@ -677,7 +677,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="83" selection-start="3159" selection-end="3159" vertical-scroll-proportion="0.4704797">
+        <state line="65" column="86" selection-start="2851" selection-end="2851" vertical-scroll-proportion="0.4704797">
           <folding />
         </state>
       </provider>
