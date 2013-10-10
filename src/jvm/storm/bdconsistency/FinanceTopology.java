@@ -41,10 +41,11 @@ public class FinanceTopology {
 
         // DRPC Service
         topology
-                .newDRPCStream("AXF")
+                .newDRPCStream("AXF", drpc)
                 .each(new Fields("args"), new PrinterBolt())
                 .shuffle()
                 .stateQuery(asks, new BrokerEqualityQuery.SelectStarFromAsks(), new Fields("asks"))
+                .parallelismHint(5)
                 .shuffle()
                 .stateQuery(bids, new BrokerEqualityQuery.SelectStarFromBids(), new Fields("bids"))
                 .parallelismHint(5)
@@ -61,9 +62,21 @@ public class FinanceTopology {
     public static void main(String[] args) throws Exception {
         Config conf = new Config();
         conf.setDebug(true);
+
+        LocalDRPC drpc = new LocalDRPC();
+        LocalCluster cluster = new LocalCluster();
+        cluster.submitTopology("AXFinder", conf, buildTopology(drpc, args[0]));
+        Thread.sleep(2000);
+
+        System.out.println("DRPC RESULTS ==> : " + drpc.execute("AXF", "axfinder"));
+
+        cluster.shutdown();
+        drpc.shutdown();
+
+
         //conf.setMaxSpoutPending(2);
-        conf.put(Config.DRPC_SERVERS, Lists.newArrayList("localhost"));
-        conf.put(Config.STORM_CLUSTER_MODE, "distributed");
+       /* conf.put(Config.DRPC_SERVERS, Lists.newArrayList("localhost"));
+        conf.put(Config.STORM_CLUSTER_MODE, "local");
         conf.put(Config.DRPC_WORKER_THREADS, 4);
 
         DRPCClient client = new DRPCClient("localhost", 3772);
@@ -74,5 +87,6 @@ public class FinanceTopology {
             System.out.println("Result for AXF query is -> " + client.execute("AXF", "axfinder"));
             Thread.sleep(100);
         }
+        */
     }
 }
