@@ -78,15 +78,14 @@ public class FinanceTopology {
         //conf.setMaxSpoutPending(2);
         conf.put(Config.DRPC_SERVERS, Lists.newArrayList("localhost"));
         conf.put(Config.STORM_CLUSTER_MODE, "distributed");
-
-        LocalDRPC drpc = new LocalDRPC();
-        StormSubmitter.submitTopology("AXFinder", conf, buildTopology(drpc, args[0]));
+        StormSubmitter.submitTopology("AXFinder", conf, buildTopology(null, args[0]));
         Thread.sleep(1000);
+
+        DRPCClient client = new DRPCClient("localhost", 3772);
         // Fire AXFinder Query 100 times
         for(int i = 0; i < 100; i++) {
-            System.out.println("Result for AXF query is -> " + drpc.execute("AXF", "axfinder"));
+            System.out.println("Result for AXF query is -> " + client.execute("AXF", "axfinder"));
             Thread.sleep(100);
         }
-        drpc.shutdown();
     }
 }
