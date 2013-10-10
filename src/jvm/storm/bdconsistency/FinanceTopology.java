@@ -29,20 +29,14 @@ public class FinanceTopology {
         // In this state we will save the table
         TridentState asks = topology
                 .newStream("spout1", asksSpout)
+                .each(new Fields("tradeString"), new AxFinderFilter.AsksFilter())
                 .each(new Fields("tradeString"), new PrinterBolt())
-                .each(new Fields("tradeString"),
-                        new TradeConstructor.AskTradeConstructor(),
-                        new Fields("brokerId", "trade")
-                )
                 .partitionPersist(new AsksStateFactory(), new Fields("trade"), new AsksUpdater());
 
         TridentState bids = topology
                 .newStream("spout2", bidsSpout)
+                .each(new Fields("tradeString"), new AxFinderFilter.BidsFilter())
                 .each(new Fields("tradeString"), new PrinterBolt())
-                .each(new Fields("tradeString"),
-                        new TradeConstructor.BidTradeConstructor(),
-                        new Fields("brokerId", "trade")
-                )
                 .partitionPersist(new BidsStateFactory(), new Fields("trade"), new BidsUpdater());
 
         // DRPC Service

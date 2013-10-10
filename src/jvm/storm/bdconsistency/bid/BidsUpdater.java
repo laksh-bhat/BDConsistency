@@ -15,13 +15,12 @@ import java.util.List;
 public class BidsUpdater extends BaseStateUpdater<BidsState> {
     public void updateState(BidsState state, List<TridentTuple> tuples, TridentCollector collector) {
         for(TridentTuple t: tuples) {
-            Object trade = t.getValueByField("trade");
-            if(trade instanceof Trade){
-                int operation = ((Trade)trade).getOperation();
-                long brokerId =  ((Trade)trade).getBrokerId();
-                if(operation == 1) state.addTrade(brokerId, (Trade) trade);
-                else state.removeTrade(brokerId, (Trade) trade);
-            }
+            String tradeStr = t.getStringByField("tradeString");
+            Trade trade = new Trade(tradeStr.split("\\|"));
+            int operation = trade.getOperation();
+            long brokerId =  trade.getBrokerId();
+            if(operation == 1) state.addTrade(brokerId, trade);
+            else state.removeTrade(brokerId, trade);
         }
     }
 }

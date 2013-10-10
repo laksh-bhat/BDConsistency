@@ -10,10 +10,17 @@ import storm.trident.tuple.TridentTuple;
  */
 public class AxFinderFilter {
 
-    public static class PriceBasedFilter  extends BaseFilter{
+    public static class AsksFilter  extends BaseFilter{
         @Override
         public boolean isKeep(TridentTuple tuple) {
-            return tuple.getLongByField("price-diff") > 1000;
+            return tuple.getStringByField("tradeString").startsWith("ASKS");
+        }
+    }
+
+    public static class BidsFilter  extends BaseFilter{
+        @Override
+        public boolean isKeep(TridentTuple tuple) {
+            return tuple.getStringByField("tradeString").startsWith("BIDS");
         }
     }
 
