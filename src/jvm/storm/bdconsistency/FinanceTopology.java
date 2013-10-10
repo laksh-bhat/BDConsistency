@@ -31,13 +31,13 @@ public class FinanceTopology {
                 .newStream("spout1", asksSpout)
                 .each(new Fields("tradeString"), new AxFinderFilter.AsksFilter())
                 .each(new Fields("tradeString"), new PrinterBolt())
-                .partitionPersist(new AsksStateFactory(), new Fields("trade"), new AsksUpdater());
+                .partitionPersist(new AsksStateFactory(), new Fields("tradeString"), new AsksUpdater());
 
         TridentState bids = topology
                 .newStream("spout2", bidsSpout)
                 .each(new Fields("tradeString"), new AxFinderFilter.BidsFilter())
                 .each(new Fields("tradeString"), new PrinterBolt())
-                .partitionPersist(new BidsStateFactory(), new Fields("trade"), new BidsUpdater());
+                .partitionPersist(new BidsStateFactory(), new Fields("tradeString"), new BidsUpdater());
 
         // DRPC Service
 
