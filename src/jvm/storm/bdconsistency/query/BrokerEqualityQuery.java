@@ -31,9 +31,10 @@ public class BrokerEqualityQuery {
 
         @Override
         public void execute(TridentTuple tuple, HashMap<Long, List<Trade>> result, TridentCollector collector) {
-            for (Long key : result.keySet())
+/*            for (Long key : result.keySet())
                 for (Trade t : result.get(key))
-                    collector.emit(new Values(t.getBrokerId()));
+                    collector.emit(new Values(t.getBrokerId()));*/
+            collector.emit(new Values(result));
         }
     }
 

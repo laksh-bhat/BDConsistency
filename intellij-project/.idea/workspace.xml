@@ -5,7 +5,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../BDConsistency" afterPath="$PROJECT_DIR$/../BDConsistency" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" afterPath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/BrokerEqualityQuery.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/BrokerEqualityQuery.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java" />
     </list>
     <ignored path="storm.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -23,7 +22,7 @@
     <file path="/AsksUpdater.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381363102719" ignored="false" />
     <file path="/BidsUpdater.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381185713369" ignored="false" />
     <file path="/BidsState.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381362420700" ignored="false" />
-    <file path="/BrokerEqualityQuery.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381367660362" ignored="false" />
+    <file path="/BrokerEqualityQuery.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381368692936" ignored="false" />
     <file path="/BrokerTradeFilter.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381211464432" ignored="false" />
     <file path="/AsksState.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381367265903" ignored="false" />
     <file path="/AsksBrokerEqualityFilter.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381030103458" ignored="false" />
@@ -110,7 +109,7 @@
       <file leaf-file-name="FinanceTopology.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="89" selection-start="1945" selection-end="1945" vertical-scroll-proportion="0.0">
+            <state line="43" column="91" selection-start="1946" selection-end="1947" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -119,14 +118,14 @@
       <file leaf-file-name="BrokerEqualityQuery.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/BrokerEqualityQuery.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="42" selection-start="1344" selection-end="1362" vertical-scroll-proportion="0.6363636">
+            <state line="57" column="66" selection-start="2195" selection-end="2195" vertical-scroll-proportion="0.6363636">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#863#891#0" expanded="true" />
-                <element signature="e#1675#1703#0" expanded="true" />
-                <element signature="e#2483#2509#0" expanded="true" />
-                <element signature="e#2867#2879#0" expanded="true" />
-                <element signature="e#3497#3503#0" expanded="true" />
+                <element signature="e#1727#1755#0" expanded="true" />
+                <element signature="e#2535#2561#0" expanded="true" />
+                <element signature="e#2919#2931#0" expanded="true" />
+                <element signature="e#3549#3555#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -632,21 +631,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="89" selection-start="1945" selection-end="1945" vertical-scroll-proportion="0.0">
+        <state line="43" column="91" selection-start="1946" selection-end="1947" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/BrokerEqualityQuery.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="42" selection-start="1344" selection-end="1362" vertical-scroll-proportion="0.6363636">
+        <state line="57" column="66" selection-start="2195" selection-end="2195" vertical-scroll-proportion="0.6363636">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#863#891#0" expanded="true" />
-            <element signature="e#1675#1703#0" expanded="true" />
-            <element signature="e#2483#2509#0" expanded="true" />
-            <element signature="e#2867#2879#0" expanded="true" />
-            <element signature="e#3497#3503#0" expanded="true" />
+            <element signature="e#1727#1755#0" expanded="true" />
+            <element signature="e#2535#2561#0" expanded="true" />
+            <element signature="e#2919#2931#0" expanded="true" />
+            <element signature="e#3549#3555#0" expanded="true" />
           </folding>
         </state>
       </provider>
