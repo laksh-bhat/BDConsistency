@@ -27,13 +27,13 @@ public class FinanceTopology {
         TridentState asks = topology
                 .newStream("spout1", asksSpout)
                 .each(new Fields("tradeString"), new AxFinderFilter.AsksFilter())
-                .each(new Fields("tradeString"), new PrinterBolt())
+                //.each(new Fields("tradeString"), new PrinterBolt())
                 .partitionPersist(new AsksStateFactory(), new Fields("tradeString"), new AsksUpdater());
 
         TridentState bids = topology
                 .newStream("spout2", bidsSpout)
                 .each(new Fields("tradeString"), new AxFinderFilter.BidsFilter())
-                .each(new Fields("tradeString"), new PrinterBolt())
+                //.each(new Fields("tradeString"), new PrinterBolt())
                 .partitionPersist(new BidsStateFactory(), new Fields("tradeString"), new BidsUpdater());
 
         // DRPC Service
@@ -42,7 +42,7 @@ public class FinanceTopology {
                 .newDRPCStream("AXF", drpc)
                 .each(new Fields("args"), new PrinterBolt())
                 .stateQuery(asks, new Fields("args"), new BrokerEqualityQuery.SelectStarFromAsks(), new Fields("asks"))
-                //.stateQuery(bids, new Fields("args"), new BrokerEqualityQuery.SelectStarFromBids(), new Fields("bids"))
+                .stateQuery(bids, new Fields("args"), new BrokerEqualityQuery.SelectStarFromBids(), new Fields("bids"))
 
                 //.each(new Fields("asks", "bids"), new AsksBidsJoin(), new Fields("broker", "volume"))
                 // Project allows us to keep only the interesting results
@@ -61,7 +61,7 @@ public class FinanceTopology {
         StormSubmitter.submitTopology("AXFinder", conf, buildTopology(drpc, args[0]));
         // Query 100 times for
         for(int i = 0; i < 100; i++) {
-            Thread.sleep(1000);
+            Thread.sleep(500);
             System.out.println("Result for AXF query is -> " + drpc.execute("AXF", "axfinder"));
         }
     }

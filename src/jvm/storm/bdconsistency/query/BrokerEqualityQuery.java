@@ -24,7 +24,7 @@ public class BrokerEqualityQuery {
     public static class SelectStarFromAsks extends BaseQueryFunction<AsksState, HashMap<Long, List<Trade>>> {
         public List<HashMap<Long, List<Trade>>> batchRetrieve(AsksState asksState, List<TridentTuple> inputs) {
             System.out.println("-- SelectStarFromAsks -- ");
-            List<HashMap<Long, List<Trade>>> returnList = new ArrayList<HashMap<Long, List<Trade>>>();
+            List<HashMap<Long, List<Trade>>> returnList = new ArrayList<HashMap<Long, List<Trade>>>(1);
             returnList.add((HashMap<Long, List<Trade>>)asksState.getAsks());
             return returnList;
         }
@@ -42,7 +42,7 @@ public class BrokerEqualityQuery {
         public List<HashMap<Long, List<Trade>>> batchRetrieve(BidsState bidsState, List<TridentTuple> inputs) {
             System.out.println("-- SelectStarFromBids -- ");
 
-            List<HashMap<Long, List<Trade>>> returnList = new ArrayList<HashMap<Long, List<Trade>>>();
+            List<HashMap<Long, List<Trade>>> returnList = new ArrayList<HashMap<Long, List<Trade>>>(1);
             returnList.add((HashMap<Long, List<Trade>>)bidsState.getBids());
 
             return returnList;
