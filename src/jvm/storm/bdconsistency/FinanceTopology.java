@@ -6,6 +6,7 @@ import backtype.storm.LocalDRPC;
 import backtype.storm.StormSubmitter;
 import backtype.storm.generated.StormTopology;
 import backtype.storm.tuple.Fields;
+import backtype.storm.utils.DRPCClient;
 import bdconsistency.ask.AsksStateFactory;
 import bdconsistency.ask.AsksUpdater;
 import bdconsistency.bid.BidsStateFactory;
@@ -40,15 +41,18 @@ public class FinanceTopology {
 
         // DRPC Service
         topology
-                .newDRPCStream("AXF", drpc)
+                .newDRPCStream("AXF")
                 .each(new Fields("args"), new PrinterBolt())
                 .shuffle()
-                .stateQuery(asks, new Fields("args"), new BrokerEqualityQuery.SelectStarFromAsks(), new Fields("asks"))
+                .stateQuery(asks, new BrokerEqualityQuery.SelectStarFromAsks(), new Fields("asks"))
                 .shuffle()
-                .stateQuery(bids, new Fields("args"), new BrokerEqualityQuery.SelectStarFromBids(), new Fields("bids"))
+                .stateQuery(bids, new BrokerEqualityQuery.SelectStarFromBids(), new Fields("bids"))
                 .parallelismHint(5)
                 .each(new Fields("asks", "bids"), new PrinterBolt())
-                .each(new Fields("asks", "bids"), new AsksBidsJoin(), new Fields("broker", "volume"));
+                .each(new Fields("asks", "bids"), new AsksBidsJoin(), new Fields("broker", "volume"))
+                .shuffle()
+                .parallelismHint(5)
+                .project(new Fields("broker", "volume"));
 
         return topology.build();
     }
@@ -60,13 +64,15 @@ public class FinanceTopology {
         //conf.setMaxSpoutPending(2);
         conf.put(Config.DRPC_SERVERS, Lists.newArrayList("localhost"));
         conf.put(Config.STORM_CLUSTER_MODE, "distributed");
+        conf.put(Config.DRPC_WORKER_THREADS, 4);
 
-        LocalDRPC drpc = new LocalDRPC();
-        StormSubmitter.submitTopology("AXFinder", conf, buildTopology(drpc, args[0]));
+        DRPCClient client = new DRPCClient("localhost", 3772);
+        //LocalDRPC drpc = new LocalDRPC();
+        StormSubmitter.submitTopology("AXFinder", conf, buildTopology(null, args[0]));
         // Query 100 times for
-        for(int i = 0; i < 100; i++) {
-            System.out.println("Result for AXF query is -> " + drpc.execute("AXF", "axfinder"));
-            Thread.sleep(1000);
+        for(int i = 0; i < 10; i++) {
+            System.out.println("Result for AXF query is -> " + client.execute("AXF", "axfinder"));
+            Thread.sleep(100);
         }
     }
 }
