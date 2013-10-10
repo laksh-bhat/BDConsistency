@@ -1,4 +1,4 @@
-package bdconsistency.ask;
+package bdconsistency;
 
 import java.io.File;
 import java.io.IOException;
@@ -64,7 +64,7 @@ public class FileStreamingSpout implements IRichSpout {
     @Override
     public void nextTuple() {
         try {
-            Thread.sleep(100);
+            Thread.sleep(500);
             _collector.emit(new Values(scanner.nextLine()));
         } catch (InterruptedException ignore) {}
     }

@@ -3,12 +3,10 @@ package bdconsistency;
 import backtype.storm.Config;
 import backtype.storm.LocalCluster;
 import backtype.storm.LocalDRPC;
-import backtype.storm.StormSubmitter;
 import backtype.storm.generated.StormTopology;
 import backtype.storm.tuple.Fields;
 import bdconsistency.ask.AsksStateFactory;
 import bdconsistency.ask.AsksUpdater;
-import bdconsistency.ask.FileStreamingSpout;
 import bdconsistency.bid.BidsStateFactory;
 import bdconsistency.bid.BidsUpdater;
 import bdconsistency.query.*;
@@ -16,8 +14,6 @@ import storm.trident.TridentState;
 import storm.trident.TridentTopology;
 import storm.trident.spout.ITridentSpout;
 import storm.trident.spout.RichSpoutBatchExecutor;
-import storm.trident.state.StateFactory;
-import storm.trident.testing.MemoryMapState;
 
 public class FinanceTopology {
 
@@ -58,7 +54,7 @@ public class FinanceTopology {
 
     public static void main(String[] args) throws Exception {
         Config conf = new Config();
-        conf.setMaxSpoutPending(20);
+        //conf.setMaxSpoutPending(20);
 
         LocalDRPC drpc = new LocalDRPC();
         LocalCluster cluster = new LocalCluster();

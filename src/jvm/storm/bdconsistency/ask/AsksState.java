@@ -1,7 +1,7 @@
 package bdconsistency.ask;
 
 import storm.trident.state.State;
-import bdconsistency.Trade;
+import bdconsistency.trade.Trade;
 import java.util.*;
 
 /**

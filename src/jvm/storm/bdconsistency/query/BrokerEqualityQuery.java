@@ -1,13 +1,12 @@
 package bdconsistency.query;
 
 import backtype.storm.tuple.Values;
-import bdconsistency.Trade;
+import bdconsistency.trade.Trade;
 import bdconsistency.ask.AsksState;
 import bdconsistency.bid.BidsState;
 import storm.trident.operation.TridentCollector;
 import storm.trident.state.BaseQueryFunction;
 import storm.trident.tuple.TridentTuple;
-import storm.trident.tuple.TridentTupleView;
 
 import java.util.ArrayList;
 import java.util.HashMap;

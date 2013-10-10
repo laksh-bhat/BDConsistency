@@ -1,6 +1,6 @@
 package bdconsistency.bid;
 
-import bdconsistency.Trade;
+import bdconsistency.trade.Trade;
 import storm.trident.state.State;
 
 import java.util.*;

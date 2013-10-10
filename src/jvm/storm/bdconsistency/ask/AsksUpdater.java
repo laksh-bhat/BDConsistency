@@ -1,6 +1,6 @@
 package bdconsistency.ask;
 
-import bdconsistency.Trade;
+import bdconsistency.trade.Trade;
 import storm.trident.operation.TridentCollector;
 import storm.trident.state.BaseStateUpdater;
 import storm.trident.tuple.TridentTuple;
