@@ -42,9 +42,9 @@ public class FinanceTopology {
                 .newDRPCStream("AXF", drpc)
                 .each(new Fields("args"), new PrinterBolt())
                 .stateQuery(asks, new Fields("args"), new BrokerEqualityQuery.SelectStarFromAsks(), new Fields("asks"))
-                .stateQuery(bids, new Fields("args"), new BrokerEqualityQuery.SelectStarFromBids(), new Fields("bids"))
+                //.stateQuery(bids, new Fields("args"), new BrokerEqualityQuery.SelectStarFromBids(), new Fields("bids"))
 
-                .each(new Fields("asks", "bids"), new AsksBidsJoin(), new Fields("broker", "volume"))
+                //.each(new Fields("asks", "bids"), new AsksBidsJoin(), new Fields("broker", "volume"))
                 // Project allows us to keep only the interesting results
                 .each(new Fields("asks", "bids"), new PrinterBolt())
                 ;
