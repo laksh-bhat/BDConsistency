@@ -41,7 +41,7 @@ public class FinanceTopology {
 
         // DRPC Service
         topology
-                .newDRPCStream("AXF", drpc)
+                .newDRPCStream("AXF")
                 .each(new Fields("args"), new PrinterBolt())
                 //.shuffle()
                 .stateQuery(asks, new BrokerEqualityQuery.SelectStarFromAsks(), new Fields("asks"))
