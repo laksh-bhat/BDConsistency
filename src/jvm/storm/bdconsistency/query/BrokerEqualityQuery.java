@@ -21,51 +21,32 @@ import java.util.Map;
 
 public class BrokerEqualityQuery {
 
-    public static class SelectStarFromAsks extends BaseQueryFunction<AsksState, Object> {
-        public List<Object> batchRetrieve(AsksState asksState, List<TridentTuple> inputs) {
-            System.out.println("SelectStarFromAsks - " + inputs.size());
-
-            List<Object> returnList = new ArrayList<Object>();
-            for (TridentTuple input : inputs) {
-                System.out.println(input);
-                /*ArrayList<Trade> askTable = new ArrayList<Trade>();
-                for (List<Trade> l : asksState.getAsks().values())
-                    for (Trade t : l)
-                        askTable.add(t);*/
-                returnList.add(asksState.getAsks());
-            }
-
+    public static class SelectStarFromAsks extends BaseQueryFunction<AsksState, HashMap<Long, List<Trade>>> {
+        public List<HashMap<Long, List<Trade>>> batchRetrieve(AsksState asksState, List<TridentTuple> inputs) {
+            System.out.println("-- SelectStarFromAsks -- ");
+            List<HashMap<Long, List<Trade>>> returnList = new ArrayList<HashMap<Long, List<Trade>>>();
+            returnList.add((HashMap<Long, List<Trade>>)asksState.getAsks());
             return returnList;
         }
 
         @Override
-        public void execute(TridentTuple tuple, Object result, TridentCollector collector) {
-           /* for (Trade t : result) {
-                collector.emit(new Values(t.getTable(), t.getBrokerId(), t.getPrice(), t.getVolume()));
-            }*/
+        public void execute(TridentTuple tuple, HashMap<Long, List<Trade>> result, TridentCollector collector) {
             collector.emit(new Values(result));
         }
     }
 
-    public static class SelectStarFromBids extends BaseQueryFunction<BidsState, Object> {
-        public List<Object> batchRetrieve(BidsState bidsState, List<TridentTuple> inputs) {
-            System.out.println("SelectStarFromBids - " + inputs.size());
+    public static class SelectStarFromBids extends BaseQueryFunction<BidsState, HashMap<Long, List<Trade>>> {
+        public List<HashMap<Long, List<Trade>>> batchRetrieve(BidsState bidsState, List<TridentTuple> inputs) {
+            System.out.println("-- SelectStarFromBids -- ");
 
-            List<Object> returnList = new ArrayList<Object>();
-            for (TridentTuple input : inputs) {
-                System.out.println(input);
-/*                ArrayList<Trade> bidsTable = new ArrayList<Trade>();
-                for (List<Trade> l : bidsState.getBids().values())
-                    for (Trade t : l)
-                        bidsTable.add(t);*/
-                returnList.add(bidsState.getBids());
-            }
+            List<HashMap<Long, List<Trade>>> returnList = new ArrayList<HashMap<Long, List<Trade>>>();
+            returnList.add((HashMap<Long, List<Trade>>)bidsState.getBids());
 
             return returnList;
         }
 
         @Override
-        public void execute(TridentTuple tuple, Object result, TridentCollector collector) {
+        public void execute(TridentTuple tuple, HashMap<Long, List<Trade>> result, TridentCollector collector) {
             collector.emit(new Values(result));
         }
     }
