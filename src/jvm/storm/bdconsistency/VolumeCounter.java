@@ -60,7 +60,7 @@ public class VolumeCounter {
                 .newStream("spout1", asksSpout)
                 .shuffle()
                 .parallelismHint(5)
-                .aggregate( new VolumeAggregator(), new Fields("volume"))
+                .aggregate(new Fields("tradeString"), new VolumeAggregator(), new Fields("volume"))
                 .each(new Fields("volume"), new PrinterBolt());
         return topology.build();
     }

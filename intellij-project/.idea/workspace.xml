@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3ce62a69-14b0-48fd-b6e9-6b6be8644430" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/VolumeCounter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../BDConsistency" afterPath="$PROJECT_DIR$/../BDConsistency" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" afterPath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FileStreamingSpout.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FileStreamingSpout.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/VolumeCounter.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/VolumeCounter.java" />
     </list>
     <ignored path="storm.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -48,7 +46,7 @@
     <file path="/FileStreamingSpout.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381200031672" ignored="false" />
     <file path="/AsksBidsJoin.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381383173319" ignored="false" />
     <file path="/AxFinderFilter.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381363205212" ignored="false" />
-    <file path="/VolumeCounter.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381515421752" ignored="false" />
+    <file path="/VolumeCounter.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381516987101" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,10 +116,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VolumeCounter.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="VolumeCounter.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/VolumeCounter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="66" column="66" selection-start="2318" selection-end="2318" vertical-scroll-proportion="0.0">
+            <state line="63" column="65" selection-start="2304" selection-end="2304" vertical-scroll-proportion="0.31609195">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -156,10 +154,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FileStreamingSpout.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="FileStreamingSpout.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FileStreamingSpout.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="75" column="45" selection-start="1876" selection-end="1876" vertical-scroll-proportion="0.68390805">
+            <state line="75" column="45" selection-start="1876" selection-end="1876" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -169,6 +167,15 @@
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/BrokerEqualityQuery.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="23" column="24" selection-start="533" selection-end="533" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Stream.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/../lib/storm-0.8.3-wip3.jar!/src/jvm/storm/trident/Stream.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="237" column="18" selection-start="9530" selection-end="9530" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -206,8 +213,8 @@
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/AsksBidsJoin.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/trade/Trade.java" />
-        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/VolumeCounter.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FileStreamingSpout.java" />
+        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/VolumeCounter.java" />
       </list>
     </option>
   </component>
@@ -553,13 +560,6 @@
         <state line="26" column="11" selection-start="844" selection-end="844" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/../lib/storm-0.8.3-wip3.jar!/src/jvm/storm/trident/Stream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="303" column="21" selection-start="12922" selection-end="12922" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/lib/libthrift7-0.7.0.jar!/org/apache/thrift7/protocol/TProtocol.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="107" column="27" selection-start="2850" selection-end="2850" vertical-scroll-proportion="0.0">
@@ -642,19 +642,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/VolumeCounter.java">
+    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FileStreamingSpout.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="66" selection-start="2318" selection-end="2318" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="75" column="45" selection-start="1876" selection-end="1876" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FileStreamingSpout.java">
+    <entry file="jar://$PROJECT_DIR$/../lib/storm-0.8.3-wip3.jar!/src/jvm/storm/trident/Stream.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="45" selection-start="1876" selection-end="1876" vertical-scroll-proportion="0.68390805">
+        <state line="237" column="18" selection-start="9530" selection-end="9530" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/VolumeCounter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="65" selection-start="2304" selection-end="2304" vertical-scroll-proportion="0.31609195">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
