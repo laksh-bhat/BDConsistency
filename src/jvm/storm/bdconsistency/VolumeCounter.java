@@ -41,6 +41,7 @@ public class VolumeCounter {
 
         @Override
         public CountState reduce(CountState state, TridentTuple tuple) {
+            System.out.println("Reducing...");
             Trade t = new Trade(tuple.getString(0).split("\\|"));
             if (t.getOperation() == 1) state.count += t.getVolume();
             else state.count -= t.getVolume();
@@ -61,7 +62,9 @@ public class VolumeCounter {
                 .shuffle()
                 .parallelismHint(5)
                 .aggregate(new Fields("tradeString"), new VolumeAggregator(), new Fields("volume"))
-                .each(new Fields("volume"), new PrinterBolt());
+                .shuffle()
+                .each(new Fields("volume"), new PrinterBolt())
+                .shuffle();
         return topology.build();
     }
 
