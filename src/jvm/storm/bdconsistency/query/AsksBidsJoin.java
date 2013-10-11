@@ -26,12 +26,13 @@ public class AsksBidsJoin extends BaseFunction {
 
         for (long broker : asksTable.keySet()) {
             long asksTotalVolume = 0, asksPrice = 0, bidsTotalVolume = 0, bidsPrice = 0;
-            for (Object ask : asksTable.get(broker)) {
-                asksTotalVolume += ((TridentTuple) ask).getLongByField("volume");
-                asksPrice += ((TridentTuple) ask).getLongByField("price");
+
+            for (Trade ask : asksTable.get(broker)) {
+                asksTotalVolume += ask.getVolume();
+                asksPrice += ask.getPrice();
 
                 System.out.println(MessageFormat.format("-- Broker Id = {0}, trade price = {1}",
-                        broker, ((TridentTuple) ask).getLongByField("price") ));
+                        broker, ask.getPrice() ));
             }
             for (Trade bid : bidsTable.get(broker)) {
                 bidsTotalVolume += bid.getVolume();
