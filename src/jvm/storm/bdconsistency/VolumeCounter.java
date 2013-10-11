@@ -33,14 +33,14 @@ import storm.trident.tuple.TridentTuple;
  * Time: 1:47 PM
  */
 public class VolumeCounter {
-    public static class VolumeAggregator implements ReducerAggregator<Long> {
+    public static class VolumeAggregator implements ReducerAggregator<Double> {
         @Override
-        public Long init() {
-            return 0L;
+        public Double init() {
+            return 0D;
         }
 
         @Override
-        public Long reduce(Long state, TridentTuple tuple) {
+        public Double reduce(Double state, TridentTuple tuple) {
             System.out.println("Reducing...");
             Trade t = new Trade(tuple.getString(0).split("\\|"));
             if (t.getOperation() == 1) state += t.getVolume();
