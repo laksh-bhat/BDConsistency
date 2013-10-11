@@ -46,7 +46,7 @@
     <file path="/FileStreamingSpout.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381200031672" ignored="false" />
     <file path="/AsksBidsJoin.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381383173319" ignored="false" />
     <file path="/AxFinderFilter.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381363205212" ignored="false" />
-    <file path="/VolumeCounter.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381522514528" ignored="false" />
+    <file path="/VolumeCounter.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381522612299" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,7 +119,7 @@
       <file leaf-file-name="VolumeCounter.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/VolumeCounter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="95" column="66" selection-start="3253" selection-end="3253" vertical-scroll-proportion="1.8015717">
+            <state line="99" column="49" selection-start="3501" selection-end="3501" vertical-scroll-proportion="0.5324165">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -686,7 +686,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/VolumeCounter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="95" column="66" selection-start="3253" selection-end="3253" vertical-scroll-proportion="1.8015717">
+        <state line="99" column="49" selection-start="3501" selection-end="3501" vertical-scroll-proportion="0.5324165">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

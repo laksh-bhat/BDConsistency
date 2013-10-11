@@ -97,7 +97,7 @@ public class VolumeCounter {
 /*                .each(new Fields("tradeString"), new Split(), new Fields("table", "op", "ts", "broker", "price", "volume"))
                 .stateQuery(state, new Fields("op", "volume"), new);*/
 
-        volumes.aggregate(new VolumeAggregator(), new Fields("volume"))
+        volumes.aggregate(new Fields("tradeString"), new VolumeAggregator(), new Fields("volume"))
         .each(new Fields("volume"), new PrinterBolt());
 
         return topology.build();
