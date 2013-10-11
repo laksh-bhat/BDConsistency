@@ -18,14 +18,17 @@ import bdconsistency.trade.Trade;
 import storm.trident.Stream;
 import storm.trident.TridentState;
 import storm.trident.TridentTopology;
-import storm.trident.operation.BaseAggregator;
-import storm.trident.operation.CombinerAggregator;
-import storm.trident.operation.ReducerAggregator;
-import storm.trident.operation.TridentCollector;
+import storm.trident.operation.*;
 import storm.trident.spout.ITridentSpout;
 import storm.trident.spout.RichSpoutBatchExecutor;
+import storm.trident.state.BaseQueryFunction;
+import storm.trident.state.State;
 import storm.trident.testing.MemoryMapState;
+import storm.trident.testing.Split;
 import storm.trident.tuple.TridentTuple;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * User: lbhat@damsl
@@ -33,13 +36,11 @@ import storm.trident.tuple.TridentTuple;
  * Time: 1:47 PM
  */
 public class VolumeCounter {
-    public static class VolumeAggregator implements ReducerAggregator<Double> {
-        @Override
+    public static class VolumeAggregator implements Aggregator<Double> {
         public Double init() {
             return 0D;
         }
 
-        @Override
         public Double reduce(Double state, TridentTuple tuple) {
             System.out.println("Reducing...");
             Trade t = new Trade(tuple.getString(0).split("\\|"));
@@ -48,16 +49,57 @@ public class VolumeCounter {
             System.out.println("returning state value -- " + state);
             return state;
         }
+
+        @Override
+        public Double init(Object batchId, TridentCollector collector) {
+            return 0D;
+        }
+
+        @Override
+        public void aggregate(Double val, TridentTuple tuple, TridentCollector collector) {
+            Trade t = new Trade(tuple.getString(0).split("\\|"));
+            if (t.getOperation() == 1) val += t.getVolume();
+            else val -= t.getVolume();
+            collector.emit(new Values(val));
+        }
+
+        @Override
+        public void complete(Double val, TridentCollector collector) {
+            //To change body of implemented methods use File | Settings | File Templates.
+        }
+
+        @Override
+        public void prepare(Map conf, TridentOperationContext context) {}
+
+        @Override
+        public void cleanup() {}
+    }
+
+    public static class Split extends BaseFunction {
+
+        @Override
+        public void execute(TridentTuple tuple, TridentCollector collector) {
+            for(String word: tuple.getString(0).split("\\|")) {
+                if(word.length() > 0) {
+                    collector.emit(new Values(word));
+                }
+            }
+        }
     }
 
     public static StormTopology buildTopology(String fileName) {
         TridentTopology topology = new TridentTopology();
         final ITridentSpout asksSpout = new RichSpoutBatchExecutor(new FileStreamingSpout(fileName));
+        TridentState state = topology.newStaticState(new MemoryMapState.Factory());
 
-        Stream asks = topology
-                .newStream("spout1", asksSpout)
-                .aggregate(new Fields("tradeString"), new VolumeAggregator(), new Fields("volume"))
-                .each(new Fields("volume"), new PrinterBolt());
+        Stream volumes = topology
+                .newStream("spout", asksSpout);
+/*                .each(new Fields("tradeString"), new Split(), new Fields("table", "op", "ts", "broker", "price", "volume"))
+                .stateQuery(state, new Fields("op", "volume"), new);*/
+
+        volumes.aggregate(new VolumeAggregator(), new Fields("volume"))
+        .each(new Fields("volume"), new PrinterBolt());
+
         return topology.build();
     }
 
