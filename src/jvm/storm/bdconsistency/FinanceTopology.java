@@ -52,10 +52,10 @@ public class FinanceTopology {
                 .each(new Fields("args"), new PrinterBolt())
                 .shuffle()
                 .stateQuery(asks, new BrokerEqualityQuery.SelectStarFromAsks(), new Fields("asks"))
-                //.parallelismHint(5)
+                .parallelismHint(5)
                 .shuffle()
                 .stateQuery(bids, new BrokerEqualityQuery.SelectStarFromBids(), new Fields("bids"))
-                //.parallelismHint(5)
+                .parallelismHint(5)
                 .each(new Fields("asks", "bids"), new PrinterBolt())
                 .shuffle()
                 .each(new Fields("asks", "bids"), new AsksBidsJoin(), new Fields("AXF"))
@@ -84,6 +84,7 @@ public class FinanceTopology {
 
         //conf.setMaxSpoutPending(2);
         conf.put(Config.DRPC_SERVERS, Lists.newArrayList("localhost"));
+        conf.setMaxSpoutPending(1);
         conf.put(Config.STORM_CLUSTER_MODE, "distributed");
         StormSubmitter.submitTopology("AXFinder", conf, buildTopology(null, args[0]));
         Thread.sleep(1000);
