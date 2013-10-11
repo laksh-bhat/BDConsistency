@@ -21,7 +21,7 @@ public class BidsUpdater extends BaseStateUpdater<BidsState> {
             int operation = trade.getOperation();
             long brokerId =  trade.getBrokerId();
 
-            System.out.println(MessageFormat.format("-- Broker Id = {0}, trade volume = {1}",
+            System.out.println(MessageFormat.format("UPDATE-BIDS-- Broker Id = {0}, trade volume = {1}",
                     brokerId, trade.getVolume()));
 
             if(operation == 1) state.addTrade(brokerId, trade);

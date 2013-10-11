@@ -6,6 +6,7 @@ import storm.trident.operation.BaseFunction;
 import storm.trident.operation.TridentCollector;
 import storm.trident.tuple.TridentTuple;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,9 @@ public class AsksBidsJoin extends BaseFunction {
             for (Object ask : asksTable.get(broker)) {
                 asksTotalVolume += ((TridentTuple) ask).getLongByField("volume");
                 asksPrice += ((TridentTuple) ask).getLongByField("price");
+
+                System.out.println(MessageFormat.format("-- Broker Id = {0}, trade price = {1}",
+                        broker, ((TridentTuple) ask).getLongByField("price") ));
             }
             for (Trade bid : bidsTable.get(broker)) {
                 bidsTotalVolume += bid.getVolume();

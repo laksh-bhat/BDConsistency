@@ -5,6 +5,7 @@ import storm.trident.operation.TridentCollector;
 import storm.trident.state.BaseStateUpdater;
 import storm.trident.tuple.TridentTuple;
 
+import java.text.MessageFormat;
 import java.util.List;
 
 /**
@@ -19,6 +20,10 @@ public class AsksUpdater extends BaseStateUpdater<AsksState> {
             Trade trade = new Trade(tradeStr.split("\\|"));
             int operation = trade.getOperation();
             long brokerId =  trade.getBrokerId();
+
+            System.out.println(MessageFormat.format("ASKS-UPDATER -- Broker Id = {0}, trade volume = {1}",
+                    brokerId, trade.getVolume()));
+
             if(operation == 1) state.addTrade(brokerId, trade);
             else state.removeTrade(brokerId, trade);
         }
