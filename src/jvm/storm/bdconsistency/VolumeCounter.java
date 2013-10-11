@@ -33,23 +33,20 @@ import storm.trident.tuple.TridentTuple;
  * Time: 1:47 PM
  */
 public class VolumeCounter {
-    public static class VolumeAggregator implements ReducerAggregator<VolumeAggregator.CountState> {
+    public static class VolumeAggregator implements ReducerAggregator<Long> {
         @Override
-        public CountState init() {
-            return new CountState();
+        public Long init() {
+            return 0L;
         }
 
         @Override
-        public CountState reduce(CountState state, TridentTuple tuple) {
+        public Long reduce(Long state, TridentTuple tuple) {
             System.out.println("Reducing...");
             Trade t = new Trade(tuple.getString(0).split("\\|"));
-            if (t.getOperation() == 1) state.count += t.getVolume();
-            else state.count -= t.getVolume();
+            if (t.getOperation() == 1) state += t.getVolume();
+            else state -= t.getVolume();
+            System.out.println("returning state value -- " + state);
             return state;
-        }
-
-        public class CountState {
-            long count = 0;
         }
     }
 
@@ -59,17 +56,14 @@ public class VolumeCounter {
 
         Stream asks = topology
                 .newStream("spout1", asksSpout)
-                .shuffle()
-                .parallelismHint(5)
                 .aggregate(new Fields("tradeString"), new VolumeAggregator(), new Fields("volume"))
-                .shuffle()
-                .each(new Fields("volume"), new PrinterBolt())
-                .shuffle();
+                .each(new Fields("volume"), new PrinterBolt());
         return topology.build();
     }
 
     public static void main(String[] args) {
         Config conf = new Config();
+        conf.setDebug(true);
         LocalCluster cluster = new LocalCluster();
         cluster.submitTopology("VolumeCounterTopology", conf, buildTopology(args[0]));
         try {
