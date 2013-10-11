@@ -119,7 +119,7 @@
       <file leaf-file-name="VolumeCounter.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/VolumeCounter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="99" column="49" selection-start="3501" selection-end="3501" vertical-scroll-proportion="0.5324165">
+            <state line="104" column="39" selection-start="3647" selection-end="3647" vertical-scroll-proportion="0.4990177">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -686,7 +686,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/VolumeCounter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="99" column="49" selection-start="3501" selection-end="3501" vertical-scroll-proportion="0.5324165">
+        <state line="104" column="39" selection-start="3647" selection-end="3647" vertical-scroll-proportion="0.4990177">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

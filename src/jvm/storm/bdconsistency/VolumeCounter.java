@@ -105,7 +105,7 @@ public class VolumeCounter {
 
     public static void main(String[] args) {
         Config conf = new Config();
-        conf.setDebug(true);
+        //conf.setDebug(true);
         LocalCluster cluster = new LocalCluster();
         cluster.submitTopology("VolumeCounterTopology", conf, buildTopology(args[0]));
         try {
