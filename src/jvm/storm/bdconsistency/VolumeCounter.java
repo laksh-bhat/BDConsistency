@@ -61,16 +61,17 @@ public class VolumeCounter {
             } else{
                 val.volume -= t.getVolume();
             }
-            collector.emit(new Values(val.volume));
-        }
 
-        @Override
-        public void complete(CountState val, TridentCollector collector) {
             if (val.count % 1000 == 0) {
                 System.out.println("-- volume aggregate -- ");
                 collector.emit(new Values(val.volume));
                 collector.emit(new Values(val.count));
             }
+        }
+
+        @Override
+        public void complete(CountState val, TridentCollector collector) {
+
         }
 
         @Override
