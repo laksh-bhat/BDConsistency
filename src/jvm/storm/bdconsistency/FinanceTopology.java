@@ -29,33 +29,27 @@ public class FinanceTopology {
         // In this state we will save the table
         TridentState asks = topology
                 .newStream("spout1", asksSpout)
-                .shuffle()
                 .each(new Fields("tradeString"), new AxFinderFilter.AsksFilter())
-                .parallelismHint(8)
                 //.each(new Fields("tradeString"), new PrinterBolt())
-                .partitionBy(new Fields("tradeString"))
                 .partitionPersist(new AsksStateFactory(), new Fields("tradeString"), new AsksUpdater());
 
         TridentState bids = topology
                 .newStream("spout2", bidsSpout)
-                .shuffle()
                 .each(new Fields("tradeString"), new AxFinderFilter.BidsFilter())
-                .parallelismHint(8)
                 //.each(new Fields("tradeString"), new PrinterBolt())
-                .partitionBy(new Fields("tradeString"))
                 .partitionPersist(new BidsStateFactory(), new Fields("tradeString"), new BidsUpdater())
                 ;
 
         // DRPC Service
         topology
                 .newDRPCStream("AXF")
-                .shuffle()
+                //.shuffle()
                 .stateQuery(asks, new BrokerEqualityQuery.SelectStarFromAsks(), new Fields("asks"))
                 .parallelismHint(8)
                 .shuffle()
                 .stateQuery(bids, new BrokerEqualityQuery.SelectStarFromBids(), new Fields("bids"))
-                .parallelismHint(8)
-                .shuffle()
+                //.parallelismHint(8)
+                //.shuffle()
                 .each(new Fields("asks", "bids"), new AsksBidsJoin(), new Fields("AXF"))
                 .shuffle()
                 .parallelismHint(8)

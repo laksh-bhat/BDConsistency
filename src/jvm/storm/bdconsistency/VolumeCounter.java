@@ -42,7 +42,7 @@ import static bdconsistency.VolumeCounter.VolumeAggregator.*;
  * Time: 1:47 PM
  */
 public class VolumeCounter {
-    public static class CountState{
+    public static class CountState {
         double volume;
         double count;
     }
@@ -60,12 +60,13 @@ public class VolumeCounter {
 
             if (t.getOperation() == 1) {
                 val.volume += t.getVolume();
-            } else{
+            } else {
                 val.volume -= t.getVolume();
             }
-
-            collector.emit(new Values(val.volume));
-            collector.emit(new Values(val.count));
+            if (val.count % 1000 == 0) {
+                collector.emit(new Values(val.volume));
+                collector.emit(new Values(val.count));
+            }
         }
 
         @Override
@@ -74,18 +75,20 @@ public class VolumeCounter {
         }
 
         @Override
-        public void prepare(Map conf, TridentOperationContext context) {}
+        public void prepare(Map conf, TridentOperationContext context) {
+        }
 
         @Override
-        public void cleanup() {}
+        public void cleanup() {
+        }
     }
 
     public static class Split extends BaseFunction {
 
         @Override
         public void execute(TridentTuple tuple, TridentCollector collector) {
-            for(String word: tuple.getString(0).split("\\|")) {
-                if(word.length() > 0) {
+            for (String word : tuple.getString(0).split("\\|")) {
+                if (word.length() > 0) {
                     collector.emit(new Values(word));
                 }
             }
@@ -101,11 +104,9 @@ public class VolumeCounter {
 
         Stream aggregates = volumes.shuffle()
                 .aggregate(new Fields("tradeString"), new VolumeAggregator(), new Fields("volume", "count"))
-                .project(new Fields("volume", "count"))
-                .parallelismHint(8)
-                ;
+                .project(new Fields("volume", "count"));
 
-        aggregates.each(new Fields("volume","count"), new PrinterBolt());
+        aggregates.each(new Fields("volume", "count"), new PrinterBolt());
 
         return topology.build();
     }
