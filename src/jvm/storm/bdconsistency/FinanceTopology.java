@@ -29,38 +29,37 @@ public class FinanceTopology {
         // In this state we will save the table
         TridentState asks = topology
                 .newStream("spout1", asksSpout)
-                .each(new Fields("tradeString"), new AxFinderFilter.AsksFilter())
                 .shuffle()
-                .parallelismHint(5)
+                .each(new Fields("tradeString"), new AxFinderFilter.AsksFilter())
+                .parallelismHint(8)
                 //.each(new Fields("tradeString"), new PrinterBolt())
                 .partitionPersist(new AsksStateFactory(), new Fields("tradeString"), new AsksUpdater())
-                .parallelismHint(5);
+                .parallelismHint(8);
 
         TridentState bids = topology
                 .newStream("spout2", bidsSpout)
-                .each(new Fields("tradeString"), new AxFinderFilter.BidsFilter())
                 .shuffle()
-                .parallelismHint(5)
+                .each(new Fields("tradeString"), new AxFinderFilter.BidsFilter())
+                .parallelismHint(8)
                 //.each(new Fields("tradeString"), new PrinterBolt())
+                .shuffle()
                 .partitionPersist(new BidsStateFactory(), new Fields("tradeString"), new BidsUpdater())
-                .parallelismHint(5)
+                .parallelismHint(8)
                 ;
 
         // DRPC Service
         topology
                 .newDRPCStream("AXF")
-                .each(new Fields("args"), new PrinterBolt())
                 .shuffle()
                 .stateQuery(asks, new BrokerEqualityQuery.SelectStarFromAsks(), new Fields("asks"))
-                .parallelismHint(5)
+                .parallelismHint(8)
                 .shuffle()
                 .stateQuery(bids, new BrokerEqualityQuery.SelectStarFromBids(), new Fields("bids"))
-                .parallelismHint(5)
-                .each(new Fields("asks", "bids"), new PrinterBolt())
+                .parallelismHint(8)
                 .shuffle()
                 .each(new Fields("asks", "bids"), new AsksBidsJoin(), new Fields("AXF"))
                 .shuffle()
-                //.parallelismHint(5)
+                .parallelismHint(8)
                 .project(new Fields("AXF"));
 
         return topology.build();
@@ -68,32 +67,14 @@ public class FinanceTopology {
 
 
     public static void main(String[] args) throws Exception {
-        Config conf = new Config();
-        //conf.setDebug(true);
-
-/*        LocalDRPC drpc = new LocalDRPC();
-        LocalCluster cluster = new LocalCluster();
-        cluster.submitTopology("AXFinder", conf, buildTopology(drpc, args[0]));
-        Thread.sleep(2000);
-
-        System.out.println("DRPC RESULTS ==> : " + drpc.execute("AXF", "axfinder"));
-
-        cluster.shutdown();
-        drpc.shutdown();*/
-
-
-        //conf.setMaxSpoutPending(2);
-        conf.put(Config.DRPC_SERVERS, Lists.newArrayList("localhost"));
-        conf.setMaxSpoutPending(2);
-        conf.put(Config.STORM_CLUSTER_MODE, "distributed");
-        StormSubmitter.submitTopology("AXFinder", conf, buildTopology(null, args[0]));
-        Thread.sleep(1000);
-
-        DRPCClient client = new DRPCClient("localhost", 3772);
-        // Fire AXFinder Query 100 times
-        for(int i = 0; i < 500; i++) {
-            System.out.println("Result for AXF query is -> " + client.execute("AXF", "axfinder"));
-            Thread.sleep(1000);
-        }
+        Config topologyConfig = new Config();
+        topologyConfig.put(Config.DRPC_SERVERS, Lists.newArrayList("damsel", "qp4", "qp5", "qp6"));
+        topologyConfig.setMaxSpoutPending(4);
+        topologyConfig.put(Config.STORM_CLUSTER_MODE, "distributed");
+        StormSubmitter.submitTopology("AXFinder", topologyConfig, buildTopology(null, args[0]));
+        // Let it run for 5 minutes
+        Thread.sleep(300000);
+        DRPCClient client = new DRPCClient("damsel", 3772);
+        System.out.println("Result for AXF query is -> " + client.execute("AXF", "None"));
     }
 }

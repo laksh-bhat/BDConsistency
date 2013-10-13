@@ -3,6 +3,9 @@ package bdconsistency;
 import backtype.storm.Config;
 import backtype.storm.LocalCluster;
 import backtype.storm.LocalDRPC;
+import backtype.storm.StormSubmitter;
+import backtype.storm.generated.AlreadyAliveException;
+import backtype.storm.generated.InvalidTopologyException;
 import backtype.storm.generated.StormTopology;
 import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Values;
@@ -15,6 +18,7 @@ import bdconsistency.query.AxFinderFilter;
 import bdconsistency.query.BrokerEqualityQuery;
 import bdconsistency.query.PrinterBolt;
 import bdconsistency.trade.Trade;
+import com.google.common.collect.Lists;
 import storm.trident.Stream;
 import storm.trident.TridentState;
 import storm.trident.TridentTopology;
@@ -36,36 +40,37 @@ import java.util.Map;
  * Time: 1:47 PM
  */
 public class VolumeCounter {
-    public static class VolumeAggregator implements Aggregator<Double> {
-        public Double init() {
-            return 0D;
+    public static class VolumeAggregator implements Aggregator<VolumeAggregator.CountState> {
+        public class CountState{
+            double volume;
+            double count;
         }
 
-        public Double reduce(Double state, TridentTuple tuple) {
-            System.out.println("Reducing...");
+        @Override
+        public VolumeAggregator.CountState init(Object batchId, TridentCollector collector) {
+            return new CountState();
+        }
+
+        @Override
+        public void aggregate(CountState val, TridentTuple tuple, TridentCollector collector) {
             Trade t = new Trade(tuple.getString(0).split("\\|"));
-            if (t.getOperation() == 1) state += t.getVolume();
-            else state -= t.getVolume();
-            System.out.println("returning state value -- " + state);
-            return state;
+            val.count++;
+
+            if (t.getOperation() == 1) {
+                val.volume += t.getVolume();
+            } else{
+                val.volume -= t.getVolume();
+            }
+            collector.emit(new Values(val.volume));
         }
 
         @Override
-        public Double init(Object batchId, TridentCollector collector) {
-            return 0D;
-        }
-
-        @Override
-        public void aggregate(Double val, TridentTuple tuple, TridentCollector collector) {
-            Trade t = new Trade(tuple.getString(0).split("\\|"));
-            if (t.getOperation() == 1) val += t.getVolume();
-            else val -= t.getVolume();
-            collector.emit(new Values(val));
-        }
-
-        @Override
-        public void complete(Double val, TridentCollector collector) {
-            //To change body of implemented methods use File | Settings | File Templates.
+        public void complete(CountState val, TridentCollector collector) {
+            if (val.count % 1000 == 0) {
+                System.out.println("-- volume aggregate -- ");
+                collector.emit(new Values(val.volume));
+                collector.emit(new Values(val.count));
+            }
         }
 
         @Override
@@ -90,22 +95,30 @@ public class VolumeCounter {
     public static StormTopology buildTopology(String fileName) {
         TridentTopology topology = new TridentTopology();
         final ITridentSpout asksSpout = new RichSpoutBatchExecutor(new FileStreamingSpout(fileName));
-        TridentState state = topology.newStaticState(new MemoryMapState.Factory());
 
         Stream volumes = topology
-                .newStream("spout", asksSpout);
-/*                .each(new Fields("tradeString"), new Split(), new Fields("table", "op", "ts", "broker", "price", "volume"))
-                .stateQuery(state, new Fields("op", "volume"), new);*/
+                .newStream("spout", asksSpout)
+                .parallelismHint(8);
 
-        volumes.aggregate(new Fields("tradeString"), new VolumeAggregator(), new Fields("volume"))
-        .each(new Fields("volume"), new PrinterBolt());
+        Stream aggregates = volumes.shuffle()
+                .aggregate(new Fields("tradeString"), new VolumeAggregator(), new Fields("volume", "count"))
+                .parallelismHint(8);
+
+        aggregates.each(new Fields("volume","count"), new PrinterBolt());
 
         return topology.build();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws AlreadyAliveException, InvalidTopologyException, InterruptedException {
         Config conf = new Config();
-        //conf.setDebug(true);
+        conf.setNumWorkers(20);
+        conf.put(Config.DRPC_SERVERS, Lists.newArrayList("damsel", "qp4", "qp5", "qp6"));
+        conf.setMaxSpoutPending(4);
+        conf.put(Config.STORM_CLUSTER_MODE, "distributed");
+        StormSubmitter.submitTopology("VolumeCounter", conf, buildTopology(args[0]));
+
+        // Let it run for 5 minutes
+        Thread.sleep(300000);
         LocalCluster cluster = new LocalCluster();
         cluster.submitTopology("VolumeCounterTopology", conf, buildTopology(args[0]));
         try {

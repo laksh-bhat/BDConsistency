@@ -12,7 +12,6 @@ import java.util.*;
  */
 public class BidsState implements State {
     public BidsState() {
-        System.out.println("Bids State Constructed");
         bids = new HashMap<Long, List<Trade>>();
     }
 
@@ -24,6 +23,8 @@ public class BidsState implements State {
     }
 
     public void addTrade(long broker, Trade trade) {
+        totalTradeTuples++;
+
         if(!getBids().containsKey(broker)){
             // register this broker
             List<Trade> brokerTransactions = new ArrayList<Trade>();
@@ -34,6 +35,8 @@ public class BidsState implements State {
     }
 
     public void removeTrade(long broker, Trade trade) {
+        totalTradeTuples++;
+
         // If broker isn't registered, ignore this trade
         if(!getBids().containsKey(broker))
             return;
@@ -53,6 +56,11 @@ public class BidsState implements State {
         return bids;
     }
 
+    public Long getTotalTradeTuples() {
+        return totalTradeTuples;
+    }
+
+    private Long totalTradeTuples;
     // Basically a multi-map
     private Map<Long, List<Trade>> bids;
 }

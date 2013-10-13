@@ -8,6 +8,7 @@ import storm.trident.operation.TridentCollector;
 import storm.trident.state.BaseQueryFunction;
 import storm.trident.tuple.TridentTuple;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +24,10 @@ public class BrokerEqualityQuery {
 
     public static class SelectStarFromAsks extends BaseQueryFunction<AsksState, HashMap<Long, List<Trade>>> {
         public List<HashMap<Long, List<Trade>>> batchRetrieve(AsksState asksState, List<TridentTuple> inputs) {
-            System.out.println("-- SelectStarFromAsks -- ");
+            System.out.println(
+                    MessageFormat.format("-- SelectStarFromAsks -- total asks trade -- {0}",
+                            asksState.getTotalTradeTuples()));
+
             List<HashMap<Long, List<Trade>>> returnList = new ArrayList<HashMap<Long, List<Trade>>>(1);
             returnList.add((HashMap<Long, List<Trade>>)asksState.getAsks());
             return returnList;
@@ -31,19 +35,19 @@ public class BrokerEqualityQuery {
 
         @Override
         public void execute(TridentTuple tuple, HashMap<Long, List<Trade>> result, TridentCollector collector) {
-/*            for (Long key : result.keySet())
-                for (Trade t : result.get(key))
-                    collector.emit(new Values(t.getBrokerId()));*/
             collector.emit(new Values(result));
         }
     }
 
     public static class SelectStarFromBids extends BaseQueryFunction<BidsState, HashMap<Long, List<Trade>>> {
         public List<HashMap<Long, List<Trade>>> batchRetrieve(BidsState bidsState, List<TridentTuple> inputs) {
-            System.out.println("-- SelectStarFromBids -- ");
 
             List<HashMap<Long, List<Trade>>> returnList = new ArrayList<HashMap<Long, List<Trade>>>(1);
             returnList.add((HashMap<Long, List<Trade>>)bidsState.getBids());
+
+            System.out.println(
+                    MessageFormat.format("-- SelectStarFromAsks -- total asks trade -- {0}",
+                            bidsState.getTotalTradeTuples()));
 
             return returnList;
         }

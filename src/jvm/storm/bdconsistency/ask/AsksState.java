@@ -11,7 +11,6 @@ import java.util.*;
  */
 public class AsksState implements State {
     public AsksState() {
-        System.out.println("Asks State Constructed");
         asks = new HashMap<Long, List<Trade>>();
     }
 
@@ -20,6 +19,8 @@ public class AsksState implements State {
     public void commit(Long txid) {}
 
     public void addTrade(long broker, Trade trade) {
+        totalTradeTuples++;
+
         if(!getAsks().containsKey(broker)){
             // register this broker
             List<Trade> brokerTransactions = new ArrayList<Trade>();
@@ -30,6 +31,7 @@ public class AsksState implements State {
     }
 
     public void removeTrade(long broker, Trade trade) {
+        totalTradeTuples++;
         // If broker isn't registered, ignore this trade
         if(!getAsks().containsKey(broker))
             return;
@@ -49,6 +51,11 @@ public class AsksState implements State {
         return asks;
     }
 
+    public Long getTotalTradeTuples() {
+        return totalTradeTuples;
+    }
+
+    private Long totalTradeTuples;
     // Basically a multi-map
     private Map<Long, List<Trade>> asks;
 }
