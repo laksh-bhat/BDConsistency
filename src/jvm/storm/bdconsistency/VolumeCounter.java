@@ -97,8 +97,7 @@ public class VolumeCounter {
         final ITridentSpout asksSpout = new RichSpoutBatchExecutor(new FileStreamingSpout(fileName));
 
         Stream volumes = topology
-                .newStream("spout", asksSpout)
-                .parallelismHint(8);
+                .newStream("spout", asksSpout);
 
         Stream aggregates = volumes.shuffle()
                 .aggregate(new Fields("tradeString"), new VolumeAggregator(), new Fields("volume", "count"))
