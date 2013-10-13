@@ -103,7 +103,9 @@ public class VolumeCounter {
 
         Stream aggregates = volumes.shuffle()
                 .aggregate(new Fields("tradeString"), new VolumeAggregator(), new Fields("volume", "count"))
-                .parallelismHint(8);
+                .project(new Fields("volume", "count"))
+                .parallelismHint(8)
+                ;
 
         aggregates.each(new Fields("volume","count"), new PrinterBolt());
 
