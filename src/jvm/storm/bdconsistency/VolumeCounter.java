@@ -44,7 +44,7 @@ import static bdconsistency.VolumeCounter.VolumeAggregator.*;
 public class VolumeCounter {
     public static class CountState {
         double volume;
-        double count;
+        long count;
     }
 
     public static class VolumeAggregator implements Aggregator<CountState> {

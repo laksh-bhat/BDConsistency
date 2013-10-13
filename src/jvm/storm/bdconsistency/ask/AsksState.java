@@ -51,11 +51,11 @@ public class AsksState implements State {
         return asks;
     }
 
-    public Long getTotalTradeTuples() {
+    public long getTotalTradeTuples() {
         return totalTradeTuples;
     }
 
-    private Long totalTradeTuples;
+    private long totalTradeTuples;
     // Basically a multi-map
     private Map<Long, List<Trade>> asks;
 }

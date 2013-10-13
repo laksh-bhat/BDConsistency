@@ -56,11 +56,11 @@ public class BidsState implements State {
         return bids;
     }
 
-    public Long getTotalTradeTuples() {
+    public long getTotalTradeTuples() {
         return totalTradeTuples;
     }
 
-    private Long totalTradeTuples;
+    private long totalTradeTuples;
     // Basically a multi-map
     private Map<Long, List<Trade>> bids;
 }
