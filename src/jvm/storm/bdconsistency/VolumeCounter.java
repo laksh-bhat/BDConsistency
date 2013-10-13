@@ -62,11 +62,8 @@ public class VolumeCounter {
                 val.volume -= t.getVolume();
             }
 
-            if (val.count % 1000 == 0) {
-                System.out.println("-- volume aggregate -- ");
-                collector.emit(new Values(val.volume));
-                collector.emit(new Values(val.count));
-            }
+            collector.emit(new Values(val.volume));
+            collector.emit(new Values(val.count));
         }
 
         @Override

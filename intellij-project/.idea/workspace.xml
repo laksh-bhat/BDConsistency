@@ -4,6 +4,7 @@
     <list default="true" id="3ce62a69-14b0-48fd-b6e9-6b6be8644430" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../BDConsistency" afterPath="$PROJECT_DIR$/../BDConsistency" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" afterPath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/VolumeCounter.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/VolumeCounter.java" />
     </list>
     <ignored path="storm.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -127,7 +128,7 @@
       <file leaf-file-name="VolumeCounter.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/VolumeCounter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="109" column="74" selection-start="3632" selection-end="3632" vertical-scroll-proportion="0.71647507">
+            <state line="54" column="24" selection-start="1765" selection-end="1765" vertical-scroll-proportion="0.2605364">
               <folding />
             </state>
           </provider>
@@ -761,7 +762,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/VolumeCounter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="109" column="74" selection-start="3632" selection-end="3632" vertical-scroll-proportion="0.71647507">
+        <state line="54" column="24" selection-start="1765" selection-end="1765" vertical-scroll-proportion="0.2605364">
           <folding />
         </state>
       </provider>
