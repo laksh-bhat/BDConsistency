@@ -34,20 +34,22 @@ import storm.trident.tuple.TridentTuple;
 import java.util.List;
 import java.util.Map;
 
+import static bdconsistency.VolumeCounter.VolumeAggregator.*;
+
 /**
  * User: lbhat@damsl
  * Date: 10/11/13
  * Time: 1:47 PM
  */
 public class VolumeCounter {
-    public static class VolumeAggregator implements Aggregator<VolumeAggregator.CountState> {
-        public class CountState{
-            double volume;
-            double count;
-        }
+    public static class CountState{
+        double volume;
+        double count;
+    }
 
+    public static class VolumeAggregator implements Aggregator<CountState> {
         @Override
-        public VolumeAggregator.CountState init(Object batchId, TridentCollector collector) {
+        public CountState init(Object batchId, TridentCollector collector) {
             return new CountState();
         }
 
