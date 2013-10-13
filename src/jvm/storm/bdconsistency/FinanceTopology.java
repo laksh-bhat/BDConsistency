@@ -67,7 +67,7 @@ public class FinanceTopology {
         topologyConfig.put(Config.STORM_CLUSTER_MODE, "distributed");
         StormSubmitter.submitTopology("AXFinder", topologyConfig, buildTopology(null, args[0]));
         // Let it run for 5 minutes
-        Thread.sleep(10000);
+        Thread.sleep(1000);
         DRPCClient client = new DRPCClient("localhost", 3772);
         for (int i = 0 ; i < 50 ; i++){
             System.out.println("Result for AXF query is -> " + client.execute("AXF", "None"));
