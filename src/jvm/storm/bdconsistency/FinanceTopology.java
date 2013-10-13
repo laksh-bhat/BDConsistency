@@ -33,8 +33,8 @@ public class FinanceTopology {
                 .each(new Fields("tradeString"), new AxFinderFilter.AsksFilter())
                 .parallelismHint(8)
                 //.each(new Fields("tradeString"), new PrinterBolt())
-                .partitionPersist(new AsksStateFactory(), new Fields("tradeString"), new AsksUpdater())
-                .parallelismHint(8);
+                .partitionBy(new Fields("tradeString"))
+                .partitionPersist(new AsksStateFactory(), new Fields("tradeString"), new AsksUpdater());
 
         TridentState bids = topology
                 .newStream("spout2", bidsSpout)
@@ -42,9 +42,8 @@ public class FinanceTopology {
                 .each(new Fields("tradeString"), new AxFinderFilter.BidsFilter())
                 .parallelismHint(8)
                 //.each(new Fields("tradeString"), new PrinterBolt())
-                .shuffle()
+                .partitionBy(new Fields("tradeString"))
                 .partitionPersist(new BidsStateFactory(), new Fields("tradeString"), new BidsUpdater())
-                .parallelismHint(8)
                 ;
 
         // DRPC Service
@@ -68,6 +67,7 @@ public class FinanceTopology {
 
     public static void main(String[] args) throws Exception {
         Config topologyConfig = new Config();
+        topologyConfig.setNumWorkers(20);
         topologyConfig.put(Config.DRPC_SERVERS, Lists.newArrayList("damsel", "qp4", "qp5", "qp6"));
         topologyConfig.setMaxSpoutPending(4);
         topologyConfig.put(Config.STORM_CLUSTER_MODE, "distributed");

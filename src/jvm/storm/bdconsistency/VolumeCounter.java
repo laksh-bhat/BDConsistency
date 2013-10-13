@@ -115,15 +115,12 @@ public class VolumeCounter {
         conf.put(Config.DRPC_SERVERS, Lists.newArrayList("damsel", "qp4", "qp5", "qp6"));
         conf.setMaxSpoutPending(4);
         conf.put(Config.STORM_CLUSTER_MODE, "distributed");
-        StormSubmitter.submitTopology("VolumeCounter", conf, buildTopology(args[0]));
+        //StormSubmitter.submitTopology("VolumeCounter", conf, buildTopology(args[0]));
 
         // Let it run for 5 minutes
-        Thread.sleep(300000);
         LocalCluster cluster = new LocalCluster();
         cluster.submitTopology("VolumeCounterTopology", conf, buildTopology(args[0]));
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException ignore) {}
+        Thread.sleep(300000);
         cluster.killTopology("VolumeCounterTopology");
         cluster.shutdown();
     }
