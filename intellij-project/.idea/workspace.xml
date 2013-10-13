@@ -4,8 +4,7 @@
     <list default="true" id="3ce62a69-14b0-48fd-b6e9-6b6be8644430" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../BDConsistency" afterPath="$PROJECT_DIR$/../BDConsistency" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" afterPath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/VolumeCounter.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/VolumeCounter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/PrinterBolt.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/PrinterBolt.java" />
     </list>
     <ignored path="storm.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -43,7 +42,7 @@
     <file path="/AsksStateFactory.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381204853479" ignored="false" />
     <file path="/TradeConstructor.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381199423291" ignored="false" />
     <file path="/a.dummy" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381178208984" ignored="false" />
-    <file path="/PrinterBolt.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381214881434" ignored="false" />
+    <file path="/PrinterBolt.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381700844242" ignored="false" />
     <file path="/FileStreamingSpout.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381200031672" ignored="false" />
     <file path="/AsksBidsJoin.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381695538995" ignored="false" />
     <file path="/AxFinderFilter.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381363205212" ignored="false" />
@@ -108,10 +107,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="FinanceTopology.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="FinanceTopology.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="79" column="41" selection-start="3503" selection-end="3503" vertical-scroll-proportion="0.77203065">
+            <state line="79" column="41" selection-start="3503" selection-end="3503" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -129,7 +128,16 @@
       <file leaf-file-name="VolumeCounter.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/VolumeCounter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="73" selection-start="1586" selection-end="1596" vertical-scroll-proportion="0.0">
+            <state line="66" column="48" selection-start="2157" selection-end="2163" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PrinterBolt.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/PrinterBolt.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="20" column="24" selection-start="550" selection-end="550" vertical-scroll-proportion="0.3908046">
               <folding />
             </state>
           </provider>
@@ -193,15 +201,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="QuerySpout.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/QuerySpout.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="54" selection-start="525" selection-end="525" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FindManager">
@@ -220,7 +219,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/AsksBidsJoin.java" />
         <option value="$PROJECT_DIR$/../lib/storm-0.8.3-wip3.jar!/src/jvm/storm/trident/planner/processor/PartitionPersistProcessor.java" />
         <option value="$PROJECT_DIR$/../lib/storm-0.8.3-wip3.jar!/src/jvm/storm/trident/Stream.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/AxFinderFilter.java" />
@@ -236,6 +234,7 @@
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/BrokerEqualityQuery.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/VolumeCounter.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java" />
+        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/PrinterBolt.java" />
       </list>
     </option>
   </component>
@@ -654,11 +653,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/../lib/storm-0.8.3-wip3.jar!/src/jvm/storm/trident/operation/Aggregator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="17" selection-start="93" selection-end="93" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/../lib/storm-0.8.3-wip3.jar!/src/jvm/backtype/storm/utils/DRPCClient.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="29" column="9" selection-start="928" selection-end="928" vertical-scroll-proportion="0.0">
@@ -754,16 +748,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/VolumeCounter.java">
+    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="73" selection-start="1586" selection-end="1596" vertical-scroll-proportion="0.0">
+        <state line="79" column="41" selection-start="3503" selection-end="3503" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java">
+    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/VolumeCounter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="41" selection-start="3503" selection-end="3503" vertical-scroll-proportion="0.77203065">
+        <state line="66" column="48" selection-start="2157" selection-end="2163" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/PrinterBolt.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="24" selection-start="550" selection-end="550" vertical-scroll-proportion="0.3908046">
           <folding />
         </state>
       </provider>
