@@ -4,16 +4,14 @@
     <list default="true" id="3ce62a69-14b0-48fd-b6e9-6b6be8644430" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../BDConsistency" afterPath="$PROJECT_DIR$/../BDConsistency" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" afterPath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ask/AsksState.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ask/AsksState.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bid/BidsState.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bid/BidsState.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/VolumeCounter.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/VolumeCounter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java" />
     </list>
     <ignored path="storm.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="$PROJECT_DIR$/../../compgenomics/src/asgmt2/compgen-answers.txt" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1380574467967" ignored="false" />
     <file path="/compgen-answers.txt" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1380574467967" ignored="false" />
     <file path="/SingleJoinExample.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1380558741906" ignored="false" />
-    <file path="/FinanceTopology.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381700461170" ignored="false" />
+    <file path="/FinanceTopology.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381703117028" ignored="false" />
     <file path="/AskSpout.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381201067384" ignored="false" />
     <file path="/TransactionMessage.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1380882421063" ignored="false" />
     <file path="/fragment.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381364179376" ignored="false" />
@@ -109,10 +107,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="FinanceTopology.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="FinanceTopology.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="45" column="43" selection-start="1962" selection-end="1962" vertical-scroll-proportion="0.0">
+            <state line="75" column="23" selection-start="3305" selection-end="3305" vertical-scroll-proportion="0.7394636">
               <folding />
             </state>
           </provider>
@@ -127,10 +125,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VolumeCounter.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="VolumeCounter.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/VolumeCounter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="58" column="21" selection-start="1938" selection-end="1943" vertical-scroll-proportion="0.52873564">
+            <state line="123" column="30" selection-start="4131" selection-end="4145" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -233,10 +231,10 @@
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/AsksBidsJoin.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/BrokerEqualityQuery.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/PrinterBolt.java" />
-        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bid/BidsState.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ask/AsksState.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/VolumeCounter.java" />
+        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java" />
       </list>
     </option>
   </component>
@@ -732,13 +730,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="43" selection-start="1962" selection-end="1962" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/PrinterBolt.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="22" column="28" selection-start="635" selection-end="640" vertical-scroll-proportion="0.0">
@@ -766,7 +757,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/VolumeCounter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="21" selection-start="1938" selection-end="1943" vertical-scroll-proportion="0.52873564">
+        <state line="123" column="30" selection-start="4131" selection-end="4145" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="75" column="23" selection-start="3305" selection-end="3305" vertical-scroll-proportion="0.7394636">
           <folding />
         </state>
       </provider>

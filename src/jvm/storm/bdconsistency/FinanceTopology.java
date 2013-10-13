@@ -73,5 +73,6 @@ public class FinanceTopology {
             System.out.println("Result for AXF query is -> " + client.execute("AXF", "None"));
             Thread.sleep(1000);
         }
+        client.close();
     }
 }
