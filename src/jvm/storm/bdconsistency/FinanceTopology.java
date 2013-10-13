@@ -45,14 +45,14 @@ public class FinanceTopology {
                 .newDRPCStream("AXF")
                 //.shuffle()
                 .stateQuery(asks, new BrokerEqualityQuery.SelectStarFromAsks(), new Fields("asks"))
-                .parallelismHint(8)
-                .shuffle()
+                //.parallelismHint(8)
+                //.shuffle()
                 .stateQuery(bids, new BrokerEqualityQuery.SelectStarFromBids(), new Fields("bids"))
                 //.parallelismHint(8)
                 //.shuffle()
                 .each(new Fields("asks", "bids"), new AsksBidsJoin(), new Fields("AXF"))
-                .shuffle()
-                .parallelismHint(8)
+                //.shuffle()
+                //.parallelismHint(8)
                 .project(new Fields("AXF"));
 
         return topology.build();

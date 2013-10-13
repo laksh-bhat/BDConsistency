@@ -4,7 +4,6 @@
     <list default="true" id="3ce62a69-14b0-48fd-b6e9-6b6be8644430" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../BDConsistency" afterPath="$PROJECT_DIR$/../BDConsistency" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" afterPath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FileStreamingSpout.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FileStreamingSpout.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java" />
     </list>
     <ignored path="storm.iws" />
@@ -111,7 +110,7 @@
       <file leaf-file-name="FinanceTopology.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="65" column="43" selection-start="2807" selection-end="2807" vertical-scroll-proportion="0.41379312">
+            <state line="48" column="18" selection-start="2119" selection-end="2119" vertical-scroll-proportion="0.38122606">
               <folding />
             </state>
           </provider>
@@ -765,7 +764,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="43" selection-start="2807" selection-end="2807" vertical-scroll-proportion="0.41379312">
+        <state line="48" column="18" selection-start="2119" selection-end="2119" vertical-scroll-proportion="0.38122606">
           <folding />
         </state>
       </provider>
