@@ -64,7 +64,7 @@ public class FileStreamingSpout implements IRichSpout {
     @Override
     public void nextTuple() {
         try {
-            Thread.sleep(10);
+            Thread.sleep(100);
             _collector.emit(new Values(scanner.nextLine()));
         } catch (InterruptedException ignore) {}
     }

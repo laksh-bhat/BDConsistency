@@ -63,7 +63,7 @@ public class FinanceTopology {
         Config topologyConfig = new Config();
         topologyConfig.setNumWorkers(20);
         topologyConfig.put(Config.DRPC_SERVERS, Lists.newArrayList("localhost"));
-        topologyConfig.setMaxSpoutPending(4);
+        topologyConfig.setMaxSpoutPending(1);
         topologyConfig.put(Config.STORM_CLUSTER_MODE, "distributed");
         StormSubmitter.submitTopology("AXFinder", topologyConfig, buildTopology(null, args[0]));
         // Let it run for 5 minutes
