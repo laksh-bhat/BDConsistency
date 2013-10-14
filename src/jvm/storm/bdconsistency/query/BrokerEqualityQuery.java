@@ -22,35 +22,32 @@ import java.util.Map;
 
 public class BrokerEqualityQuery {
 
-    public static class SelectStarFromAsks extends BaseQueryFunction<AsksState, HashMap<Long, List<Trade>>> {
-        public List<HashMap<Long, List<Trade>>> batchRetrieve(AsksState asksState, List<TridentTuple> inputs) {
+    public static class SelectStarFromAsks extends BaseQueryFunction<AsksState, Map<Long, List<Trade>>> {
+        public List<Map<Long, List<Trade>>> batchRetrieve(AsksState asksState, List<TridentTuple> inputs) {
             System.out.println(MessageFormat.format("-- SelectStarFromAsks -- {0}", asksState.getTotalTrade()));
-            List<HashMap<Long, List<Trade>>> returnList = new ArrayList<HashMap<Long, List<Trade>>>(1);
+            List<Map<Long, List<Trade>>> returnList = new ArrayList<Map<Long, List<Trade>>>(1);
             returnList.add((HashMap<Long, List<Trade>>)asksState.getAsks());
             return returnList;
         }
 
         @Override
-        public void execute(TridentTuple tuple, HashMap<Long, List<Trade>> result, TridentCollector collector) {
-/*            for (Long key : result.keySet())
-                for (Trade t : result.get(key))
-                    collector.emit(new Values(t.getBrokerId()));*/
+        public void execute(TridentTuple tuple, Map<Long, List<Trade>> result, TridentCollector collector) {
             collector.emit(new Values(result));
         }
     }
 
-    public static class SelectStarFromBids extends BaseQueryFunction<BidsState, HashMap<Long, List<Trade>>> {
-        public List<HashMap<Long, List<Trade>>> batchRetrieve(BidsState bidsState, List<TridentTuple> inputs) {
+    public static class SelectStarFromBids extends BaseQueryFunction<BidsState, Map<Long, List<Trade>>> {
+        public List<Map<Long, List<Trade>>> batchRetrieve(BidsState bidsState, List<TridentTuple> inputs) {
             System.out.println("-- SelectStarFromBids -- " + bidsState.getTotalTrade());
 
-            List<HashMap<Long, List<Trade>>> returnList = new ArrayList<HashMap<Long, List<Trade>>>(1);
+            List<Map<Long, List<Trade>>> returnList = new ArrayList<Map<Long, List<Trade>>>(1);
             returnList.add((HashMap<Long, List<Trade>>)bidsState.getBids());
 
             return returnList;
         }
 
         @Override
-        public void execute(TridentTuple tuple, HashMap<Long, List<Trade>> result, TridentCollector collector) {
+        public void execute(TridentTuple tuple, Map<Long, List<Trade>> result, TridentCollector collector) {
             collector.emit(new Values(result));
         }
     }

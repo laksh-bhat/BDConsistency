@@ -63,5 +63,5 @@ public class AsksState implements State {
     private long totalTrade;
 
     // Basically a multi-map
-    private ConcurrentMap<Long, List<Trade>> asks;
+    private Map<Long, List<Trade>> asks;
 }

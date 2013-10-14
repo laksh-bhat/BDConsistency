@@ -45,6 +45,7 @@ public class Filter {
 
             val.count += 1;
             val.volume = Long.valueOf(tuple.getString(0).split("\\|")[6]);
+            collector.emit(new Values(val.count, val.volume));
         }
 
         @Override

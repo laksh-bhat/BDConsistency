@@ -69,5 +69,5 @@ public class BidsState implements State {
     private long totalTrade;
 
     // Basically a multi-map
-    private ConcurrentMap<Long, List<Trade>> bids;
+    private Map<Long, List<Trade>> bids;
 }
