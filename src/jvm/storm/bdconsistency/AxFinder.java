@@ -4,42 +4,27 @@ import backtype.storm.Config;
 import backtype.storm.LocalDRPC;
 import backtype.storm.StormSubmitter;
 import backtype.storm.generated.StormTopology;
-import backtype.storm.testing.FeederSpout;
 import backtype.storm.tuple.Fields;
 import backtype.storm.utils.DRPCClient;
 import bdconsistency.ask.AsksStateFactory;
 import bdconsistency.ask.AsksUpdater;
 import bdconsistency.bid.BidsStateFactory;
 import bdconsistency.bid.BidsUpdater;
-import bdconsistency.query.AsksBidsJoin;
-import bdconsistency.query.AxFinderFilter;
-import bdconsistency.query.BrokerEqualityQuery;
-import bdconsistency.query.PrinterBolt;
+import bdconsistency.query.*;
 import com.google.common.collect.Lists;
 import storm.trident.TridentState;
 import storm.trident.TridentTopology;
 import storm.trident.spout.ITridentSpout;
 import storm.trident.spout.RichSpoutBatchExecutor;
-import storm.trident.testing.FeederBatchSpout;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.text.MessageFormat;
 
-/**
- * User: lbhat@damsl
- * Date: 10/14/13
- * Time: 1:26 AM
- */
 public class AxFinder {
-    public static StormTopology buildTopology(LocalDRPC drpc, final String fileName) {
+
+    public static StormTopology buildTopology(LocalDRPC drpc, String fileName, long statesize) {
         TridentTopology topology = new TridentTopology();
-        List<String> fields = new ArrayList<String>(1);
-        fields.add("tradeString");
-        final FeederSpout asksSpout = new FeederSpout(new Fields("tradeString"));
-        final FeederSpout bidsSpout = new FeederSpout(new Fields("tradeString"));
-
-
+        final ITridentSpout asksSpout = new RichSpoutBatchExecutor(new FileStreamingSpout(fileName));
+        final ITridentSpout bidsSpout = new RichSpoutBatchExecutor(new FileStreamingSpout(fileName));
 
         // In this state we will save the table
         TridentState asks = topology
@@ -48,7 +33,7 @@ public class AxFinder {
                 .shuffle()
                 .parallelismHint(5)
                         //.each(new Fields("tradeString"), new PrinterBolt())
-                .partitionPersist(new AsksStateFactory(10000000), new Fields("tradeString"), new AsksUpdater())
+                .partitionPersist(new AsksStateFactory(statesize), new Fields("tradeString"), new AsksUpdater())
                 .parallelismHint(5);
 
         TridentState bids = topology
@@ -57,95 +42,55 @@ public class AxFinder {
                 .shuffle()
                 .parallelismHint(5)
                         //.each(new Fields("tradeString"), new PrinterBolt())
-                .partitionPersist(new BidsStateFactory(10000000), new Fields("tradeString"), new BidsUpdater())
+                .partitionPersist(new BidsStateFactory(statesize), new Fields("tradeString"), new BidsUpdater())
                 .parallelismHint(5)
                 ;
 
         // DRPC Service
         topology
-                .newDRPCStream("AXF")
+                .newDRPCStream("AXF", drpc)
                 .each(new Fields("args"), new PrinterBolt())
                 .shuffle()
                 .stateQuery(asks, new BrokerEqualityQuery.SelectStarFromAsks(), new Fields("asks"))
-                .parallelismHint(5)
+                .parallelismHint(8)
                 .shuffle()
                 .stateQuery(bids, new BrokerEqualityQuery.SelectStarFromBids(), new Fields("bids"))
-                .parallelismHint(5)
-                .each(new Fields("asks", "bids"), new PrinterBolt())
+                .parallelismHint(8)
+                .shuffle()
+                .stateQuery(asks, new MemoryQuery.AsksMemoryQuery(), new Fields("askssize"))
+                .shuffle()
+                .stateQuery(bids, new MemoryQuery.BidsMemoryQuery(), new Fields("bidssize"))
                 .shuffle()
                 .each(new Fields("asks", "bids"), new AsksBidsJoin(), new Fields("AXF"))
                 .shuffle()
-                        //.parallelismHint(5)
-                .project(new Fields("AXF"));
-
-        startFeeding(fileName, asksSpout, bidsSpout);
-
+                .parallelismHint(8)
+                .project(new Fields("AXF", "asksize", "bidssize"));
 
         return topology.build();
-    }
-
-    private static void startFeeding(final String fileName, final FeederSpout asksSpout, final FeederSpout bidsSpout) {
-        new Thread("AsksFeeder") {
-            @Override
-            public void run() {
-                List<Object> feed = new ArrayList<Object>();
-                for (Scanner sc = new Scanner(fileName); sc.hasNextLine(); ) {
-                    feed.add(sc.nextLine());
-                    if (feed.size() > 1000){
-                        asksSpout.feed(feed);
-                        for (Object feedObj : feed)
-                            asksSpout.nextTuple();
-                        feed.clear();
-                    }
-
-                    if (!sc.hasNextLine())
-                        sc = new Scanner(fileName);
-                }
-            }
-        }.start();
-
-        new Thread("BidsFeeder") {
-            @Override
-            public void run() {
-                List<Object> feed = new ArrayList<Object>();
-                for (Scanner sc = new Scanner(fileName); sc.hasNextLine(); ) {
-                    feed.add(sc.nextLine());
-                    if (feed.size() > 1000){
-                        bidsSpout.feed(feed);
-                        for (Object feedObj : feed)
-                            bidsSpout.nextTuple();
-                        feed.clear();
-                    }
-
-                    if (!sc.hasNextLine())
-                        sc = new Scanner(fileName);
-                }
-            }
-        }.start();
     }
 
 
     public static void main(String[] args) throws Exception {
         Config conf = new Config();
-        conf.put(Config.DRPC_SERVERS, Lists.newArrayList("localhost"));
-        conf.setMaxSpoutPending(4);
+        conf.put(Config.DRPC_SERVERS, Lists.newArrayList("damsel", "qp4", "qp5", "qp6"));
+        conf.setMaxSpoutPending(20);
         conf.put(Config.STORM_CLUSTER_MODE, "distributed");
-        StormSubmitter.submitTopology("AXFinder", conf, buildTopology(null, args[0]));
-        Thread.sleep(1000);
+        StormSubmitter.submitTopology("AXFinder", conf, buildTopology(null, args[0], args.length < 2? Long.valueOf(args[1]) : 1000000));
+        Thread.sleep(10000);
 
         DRPCClient client = new DRPCClient("localhost", 3772);
         // Fire AXFinder Query 100 times
-        for(int i = 0; i < 20; i++) {
+        long duration = 0;
+        for(int i = 0; i < 50; i++) {
+            Thread.sleep(2000);
+            long startTime = System.currentTimeMillis();
             System.out.println("Result for AXF query is -> " + client.execute("AXF", "axfinder"));
-            Thread.sleep(10000);
+            long endTime = System.currentTimeMillis();
+            duration += endTime - startTime;
         }
+
+        System.out.println("==================================================================");
+        System.out.println(MessageFormat.format("duration for 50 ax-finder queries {0} mill seconds", duration));
         client.close();
-
-        // Hack -- But its fine for test code
-        Thread[] threads = new Thread[Thread.activeCount() + 1];
-        Thread.enumerate(threads);
-        for (Thread thread : threads)
-            thread.stop();
-
     }
 }

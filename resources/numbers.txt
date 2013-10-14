@@ -1,0 +1,10 @@
+[5665000] -- 2 bolts - 5 mins
+
+10000 -- duration for 50 ax-finder queries 15,011 mill seconds
+100000 -- duration for 50 ax-finder queries 1,027 mill seconds
+1000000 -- duration for 50 ax-finder queries 1,039 mill seconds
+10000000 -- duration for 50 ax-finder queries 1,039 mill seconds
+
+
+
+

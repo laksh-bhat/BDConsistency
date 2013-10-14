@@ -60,10 +60,10 @@ public class FinanceTopology {
                 .parallelismHint(5)
                 .each(new Fields("asks", "bids"), new PrinterBolt())
                 .shuffle()
-                .each(new Fields("asks", "bids"), new AsksBidsJoin(), new Fields("AXF", "statesize"))
+                .each(new Fields("asks", "bids"), new AsksBidsJoin(), new Fields("AXF"))
                 .shuffle()
                 //.parallelismHint(5)
-                .project(new Fields("AXF", "statesize"));
+                .project(new Fields("AXF"));
 
         return topology.build();
     }

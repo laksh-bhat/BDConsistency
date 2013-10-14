@@ -22,7 +22,6 @@ public class AsksBidsJoin extends BaseFunction {
         System.out.println(" -- AsksBidsJoin -- ");
         Map<Long, List<Trade>> asksTable = (Map<Long, List<Trade>>) tuple.getValueByField("asks");
         Map<Long, List<Trade>> bidsTable = (Map<Long, List<Trade>>) tuple.getValueByField("bids");
-        long totalStateSize = asksTable.size() + bidsTable.size();
 
         for (long broker : asksTable.keySet()) {
             long asksTotalVolume = 0, asksPrice = 0, bidsTotalVolume = 0, bidsPrice = 0;
@@ -41,7 +40,7 @@ public class AsksBidsJoin extends BaseFunction {
                 List<Long> axf = new ArrayList<Long>();
                 axf.add(broker);
                 axf.add(asksTotalVolume - bidsTotalVolume);
-                collector.emit(new Values(axf, totalStateSize));
+                collector.emit(new Values(axf));
             }
         }
     }

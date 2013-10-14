@@ -28,7 +28,7 @@ public class BidsState implements State {
     public synchronized void addTrade(long broker, Trade trade) {
         totalTrade++;
 
-        if(!bids.containsKey(broker)){
+        if (!bids.containsKey(broker)) {
             // register this broker
             List<Trade> brokerTransactions = new ArrayList<Trade>();
             bids.put(broker, brokerTransactions);
@@ -40,12 +40,12 @@ public class BidsState implements State {
     public synchronized void removeTrade(long broker, Trade trade) {
         totalTrade++;
         // If broker isn't registered, ignore this trade
-        if(!bids.containsKey(broker))
+        if (!bids.containsKey(broker))
             return;
 
         List<Trade> brokerTransactions = bids.get(broker);
-        for (int i = 0; i < brokerTransactions.size(); i++){
-            if(brokerTransactions.get(i).getOrderId() == trade.getOrderId()){
+        for (int i = 0; i < brokerTransactions.size(); i++) {
+            if (brokerTransactions.get(i).getOrderId() == trade.getOrderId()) {
                 brokerTransactions.remove(i);
                 break;
             }
@@ -54,7 +54,7 @@ public class BidsState implements State {
             bids.remove(broker);
     }
 
-    public synchronized void clearTrades(){
+    public synchronized void clearTrades() {
         this.bids.clear();
     }
 
