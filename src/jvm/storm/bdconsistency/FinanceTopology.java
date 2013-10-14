@@ -75,7 +75,7 @@ public class FinanceTopology {
         TridentState count =
         topology.merge(asksStream, bidsStream)
                 .shuffle()
-                .partitionPersist(new CounterState.CounterStateFactory(), new Fields("tridentString"), new CountUpdater())
+                .partitionPersist(new CounterState.CounterStateFactory(), new Fields("tradeString"), new CountUpdater())
                 ;
 
         // DRPC Service

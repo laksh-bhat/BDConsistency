@@ -120,9 +120,9 @@
       <file leaf-file-name="FinanceTopology.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="118" column="29" selection-start="4905" selection-end="4905" vertical-scroll-proportion="0.16502947">
+            <state line="77" column="97" selection-start="3197" selection-end="3197" vertical-scroll-proportion="0.4990177">
               <folding>
-                <element signature="e#4306#4314#0" expanded="true" />
+                <element signature="e#4304#4312#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -790,9 +790,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="118" column="29" selection-start="4905" selection-end="4905" vertical-scroll-proportion="0.16502947">
+        <state line="77" column="97" selection-start="3197" selection-end="3197" vertical-scroll-proportion="0.4990177">
           <folding>
-            <element signature="e#4306#4314#0" expanded="true" />
+            <element signature="e#4304#4312#0" expanded="true" />
           </folding>
         </state>
       </provider>
