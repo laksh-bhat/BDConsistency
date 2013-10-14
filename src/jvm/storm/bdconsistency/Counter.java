@@ -97,7 +97,7 @@ public class Counter {
         LocalCluster cluster = new LocalCluster();
         cluster.submitTopology("VolumeCounterTopology", conf, buildTopology(args[0]));
         try {
-            Thread.sleep(10000);
+            Thread.sleep(300000);
         } catch (InterruptedException ignore) {}
         cluster.killTopology("VolumeCounterTopology");
         cluster.shutdown();
