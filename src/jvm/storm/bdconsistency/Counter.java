@@ -34,19 +34,23 @@ public class Counter {
 
         @Override
         public void aggregate(Double val, TridentTuple tuple, TridentCollector collector) {
-            Trade t = new Trade(tuple.getString(0).split("\\|"));
-            // System.out.println(MessageFormat.format("Reducing...{0}{1}", t.getOrderId(), t.getOrderId()));
-            count += 1;
-            val = 1.0 * count;
-/*            if (t.getOperation() == 1) val += t.getVolume();
-            else val -= t.getVolume();*/
-            if (val % 1000 == 0)
-                collector.emit(new Values(count));
+            if (tuple.getString(0).startsWith("BIDS")) {
+                //Trade t = new Trade(tuple.getString(0).split("\\|"));
+                // System.out.println(MessageFormat.format("Reducing...{0}{1}", t.getOrderId(), t.getOrderId()));
+                count += 1;
+                val = 1.0 * count;
+            /*
+                if (t.getOperation() == 1) val += t.getVolume();
+                else val -= t.getVolume();
+            */
+                if (val % 1000 == 0)
+                    collector.emit(new Values(count));
+            }
         }
 
         @Override
         public void complete(Double val, TridentCollector collector) {
-            collector.emit(new Values(val));
+            collector.emit(new Values(count));
         }
 
         @Override
