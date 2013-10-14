@@ -75,18 +75,19 @@ public class FinanceTopology {
         conf.setMaxSpoutPending(10);
         conf.put(Config.STORM_CLUSTER_MODE, "distributed");
         StormSubmitter.submitTopology("AXFinder", conf, buildTopology(null, args[0]));
-        Thread.sleep(1000);
+        Thread.sleep(10000);
 
-        long startTime = System.nanoTime();
         DRPCClient client = new DRPCClient("localhost", 3772);
         // Fire AXFinder Query 100 times
+        long duration = 0;
         for(int i = 0; i < 10; i++) {
+            Thread.sleep(2000);
+            long startTime = System.nanoTime();
             System.out.println("Result for AXF query is -> " + client.execute("AXF", "axfinder"));
-            Thread.sleep(10);
+            long endTime = System.nanoTime();
+            duration += endTime - startTime;
         }
 
-        long endTime = System.nanoTime();
-        long duration = endTime - startTime;
         System.out.println("==================================================================");
         System.out.println(MessageFormat.format("duration for 20 ax-finder queries {0} seconds", duration / 1000000000.0));
         client.close();
