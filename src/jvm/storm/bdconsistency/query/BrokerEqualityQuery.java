@@ -26,7 +26,7 @@ public class BrokerEqualityQuery {
         public List<Map<Long, List<Trade>>> batchRetrieve(AsksState asksState, List<TridentTuple> inputs) {
             System.out.println(MessageFormat.format("-- SelectStarFromAsks -- {0}", asksState.getTotalTrade()));
             List<Map<Long, List<Trade>>> returnList = new ArrayList<Map<Long, List<Trade>>>(1);
-            returnList.add((HashMap<Long, List<Trade>>)asksState.getAsks());
+            returnList.add(asksState.getAsks());
             return returnList;
         }
 
@@ -41,7 +41,7 @@ public class BrokerEqualityQuery {
             System.out.println("-- SelectStarFromBids -- " + bidsState.getTotalTrade());
 
             List<Map<Long, List<Trade>>> returnList = new ArrayList<Map<Long, List<Trade>>>(1);
-            returnList.add((HashMap<Long, List<Trade>>)bidsState.getBids());
+            returnList.add(bidsState.getBids());
 
             return returnList;
         }
