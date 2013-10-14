@@ -4,12 +4,6 @@
     <list default="true" id="3ce62a69-14b0-48fd-b6e9-6b6be8644430" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../BDConsistency" afterPath="$PROJECT_DIR$/../BDConsistency" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" afterPath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ask/AsksState.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ask/AsksState.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ask/AsksUpdater.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ask/AsksUpdater.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bid/BidsState.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bid/BidsState.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bid/BidsUpdater.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bid/BidsUpdater.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/BrokerEqualityQuery.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/BrokerEqualityQuery.java" />
-      <change type="MOVED" beforePath="G:\code\BDConsistency\src\jvm\storm\bdconsistency\VolumeCounter.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/Counter.java" />
     </list>
     <ignored path="storm.iws" />
     <ignored path=".idea/workspace.xml" />
