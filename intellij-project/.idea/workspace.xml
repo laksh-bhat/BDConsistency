@@ -47,7 +47,7 @@
     <file path="/AsksBidsJoin.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381529988813" ignored="false" />
     <file path="/AxFinderFilter.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381363205212" ignored="false" />
     <file path="/VolumeCounter.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381710508145" ignored="false" />
-    <file path="/Counter.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381713765978" ignored="false" />
+    <file path="/Counter.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381714122130" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +129,7 @@
       <file leaf-file-name="Counter.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/Counter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="7" selection-start="813" selection-end="813" vertical-scroll-proportion="-0.009578544">
+            <state line="40" column="43" selection-start="1342" selection-end="1342" vertical-scroll-proportion="0.651341">
               <folding />
             </state>
           </provider>
@@ -727,7 +727,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/Counter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="7" selection-start="813" selection-end="813" vertical-scroll-proportion="-0.009578544">
+        <state line="40" column="43" selection-start="1342" selection-end="1342" vertical-scroll-proportion="0.651341">
           <folding />
         </state>
       </provider>

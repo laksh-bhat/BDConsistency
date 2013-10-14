@@ -26,7 +26,7 @@ import java.util.Map;
  */
 public class Counter {
     public static class CountAggregator implements Aggregator<Double> {
-
+        long count;
         @Override
         public Double init(Object batchId, TridentCollector collector) {
             return 0D;
@@ -35,12 +35,13 @@ public class Counter {
         @Override
         public void aggregate(Double val, TridentTuple tuple, TridentCollector collector) {
             Trade t = new Trade(tuple.getString(0).split("\\|"));
-            System.out.println(MessageFormat.format("Reducing...{0}{1}", t.getOrderId(), t.getOrderId()));
-            val += 1;
+            // System.out.println(MessageFormat.format("Reducing...{0}{1}", t.getOrderId(), t.getOrderId()));
+            count += 1;
+            val = 1.0 * count;
 /*            if (t.getOperation() == 1) val += t.getVolume();
             else val -= t.getVolume();*/
             if (val % 1000 == 0)
-                collector.emit(new Values(val));
+                collector.emit(new Values(count));
         }
 
         @Override
