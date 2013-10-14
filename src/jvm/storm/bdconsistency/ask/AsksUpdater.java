@@ -20,8 +20,13 @@ public class AsksUpdater extends BaseStateUpdater<AsksState> {
             Trade trade = new Trade(tradeStr.split("\\|"));
             int operation = trade.getOperation();
             long brokerId =  trade.getBrokerId();
-            if(operation == 1) state.addTrade(brokerId, trade);
-            else state.removeTrade(brokerId, trade);
+
+            synchronized (state.getAsks()) {
+                if (state.getAsks().size() > 500000)
+                    state.getAsks().clear();
+                if(operation == 1) state.addTrade(brokerId, trade);
+                else state.removeTrade(brokerId, trade);
+            }
         }
     }
 }

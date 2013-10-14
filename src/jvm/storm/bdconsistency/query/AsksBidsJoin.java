@@ -30,9 +30,6 @@ public class AsksBidsJoin extends BaseFunction {
             for (Trade ask : asksTable.get(broker)) {
                 asksTotalVolume += ask.getVolume();
                 asksPrice += ask.getPrice();
-
-                System.out.println(MessageFormat.format("-- Broker Id = {0}, trade price = {1}",
-                        broker, ask.getPrice() ));
             }
             for (Trade bid : bidsTable.get(broker)) {
                 bidsTotalVolume += bid.getVolume();

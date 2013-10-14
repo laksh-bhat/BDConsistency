@@ -20,8 +20,14 @@ public class BidsUpdater extends BaseStateUpdater<BidsState> {
             Trade trade = new Trade(tradeStr.split("\\|"));
             int operation = trade.getOperation();
             long brokerId =  trade.getBrokerId();
-            if(operation == 1) state.addTrade(brokerId, trade);
-            else state.removeTrade(brokerId, trade);
+
+            synchronized (state.getBids()) {
+                if (state.getBids().size() > 500000)
+                    state.getBids().clear();
+                if(operation == 1) state.addTrade(brokerId, trade);
+                else state.removeTrade(brokerId, trade);
+            }
+
         }
     }
 }
