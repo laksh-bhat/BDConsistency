@@ -46,6 +46,8 @@ public class CounterTopology {
         }
         @Override
         public Long reduce(Long curr, TridentTuple tuple) {
+            if(curr == null)
+                curr = 0L;
             return curr + 1;
         }
     }
