@@ -93,6 +93,8 @@ public class AxFinder {
                     feed.add(sc.nextLine());
                     if (feed.size() > 1000){
                         asksSpout.feed(feed);
+                        for (Object feedObj : feed)
+                            asksSpout.nextTuple();
                         feed.clear();
                     }
 
@@ -110,6 +112,8 @@ public class AxFinder {
                     feed.add(sc.nextLine());
                     if (feed.size() > 1000){
                         bidsSpout.feed(feed);
+                        for (Object feedObj : feed)
+                            bidsSpout.nextTuple();
                         feed.clear();
                     }
 
