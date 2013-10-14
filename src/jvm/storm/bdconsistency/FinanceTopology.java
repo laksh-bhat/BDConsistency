@@ -19,6 +19,8 @@ import storm.trident.spout.ITridentSpout;
 import storm.trident.spout.RichSpoutBatchExecutor;
 import storm.trident.testing.MemoryMapState;
 
+import java.text.MessageFormat;
+
 public class FinanceTopology {
 
     public static StormTopology buildTopology(LocalDRPC drpc, String fileName) {
@@ -70,17 +72,23 @@ public class FinanceTopology {
     public static void main(String[] args) throws Exception {
         Config conf = new Config();
         conf.put(Config.DRPC_SERVERS, Lists.newArrayList("localhost"));
-        conf.setMaxSpoutPending(2);
+        conf.setMaxSpoutPending(10);
         conf.put(Config.STORM_CLUSTER_MODE, "distributed");
         StormSubmitter.submitTopology("AXFinder", conf, buildTopology(null, args[0]));
         Thread.sleep(1000);
 
+        long startTime = System.nanoTime();
         DRPCClient client = new DRPCClient("localhost", 3772);
         // Fire AXFinder Query 100 times
-        for(int i = 0; i < 20; i++) {
+        for(int i = 0; i < 10; i++) {
             System.out.println("Result for AXF query is -> " + client.execute("AXF", "axfinder"));
-            Thread.sleep(10000);
+            Thread.sleep(10);
         }
+
+        long endTime = System.nanoTime();
+        long duration = endTime - startTime;
+        System.out.println("==================================================================");
+        System.out.println(MessageFormat.format("duration for 20 ax-finder queries {0} seconds", duration / 1000000000.0));
         client.close();
     }
 }
