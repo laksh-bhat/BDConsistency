@@ -2,11 +2,15 @@ package bdconsistency;
 
 import backtype.storm.Config;
 import backtype.storm.LocalCluster;
+import backtype.storm.StormSubmitter;
+import backtype.storm.generated.AlreadyAliveException;
+import backtype.storm.generated.InvalidTopologyException;
 import backtype.storm.generated.StormTopology;
 import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Values;
 import bdconsistency.query.PrinterBolt;
 import bdconsistency.trade.Trade;
+import com.google.common.collect.Lists;
 import storm.trident.Stream;
 import storm.trident.TridentState;
 import storm.trident.TridentTopology;
@@ -24,7 +28,7 @@ import java.util.Map;
  * Date: 10/11/13
  * Time: 1:47 PM
  */
-public class Counter {
+public class CounterTopology {
     public static class CountAggregator implements Aggregator<Double> {
         long count;
         @Override
@@ -34,23 +38,15 @@ public class Counter {
 
         @Override
         public void aggregate(Double val, TridentTuple tuple, TridentCollector collector) {
-            if (tuple.getString(0).startsWith("BIDS")) {
-                //Trade t = new Trade(tuple.getString(0).split("\\|"));
-                // System.out.println(MessageFormat.format("Reducing...{0}{1}", t.getOrderId(), t.getOrderId()));
                 count += 1;
                 val = 1.0 * count;
-            /*
-                if (t.getOperation() == 1) val += t.getVolume();
-                else val -= t.getVolume();
-            */
-                if (val % 1000 == 0)
+                if (val % 5000 == 0)
                     collector.emit(new Values(count));
-            }
         }
 
         @Override
         public void complete(Double val, TridentCollector collector) {
-            //collector.emit(new Values(val));
+            collector.emit(new Values(val));
         }
 
         @Override
@@ -75,8 +71,6 @@ public class Counter {
     public static StormTopology buildTopology(String fileName) {
         TridentTopology topology = new TridentTopology();
         final ITridentSpout asksSpout = new RichSpoutBatchExecutor(new FileStreamingSpout(fileName));
-        TridentState state = topology.newStaticState(new MemoryMapState.Factory());
-
         Stream volumes = topology
                 .newStream("spout", asksSpout);
 
@@ -87,15 +81,16 @@ public class Counter {
         return topology.build();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws AlreadyAliveException, InvalidTopologyException {
         Config conf = new Config();
-        //conf.setDebug(true);
-        LocalCluster cluster = new LocalCluster();
-        cluster.submitTopology("VolumeCounterTopology", conf, buildTopology(args[0]));
+        conf.setMaxSpoutPending(1);
+        conf.setNumWorkers(20);
+        conf.put(Config.DRPC_SERVERS, Lists.newArrayList("damsel", "qp4", "qp5", "qp6"));
+        conf.setMaxSpoutPending(20);
+        conf.put(Config.STORM_CLUSTER_MODE, "distributed");
+        StormSubmitter.submitTopology("CounterTopology", conf, buildTopology(args[0]));
         try {
             Thread.sleep(300000);
         } catch (InterruptedException ignore) {}
-        cluster.killTopology("VolumeCounterTopology");
-        cluster.shutdown();
     }
 }
