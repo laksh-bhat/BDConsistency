@@ -4,23 +4,32 @@ import backtype.storm.Config;
 import backtype.storm.LocalCluster;
 import backtype.storm.StormSubmitter;
 import backtype.storm.generated.AlreadyAliveException;
+import backtype.storm.generated.DRPCExecutionException;
 import backtype.storm.generated.InvalidTopologyException;
 import backtype.storm.generated.StormTopology;
 import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Values;
+import backtype.storm.utils.DRPCClient;
+import bdconsistency.query.AsksBidsJoin;
+import bdconsistency.query.BrokerEqualityQuery;
 import bdconsistency.query.PrinterBolt;
 import bdconsistency.trade.Trade;
 import com.google.common.collect.Lists;
+import org.apache.thrift7.TException;
 import storm.trident.Stream;
 import storm.trident.TridentState;
 import storm.trident.TridentTopology;
 import storm.trident.operation.*;
 import storm.trident.spout.ITridentSpout;
 import storm.trident.spout.RichSpoutBatchExecutor;
+import storm.trident.state.BaseQueryFunction;
+import storm.trident.state.State;
 import storm.trident.testing.MemoryMapState;
 import storm.trident.tuple.TridentTuple;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -29,6 +38,18 @@ import java.util.Map;
  * Time: 1:47 PM
  */
 public class CounterTopology {
+
+    public static class CountReducer implements ReducerAggregator<Long>{
+        @Override
+        public Long init() {
+            return 0L;
+        }
+        @Override
+        public Long reduce(Long curr, TridentTuple tuple) {
+            return curr + 1;
+        }
+    }
+
     public static class CountAggregator implements Aggregator<Double> {
         long count;
         @Override
@@ -56,41 +77,52 @@ public class CounterTopology {
         public void cleanup() {}
     }
 
-    public static class Split extends BaseFunction {
-
-        @Override
-        public void execute(TridentTuple tuple, TridentCollector collector) {
-            for(String word: tuple.getString(0).split("\\|")) {
-                if(word.length() > 0) {
-                    collector.emit(new Values(word));
-                }
-            }
-        }
-    }
-
     public static StormTopology buildTopology(String fileName) {
         TridentTopology topology = new TridentTopology();
         final ITridentSpout asksSpout = new RichSpoutBatchExecutor(new FileStreamingSpout(fileName));
-        Stream volumes = topology
+        Stream counts = topology
                 .newStream("spout", asksSpout);
 
-        volumes.aggregate(new Fields("tradeString"), new CountAggregator(), new Fields("count"))
-                .project(new Fields("count"))
-                .each(new Fields("count"), new PrinterBolt());
+        TridentState state = counts.shuffle()
+                .persistentAggregate(new MemoryMapState.Factory(), new CountReducer(), new Fields("count"))
+                .parallelismHint(8);
+
+        topology
+                .newDRPCStream("Counter")
+                .each(new Fields("args"), new PrinterBolt())
+                .shuffle()
+                .stateQuery(state, new BaseQueryFunction <State, Object>(){
+                    @Override
+                    public List<Object> batchRetrieve(State state, List<TridentTuple> args) {
+                        List<Object> returnList = new ArrayList<Object>();
+                        returnList.add(state);
+                        return returnList;
+                    }
+
+                    @Override
+                    public void execute(TridentTuple tuple, Object result, TridentCollector collector) {
+                        collector.emit(new Values(result));
+                    }
+                }, new Fields("count"))
+                .parallelismHint(5)
+                .shuffle()
+                .project(new Fields("count"));
 
         return topology.build();
     }
 
-    public static void main(String[] args) throws AlreadyAliveException, InvalidTopologyException {
+    public static void main(String[] args) throws AlreadyAliveException, InvalidTopologyException, InterruptedException, TException, DRPCExecutionException {
         Config conf = new Config();
-        conf.setMaxSpoutPending(1);
         conf.setNumWorkers(20);
         conf.put(Config.DRPC_SERVERS, Lists.newArrayList("damsel", "qp4", "qp5", "qp6"));
         conf.setMaxSpoutPending(20);
         conf.put(Config.STORM_CLUSTER_MODE, "distributed");
         StormSubmitter.submitTopology("CounterTopology", conf, buildTopology(args[0]));
-        try {
-            Thread.sleep(300000);
-        } catch (InterruptedException ignore) {}
+        // wait for 2 minutes
+        Thread.sleep(120000);
+
+        DRPCClient client = new DRPCClient("localhost", 3772);
+        System.out.println("Result for AXF query is -> " + client.execute("Counter", "find-count"));
+        client.close();
     }
 }
