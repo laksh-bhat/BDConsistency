@@ -16,6 +16,7 @@ import storm.trident.spout.RichSpoutBatchExecutor;
 import storm.trident.testing.MemoryMapState;
 import storm.trident.tuple.TridentTuple;
 
+import java.text.MessageFormat;
 import java.util.Map;
 
 /**
@@ -25,17 +26,6 @@ import java.util.Map;
  */
 public class Counter {
     public static class CountAggregator implements Aggregator<Double> {
-        public Double init() {
-            return 0D;
-        }
-
-        public Double reduce(Double state, TridentTuple tuple) {
-            System.out.println("Reducing...");
-            Trade t = new Trade(tuple.getString(0).split("\\|"));
-            if (t.getOperation() == 1) state += t.getVolume();
-            else state -= t.getVolume();
-            return state;
-        }
 
         @Override
         public Double init(Object batchId, TridentCollector collector) {
@@ -45,7 +35,8 @@ public class Counter {
         @Override
         public void aggregate(Double val, TridentTuple tuple, TridentCollector collector) {
             Trade t = new Trade(tuple.getString(0).split("\\|"));
-            val++;
+            System.out.println(MessageFormat.format("Reducing...{0}{1}", t.getOrderId(), t.getOrderId()));
+            val += 1;
 /*            if (t.getOperation() == 1) val += t.getVolume();
             else val -= t.getVolume();*/
             if (val % 1000 == 0)
