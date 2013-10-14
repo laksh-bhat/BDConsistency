@@ -4,6 +4,7 @@ import backtype.storm.Config;
 import backtype.storm.LocalDRPC;
 import backtype.storm.StormSubmitter;
 import backtype.storm.generated.StormTopology;
+import backtype.storm.testing.FeederSpout;
 import backtype.storm.tuple.Fields;
 import backtype.storm.utils.DRPCClient;
 import bdconsistency.ask.AsksStateFactory;
@@ -35,8 +36,8 @@ public class AxFinder {
         TridentTopology topology = new TridentTopology();
         List<String> fields = new ArrayList<String>(1);
         fields.add("tradeString");
-        final FeederBatchSpout asksSpout = new FeederBatchSpout(fields);
-        final FeederBatchSpout bidsSpout = new FeederBatchSpout(fields);
+        final FeederSpout asksSpout = new FeederSpout(new Fields("tradeString"));
+        final FeederSpout bidsSpout = new FeederSpout(new Fields("tradeString"));
 
 
 
@@ -79,15 +80,15 @@ public class AxFinder {
 
         startFeeding(fileName, asksSpout, bidsSpout);
 
+
         return topology.build();
     }
 
-    private static void startFeeding(final String fileName, final FeederBatchSpout asksSpout, final FeederBatchSpout bidsSpout) {
+    private static void startFeeding(final String fileName, final FeederSpout asksSpout, final FeederSpout bidsSpout) {
         new Thread("AsksFeeder") {
             @Override
             public void run() {
-                asksSpout.setWaitToEmit(true);
-                List<String> feed = new ArrayList<String>();
+                List<Object> feed = new ArrayList<Object>();
                 for (Scanner sc = new Scanner(fileName); sc.hasNextLine(); ) {
                     feed.add(sc.nextLine());
                     if (feed.size() > 1000){
@@ -104,12 +105,11 @@ public class AxFinder {
         new Thread("BidsFeeder") {
             @Override
             public void run() {
-                bidsSpout.setWaitToEmit(true);
-                List<String> feed = new ArrayList<String>();
+                List<Object> feed = new ArrayList<Object>();
                 for (Scanner sc = new Scanner(fileName); sc.hasNextLine(); ) {
                     feed.add(sc.nextLine());
                     if (feed.size() > 1000){
-                        asksSpout.feed(feed);
+                        bidsSpout.feed(feed);
                         feed.clear();
                     }
 
