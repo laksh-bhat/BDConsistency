@@ -13,9 +13,9 @@ import java.util.concurrent.ConcurrentMap;
  * Time: 11:53 PM
  */
 public class BidsState implements State {
-    public BidsState() {
-        System.out.println("Bids State Constructed");
+    public BidsState(long statesize) {
         bids = new ConcurrentHashMap<Long, List<Trade>>();
+        this.stateSize = statesize;
     }
 
     public void beginCommit(Long txid) {
@@ -67,6 +67,8 @@ public class BidsState implements State {
     }
 
     private long totalTrade;
+
+    public final long stateSize;
 
     // Basically a multi-map
     private Map<Long, List<Trade>> bids;

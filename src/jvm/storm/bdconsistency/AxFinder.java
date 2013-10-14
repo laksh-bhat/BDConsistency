@@ -48,7 +48,7 @@ public class AxFinder {
                 .shuffle()
                 .parallelismHint(5)
                         //.each(new Fields("tradeString"), new PrinterBolt())
-                .partitionPersist(new AsksStateFactory(), new Fields("tradeString"), new AsksUpdater())
+                .partitionPersist(new AsksStateFactory(10000000), new Fields("tradeString"), new AsksUpdater())
                 .parallelismHint(5);
 
         TridentState bids = topology
@@ -57,7 +57,7 @@ public class AxFinder {
                 .shuffle()
                 .parallelismHint(5)
                         //.each(new Fields("tradeString"), new PrinterBolt())
-                .partitionPersist(new BidsStateFactory(), new Fields("tradeString"), new BidsUpdater())
+                .partitionPersist(new BidsStateFactory(10000000), new Fields("tradeString"), new BidsUpdater())
                 .parallelismHint(5)
                 ;
 

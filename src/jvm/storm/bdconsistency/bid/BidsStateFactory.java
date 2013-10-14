@@ -12,8 +12,13 @@ import java.util.Map;
  * Time: 12:02 AM
  */
 public class BidsStateFactory implements StateFactory {
+    private final long statesize;
+
+    public BidsStateFactory(long statesize){
+        this.statesize = statesize;
+    }
     @Override
     public State makeState(Map conf, IMetricsContext metrics, int partitionIndex, int numPartitions) {
-        return new BidsState();
+        return new BidsState(statesize);
     }
 }

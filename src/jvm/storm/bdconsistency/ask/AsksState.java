@@ -12,9 +12,9 @@ import java.util.concurrent.ConcurrentMap;
  * Time: 11:53 PM
  */
 public class AsksState implements State {
-    public AsksState() {
-        System.out.println("Asks State Constructed");
+    public AsksState(long statesize) {
         asks = new ConcurrentHashMap<Long, List<Trade>>();
+        this.stateSize = statesize;
     }
 
     public void beginCommit(Long txid) {}
@@ -61,7 +61,7 @@ public class AsksState implements State {
         return totalTrade;
     }
     private long totalTrade;
-
+    public long stateSize;
     // Basically a multi-map
     private Map<Long, List<Trade>> asks;
 }

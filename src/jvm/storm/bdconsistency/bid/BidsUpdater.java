@@ -21,7 +21,7 @@ public class BidsUpdater extends BaseStateUpdater<BidsState> {
             int operation = trade.getOperation();
             long brokerId =  trade.getBrokerId();
 
-            if (state.getBids().size() > 500000)
+            if (state.getBids().size() > state.stateSize)
                 state.clearTrades();
 
             if (operation == 1) state.addTrade(brokerId, trade);

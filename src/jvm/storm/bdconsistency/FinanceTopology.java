@@ -23,7 +23,7 @@ import java.text.MessageFormat;
 
 public class FinanceTopology {
 
-    public static StormTopology buildTopology(LocalDRPC drpc, String fileName) {
+    public static StormTopology buildTopology(LocalDRPC drpc, String fileName, long statesize) {
         TridentTopology topology = new TridentTopology();
         final ITridentSpout asksSpout = new RichSpoutBatchExecutor(new FileStreamingSpout(fileName));
         final ITridentSpout bidsSpout = new RichSpoutBatchExecutor(new FileStreamingSpout(fileName));
@@ -35,7 +35,7 @@ public class FinanceTopology {
                 .shuffle()
                 .parallelismHint(5)
                 //.each(new Fields("tradeString"), new PrinterBolt())
-                .partitionPersist(new AsksStateFactory(), new Fields("tradeString"), new AsksUpdater())
+                .partitionPersist(new AsksStateFactory(statesize), new Fields("tradeString"), new AsksUpdater())
                 .parallelismHint(5);
 
         TridentState bids = topology
@@ -44,7 +44,7 @@ public class FinanceTopology {
                 .shuffle()
                 .parallelismHint(5)
                 //.each(new Fields("tradeString"), new PrinterBolt())
-                .partitionPersist(new BidsStateFactory(), new Fields("tradeString"), new BidsUpdater())
+                .partitionPersist(new BidsStateFactory(statesize), new Fields("tradeString"), new BidsUpdater())
                 .parallelismHint(5)
                 ;
 
@@ -60,10 +60,10 @@ public class FinanceTopology {
                 .parallelismHint(5)
                 .each(new Fields("asks", "bids"), new PrinterBolt())
                 .shuffle()
-                .each(new Fields("asks", "bids"), new AsksBidsJoin(), new Fields("AXF"))
+                .each(new Fields("asks", "bids"), new AsksBidsJoin(), new Fields("AXF", "statesize"))
                 .shuffle()
                 //.parallelismHint(5)
-                .project(new Fields("AXF"));
+                .project(new Fields("AXF", "statesize"));
 
         return topology.build();
     }
@@ -71,25 +71,25 @@ public class FinanceTopology {
 
     public static void main(String[] args) throws Exception {
         Config conf = new Config();
-        conf.put(Config.DRPC_SERVERS, Lists.newArrayList("localhost"));
-        conf.setMaxSpoutPending(10);
+        conf.put(Config.DRPC_SERVERS, Lists.newArrayList("damsel", "qp4", "qp5", "qp6"));
+        conf.setMaxSpoutPending(20);
         conf.put(Config.STORM_CLUSTER_MODE, "distributed");
-        StormSubmitter.submitTopology("AXFinder", conf, buildTopology(null, args[0]));
+        StormSubmitter.submitTopology("AXFinder", conf, buildTopology(null, args[0], args[1] != null? Long.valueOf(args[1]) : 100000));
         Thread.sleep(10000);
 
         DRPCClient client = new DRPCClient("localhost", 3772);
         // Fire AXFinder Query 100 times
         long duration = 0;
-        for(int i = 0; i < 10; i++) {
+        for(int i = 0; i < 50; i++) {
             Thread.sleep(2000);
-            long startTime = System.nanoTime();
+            long startTime = System.currentTimeMillis();
             System.out.println("Result for AXF query is -> " + client.execute("AXF", "axfinder"));
-            long endTime = System.nanoTime();
+            long endTime = System.currentTimeMillis();
             duration += endTime - startTime;
         }
 
         System.out.println("==================================================================");
-        System.out.println(MessageFormat.format("duration for 20 ax-finder queries {0} seconds", duration / 1000000000.0));
+        System.out.println(MessageFormat.format("duration for 50 ax-finder queries {0} mill seconds", duration));
         client.close();
     }
 }
