@@ -39,16 +39,17 @@ import java.util.Map;
  */
 public class CounterTopology {
 
-    public static class CountReducer implements ReducerAggregator<Long>{
+    public static class CountReducer implements ReducerAggregator<CounterState>{
         @Override
-        public Long init() {
-            return 0L;
+        public CounterState init() {
+            return new CounterState();
         }
         @Override
-        public Long reduce(Long curr, TridentTuple tuple) {
+        public CounterState reduce(CounterState curr, TridentTuple tuple) {
             if(curr == null)
-                curr = 0L;
-            return curr + 1;
+                curr = new CounterState();
+            curr.increment();
+            return curr;
         }
     }
 
@@ -86,18 +87,18 @@ public class CounterTopology {
                 .newStream("spout", asksSpout);
 
         TridentState state = counts.shuffle()
-                .persistentAggregate(new MemoryMapState.Factory(), new CountReducer(), new Fields("count"))
+                .persistentAggregate(new CounterState.CounterStateFactory(), new CountReducer(), new Fields("count"))
                 .parallelismHint(8);
 
         topology
                 .newDRPCStream("Counter")
                 .each(new Fields("args"), new PrinterBolt())
                 .shuffle()
-                .stateQuery(state, new BaseQueryFunction <State, Object>(){
+                .stateQuery(state, new BaseQueryFunction <CounterState, Object>(){
                     @Override
-                    public List<Object> batchRetrieve(State state, List<TridentTuple> args) {
+                    public List<Object> batchRetrieve(CounterState state, List<TridentTuple> args) {
                         List<Object> returnList = new ArrayList<Object>();
-                        returnList.add(state);
+                        returnList.add(state.getCount());
                         return returnList;
                     }
 
