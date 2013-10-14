@@ -13,8 +13,14 @@ import java.util.concurrent.ConcurrentMap;
  * Time: 11:53 PM
  */
 public class BidsState implements State {
-    public BidsState(long statesize) {
-        bids = new ConcurrentHashMap<Long, List<Trade>>();
+    public BidsState(final long statesize) {
+        bids = new LinkedHashMap<Long, List<Trade>>((int) statesize + 1, .75F, true){
+            // This method is called just after a new entry has been added
+            public boolean removeEldestEntry(Map.Entry eldest) {
+                return size() > statesize;
+            }
+        };
+        bids = Collections.synchronizedMap(bids);
         this.stateSize = statesize;
     }
 
@@ -38,7 +44,7 @@ public class BidsState implements State {
     }
 
     public synchronized void removeTrade(long broker, Trade trade) {
-        totalTrade++;
+        totalTrade--;
         // If broker isn't registered, ignore this trade
         if (!bids.containsKey(broker))
             return;

@@ -47,33 +47,6 @@ public class CounterDrpcTopology {
         public void cleanup() {}
     }
 
-    public static class CountAggregator implements Aggregator<Double> {
-        long count;
-        @Override
-        public Double init(Object batchId, TridentCollector collector) {
-            return 0D;
-        }
-
-        @Override
-        public void aggregate(Double val, TridentTuple tuple, TridentCollector collector) {
-                count += 1;
-                val = 1.0 * count;
-                if (val % 5000 == 0)
-                    collector.emit(new Values(count));
-        }
-
-        @Override
-        public void complete(Double val, TridentCollector collector) {
-            collector.emit(new Values(val));
-        }
-
-        @Override
-        public void prepare(Map conf, TridentOperationContext context) {}
-
-        @Override
-        public void cleanup() {}
-    }
-
     public static StormTopology buildTopology(String fileName) {
         TridentTopology topology = new TridentTopology();
         final ITridentSpout asksSpout = new RichSpoutBatchExecutor(new FileStreamingSpout(fileName));
@@ -121,7 +94,7 @@ public class CounterDrpcTopology {
 
         DRPCClient client = new DRPCClient("localhost", 3772);
         for (int i = 0; i < 5; i++) {
-            Thread.sleep(60000);
+            Thread.sleep(30000);
             System.out.println("Result for AXF query is -> " + client.execute("Counter", "find-count"));
         }
         client.close();

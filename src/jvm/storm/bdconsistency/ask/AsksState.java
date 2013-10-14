@@ -4,7 +4,6 @@ import storm.trident.state.State;
 import bdconsistency.trade.Trade;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 /**
  * User: lbhat@damsl
@@ -12,8 +11,14 @@ import java.util.concurrent.ConcurrentMap;
  * Time: 11:53 PM
  */
 public class AsksState implements State {
-    public AsksState(long statesize) {
-        asks = new ConcurrentHashMap<Long, List<Trade>>();
+    public AsksState(final long statesize) {
+        asks = new LinkedHashMap<Long, List<Trade>>((int) statesize + 1, .75F, true){
+            // This method is called just after a new entry has been added
+            public boolean removeEldestEntry(Map.Entry eldest) {
+                return size() > statesize;
+            }
+        };
+        asks = Collections.synchronizedMap(asks);
         this.stateSize = statesize;
     }
 
@@ -33,7 +38,7 @@ public class AsksState implements State {
     }
 
     public synchronized void removeTrade(long broker, Trade trade) {
-        totalTrade++;
+        totalTrade--;
         // If broker isn't registered, ignore this trade
         if(!asks.containsKey(broker))
             return;
