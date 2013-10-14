@@ -4,17 +4,14 @@
     <list default="true" id="3ce62a69-14b0-48fd-b6e9-6b6be8644430" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../BDConsistency" afterPath="$PROJECT_DIR$/../BDConsistency" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" afterPath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/Counter.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/Counter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/DCounter.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/DCounter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/OCounter.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/OCounter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/QCounter.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/QCounter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java" />
     </list>
     <ignored path="storm.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="$PROJECT_DIR$/../../compgenomics/src/asgmt2/compgen-answers.txt" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1380574467967" ignored="false" />
     <file path="/compgen-answers.txt" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1380574467967" ignored="false" />
     <file path="/SingleJoinExample.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1380558741906" ignored="false" />
-    <file path="/FinanceTopology.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381793380187" ignored="false" />
+    <file path="/FinanceTopology.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381794996385" ignored="false" />
     <file path="/AskSpout.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381201067384" ignored="false" />
     <file path="/TransactionMessage.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1380882421063" ignored="false" />
     <file path="/fragment.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381770996579" ignored="false" />
@@ -123,7 +120,7 @@
       <file leaf-file-name="FinanceTopology.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="121" column="132" selection-start="5189" selection-end="5195" vertical-scroll-proportion="0.26522595">
+            <state line="118" column="29" selection-start="4905" selection-end="4905" vertical-scroll-proportion="0.16502947">
               <folding>
                 <element signature="e#4306#4314#0" expanded="true" />
               </folding>
@@ -245,7 +242,6 @@
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/TCounter.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/AxFinderFilter.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/CounterDrpcTopology.java" />
-        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bid/BidsUpdater.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ask/AsksUpdater.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ask/AsksState.java" />
@@ -254,6 +250,7 @@
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/DCounter.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/OCounter.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/QCounter.java" />
+        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java" />
       </list>
     </option>
   </component>
@@ -793,7 +790,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="121" column="132" selection-start="5189" selection-end="5195" vertical-scroll-proportion="0.26522595">
+        <state line="118" column="29" selection-start="4905" selection-end="4905" vertical-scroll-proportion="0.16502947">
           <folding>
             <element signature="e#4306#4314#0" expanded="true" />
           </folding>
