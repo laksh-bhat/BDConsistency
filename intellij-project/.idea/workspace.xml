@@ -2,17 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3ce62a69-14b0-48fd-b6e9-6b6be8644430" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/MemoryQuery.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ObjectSizeCalculator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../BDConsistency" afterPath="$PROJECT_DIR$/../BDConsistency" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" afterPath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/AsksBidsJoin.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/AsksBidsJoin.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ask/AsksUpdater.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ask/AsksUpdater.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/AxFinder.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/AxFinder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bid/BidsState.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bid/BidsState.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bid/BidsUpdater.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bid/BidsUpdater.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="storm.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -129,19 +121,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AsksUpdater.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="AsksUpdater.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ask/AsksUpdater.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="49" selection-start="744" selection-end="744" vertical-scroll-proportion="0.48850575">
+            <state line="21" column="49" selection-start="744" selection-end="744" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AxFinder.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="AxFinder.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/AxFinder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="85" column="76" selection-start="3758" selection-end="3758" vertical-scroll-proportion="0.0">
+            <state line="66" column="58" selection-start="2995" selection-end="2995" vertical-scroll-proportion="0.29862475">
               <folding />
             </state>
           </provider>
@@ -225,8 +217,8 @@
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ObjectSizeCalculator.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bid/BidsState.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/MemoryQuery.java" />
-        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/AxFinder.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ask/AsksUpdater.java" />
+        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/AxFinder.java" />
       </list>
     </option>
   </component>
@@ -581,7 +573,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1" y="1" width="1364" height="726" extended-state="1" />
+    <frame x="1" y="1" width="1364" height="726" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -790,16 +782,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/AxFinder.java">
+    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ask/AsksUpdater.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="76" selection-start="3758" selection-end="3758" vertical-scroll-proportion="0.0">
+        <state line="21" column="49" selection-start="744" selection-end="744" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ask/AsksUpdater.java">
+    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/AxFinder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="49" selection-start="744" selection-end="744" vertical-scroll-proportion="0.48850575">
+        <state line="66" column="58" selection-start="2995" selection-end="2995" vertical-scroll-proportion="0.29862475">
           <folding />
         </state>
       </provider>

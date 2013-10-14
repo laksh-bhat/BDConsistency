@@ -57,14 +57,14 @@ public class AxFinder {
                 .stateQuery(bids, new BrokerEqualityQuery.SelectStarFromBids(), new Fields("bids"))
                 .parallelismHint(8)
                 .shuffle()
-                .stateQuery(asks, new MemoryQuery.AsksMemoryQuery(), new Fields("askssize"))
+                .stateQuery(asks, new MemoryQuery.AsksMemoryQuery(), new Fields("asksize"))
                 .shuffle()
-                .stateQuery(bids, new MemoryQuery.BidsMemoryQuery(), new Fields("bidssize"))
+                .stateQuery(bids, new MemoryQuery.BidsMemoryQuery(), new Fields("bidsize"))
                 .shuffle()
                 .each(new Fields("asks", "bids"), new AsksBidsJoin(), new Fields("AXF"))
                 .shuffle()
                 .parallelismHint(8)
-                .project(new Fields("AXF", "asksize", "bidssize"));
+                .project(new Fields("AXF", "asksize", "bidsize"));
 
         return topology.build();
     }
