@@ -4,7 +4,7 @@
     <list default="true" id="3ce62a69-14b0-48fd-b6e9-6b6be8644430" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../BDConsistency" afterPath="$PROJECT_DIR$/../BDConsistency" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" afterPath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/CounterTopology.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/CounterTopology.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/CounterState.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/CounterState.java" />
     </list>
     <ignored path="storm.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -126,7 +126,7 @@
       <file leaf-file-name="CounterTopology.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/CounterTopology.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="133" column="26" selection-start="4976" selection-end="4976" vertical-scroll-proportion="0.6994106">
+            <state line="133" column="26" selection-start="4976" selection-end="4976" vertical-scroll-proportion="3.3713162">
               <folding>
                 <element signature="e#3451#3459#0" expanded="true" />
               </folding>
@@ -158,7 +158,7 @@
       <file leaf-file-name="CounterState.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/CounterState.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="24" selection-start="615" selection-end="615" vertical-scroll-proportion="0.0">
+            <state line="32" column="34" selection-start="662" selection-end="662" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -227,8 +227,8 @@
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ask/AsksUpdater.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/AxFinder.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/Counter.java" />
-        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/CounterState.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/CounterTopology.java" />
+        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/CounterState.java" />
       </list>
     </option>
   </component>
@@ -721,15 +721,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/CounterState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="24" selection-start="615" selection-end="615" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/../lib/storm-0.8.3-wip3.jar!/src/jvm/storm/trident/Stream.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="285" column="24" selection-start="11894" selection-end="11894" vertical-scroll-proportion="0.0">
@@ -737,9 +728,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/CounterState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="34" selection-start="662" selection-end="662" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/CounterTopology.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="133" column="26" selection-start="4976" selection-end="4976" vertical-scroll-proportion="0.6994106">
+        <state line="133" column="26" selection-start="4976" selection-end="4976" vertical-scroll-proportion="3.3713162">
           <folding>
             <element signature="e#3451#3459#0" expanded="true" />
           </folding>
