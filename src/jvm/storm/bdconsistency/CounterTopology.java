@@ -24,6 +24,7 @@ import storm.trident.spout.ITridentSpout;
 import storm.trident.spout.RichSpoutBatchExecutor;
 import storm.trident.state.BaseQueryFunction;
 import storm.trident.state.State;
+import storm.trident.state.StateUpdater;
 import storm.trident.testing.MemoryMapState;
 import storm.trident.tuple.TridentTuple;
 
@@ -39,18 +40,16 @@ import java.util.Map;
  */
 public class CounterTopology {
 
-    public static class CountReducer implements ReducerAggregator<CounterState>{
+    public static class CountReducer implements StateUpdater<CounterState> {
         @Override
-        public CounterState init() {
-            return new CounterState();
+        public void updateState(CounterState state, List<TridentTuple> tuples, TridentCollector collector) {
+            state.increment();
         }
         @Override
-        public CounterState reduce(CounterState curr, TridentTuple tuple) {
-            if(curr == null)
-                curr = new CounterState();
-            curr.increment();
-            return curr;
-        }
+        public void prepare(Map conf, TridentOperationContext context) {}
+
+        @Override
+        public void cleanup() {}
     }
 
     public static class CountAggregator implements Aggregator<Double> {
@@ -87,7 +86,7 @@ public class CounterTopology {
                 .newStream("spout", asksSpout);
 
         TridentState state = counts.shuffle()
-                .persistentAggregate(new CounterState.CounterStateFactory(), new CountReducer(), new Fields("count"))
+                .partitionPersist(new CounterState.CounterStateFactory(), new CountReducer(), new Fields("count"))
                 .parallelismHint(8);
 
         topology

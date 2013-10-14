@@ -30,6 +30,7 @@ public class CounterState implements State {
     }
 
     public void increment(){
+        System.out.println("incrementing " + count);
         count++;
     }
 

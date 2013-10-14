@@ -4,6 +4,7 @@
     <list default="true" id="3ce62a69-14b0-48fd-b6e9-6b6be8644430" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../BDConsistency" afterPath="$PROJECT_DIR$/../BDConsistency" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" afterPath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/CounterState.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/CounterState.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/CounterTopology.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/CounterTopology.java" />
     </list>
     <ignored path="storm.iws" />
@@ -47,13 +48,13 @@
     <file path="/AsksBidsJoin.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381770411815" ignored="false" />
     <file path="/AxFinderFilter.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381363205212" ignored="false" />
     <file path="/VolumeCounter.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381710508145" ignored="false" />
-    <file path="/Counter.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381787064253" ignored="false" />
+    <file path="/Counter.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381787547239" ignored="false" />
     <file path="/Filter.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381736553550" ignored="false" />
     <file path="/AxFinder.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381773344654" ignored="false" />
     <file path="/MemoryQuery.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381773310808" ignored="false" />
     <file path="/MemoryProfiler.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381771748071" ignored="false" />
-    <file path="/CounterState.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381786987377" ignored="false" />
-    <file path="/CounterTopology.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381784337500" ignored="false" />
+    <file path="/CounterState.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381787290944" ignored="false" />
+    <file path="/CounterTopology.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381787269253" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,27 +127,18 @@
       <file leaf-file-name="CounterTopology.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/CounterTopology.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="94" column="74" selection-start="3135" selection-end="3135" vertical-scroll-proportion="0.33202356">
+            <state line="51" column="32" selection-start="1724" selection-end="1724" vertical-scroll-proportion="-2.0392928">
               <folding>
-                <element signature="e#3440#3448#0" expanded="true" />
+                <element signature="e#3451#3459#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MemoryMapState.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/../lib/storm-0.8.3-wip3.jar!/src/jvm/storm/trident/testing/MemoryMapState.java">
+      <file leaf-file-name="Stream.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/../lib/storm-0.8.3-wip3.jar!/src/jvm/storm/trident/Stream.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="76" column="17" selection-start="2207" selection-end="2207" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="QueryFunction.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/../lib/storm-0.8.3-wip3.jar!/src/jvm/storm/trident/state/QueryFunction.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="12" selection-start="277" selection-end="277" vertical-scroll-proportion="0.0">
+            <state line="285" column="24" selection-start="11894" selection-end="11894" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -167,19 +159,10 @@
       <file leaf-file-name="CounterState.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/CounterState.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="42" selection-start="274" selection-end="274" vertical-scroll-proportion="0.0">
+            <state line="29" column="24" selection-start="615" selection-end="615" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="State.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/../lib/storm-0.8.3-wip3.jar!/src/jvm/storm/trident/state/State.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="17" selection-start="869" selection-end="869" vertical-scroll-proportion="0.0">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -639,16 +622,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/BrokerEqualityQuery.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="54" selection-start="1727" selection-end="1727" vertical-scroll-proportion="1.0747126">
-          <folding>
-            <element signature="e#935#959#0" expanded="true" />
-            <element signature="e#1618#1642#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bid/BidsUpdater.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="21" column="49" selection-start="744" selection-end="744" vertical-scroll-proportion="0.0">
@@ -751,18 +724,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/CounterState.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="42" selection-start="274" selection-end="274" vertical-scroll-proportion="0.0">
+        <state line="29" column="24" selection-start="615" selection-end="615" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="jar://$PROJECT_DIR$/../lib/storm-0.8.3-wip3.jar!/src/jvm/storm/trident/Stream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="285" column="24" selection-start="11894" selection-end="11894" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/CounterTopology.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="94" column="74" selection-start="3135" selection-end="3135" vertical-scroll-proportion="0.33202356">
+        <state line="51" column="32" selection-start="1724" selection-end="1724" vertical-scroll-proportion="-2.0392928">
           <folding>
-            <element signature="e#3440#3448#0" expanded="true" />
+            <element signature="e#3451#3459#0" expanded="true" />
           </folding>
         </state>
       </provider>
