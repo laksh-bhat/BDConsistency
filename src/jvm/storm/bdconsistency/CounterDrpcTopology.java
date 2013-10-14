@@ -32,7 +32,7 @@ import java.util.Map;
  * Date: 10/11/13
  * Time: 1:47 PM
  */
-public class CounterTopology {
+public class CounterDrpcTopology {
 
     public static class CountUpdater implements StateUpdater<CounterState> {
         @Override
@@ -115,12 +115,12 @@ public class CounterTopology {
         conf.put(Config.DRPC_SERVERS, Lists.newArrayList("damsel", "qp4", "qp5", "qp6"));
         conf.setMaxSpoutPending(2);
         conf.put(Config.STORM_CLUSTER_MODE, "distributed");
-        StormSubmitter.submitTopology("CounterTopology", conf, buildTopology(args[0]));
+        StormSubmitter.submitTopology("CounterDrpcTopology", conf, buildTopology(args[0]));
         // wait for 2 minutes
 
 
         DRPCClient client = new DRPCClient("localhost", 3772);
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 5; i++) {
             Thread.sleep(60000);
             System.out.println("Result for AXF query is -> " + client.execute("Counter", "find-count"));
         }

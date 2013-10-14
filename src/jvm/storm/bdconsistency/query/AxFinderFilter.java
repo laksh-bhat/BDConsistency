@@ -24,15 +24,10 @@ public class AxFinderFilter {
         }
     }
 
-    public static class BrokerTradeFilter  extends BaseFilter{
-        public BrokerTradeFilter(long brokerId){
-            this.brokerId = brokerId;
-        }
-
+    public static class DummyFilter extends BaseFilter{
         @Override
         public boolean isKeep(TridentTuple tuple) {
-            return tuple.getLong(0) == brokerId;
+            return true;
         }
-        private final long brokerId;
     }
 }
