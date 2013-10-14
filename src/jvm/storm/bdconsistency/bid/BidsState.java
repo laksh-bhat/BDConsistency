@@ -24,6 +24,8 @@ public class BidsState implements State {
     }
 
     public void addTrade(long broker, Trade trade) {
+        totalTrade++;
+
         if(!getBids().containsKey(broker)){
             // register this broker
             List<Trade> brokerTransactions = new ArrayList<Trade>();
@@ -34,6 +36,7 @@ public class BidsState implements State {
     }
 
     public void removeTrade(long broker, Trade trade) {
+        totalTrade++;
         // If broker isn't registered, ignore this trade
         if(!getBids().containsKey(broker))
             return;
@@ -52,6 +55,12 @@ public class BidsState implements State {
     public Map<Long, List<Trade>> getBids() {
         return bids;
     }
+
+    public long getTotalTrade() {
+        return totalTrade;
+    }
+
+    private long totalTrade;
 
     // Basically a multi-map
     private Map<Long, List<Trade>> bids;

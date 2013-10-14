@@ -8,6 +8,7 @@ import storm.trident.operation.TridentCollector;
 import storm.trident.state.BaseQueryFunction;
 import storm.trident.tuple.TridentTuple;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +24,7 @@ public class BrokerEqualityQuery {
 
     public static class SelectStarFromAsks extends BaseQueryFunction<AsksState, HashMap<Long, List<Trade>>> {
         public List<HashMap<Long, List<Trade>>> batchRetrieve(AsksState asksState, List<TridentTuple> inputs) {
-            System.out.println("-- SelectStarFromAsks -- ");
+            System.out.println(MessageFormat.format("-- SelectStarFromAsks -- {0}", asksState.getTotalTrade()));
             List<HashMap<Long, List<Trade>>> returnList = new ArrayList<HashMap<Long, List<Trade>>>(1);
             returnList.add((HashMap<Long, List<Trade>>)asksState.getAsks());
             return returnList;
@@ -40,7 +41,7 @@ public class BrokerEqualityQuery {
 
     public static class SelectStarFromBids extends BaseQueryFunction<BidsState, HashMap<Long, List<Trade>>> {
         public List<HashMap<Long, List<Trade>>> batchRetrieve(BidsState bidsState, List<TridentTuple> inputs) {
-            System.out.println("-- SelectStarFromBids -- ");
+            System.out.println("-- SelectStarFromBids -- " + bidsState.getTotalTrade());
 
             List<HashMap<Long, List<Trade>>> returnList = new ArrayList<HashMap<Long, List<Trade>>>(1);
             returnList.add((HashMap<Long, List<Trade>>)bidsState.getBids());
