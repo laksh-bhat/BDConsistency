@@ -115,6 +115,7 @@ public class CounterTopology {
 
     public static void main(String[] args) throws AlreadyAliveException, InvalidTopologyException, InterruptedException, TException, DRPCExecutionException {
         Config conf = new Config();
+        conf.registerSerialization(storm.trident.testing.MemoryMapState.class);
         conf.setFallBackOnJavaSerialization(true);
         conf.setNumWorkers(20);
         conf.put(Config.DRPC_SERVERS, Lists.newArrayList("damsel", "qp4", "qp5", "qp6"));
@@ -122,7 +123,7 @@ public class CounterTopology {
         conf.put(Config.STORM_CLUSTER_MODE, "distributed");
         StormSubmitter.submitTopology("CounterTopology", conf, buildTopology(args[0]));
         // wait for 2 minutes
-        Thread.sleep(120000);
+        Thread.sleep(60000);
 
         DRPCClient client = new DRPCClient("localhost", 3772);
         System.out.println("Result for AXF query is -> " + client.execute("Counter", "find-count"));
