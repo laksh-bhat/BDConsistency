@@ -130,7 +130,10 @@ public class CounterTopology {
         Thread.sleep(60000);
 
         DRPCClient client = new DRPCClient("localhost", 3772);
-        System.out.println("Result for AXF query is -> " + client.execute("Counter", "find-count"));
+        for (int i = 0; i < 20; i++) {
+            Thread.sleep(2000);
+            System.out.println("Result for AXF query is -> " + client.execute("Counter", "find-count"));
+        }
         client.close();
     }
 }
