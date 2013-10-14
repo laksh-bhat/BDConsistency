@@ -4,12 +4,10 @@
     <list default="true" id="3ce62a69-14b0-48fd-b6e9-6b6be8644430" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../BDConsistency" afterPath="$PROJECT_DIR$/../BDConsistency" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" afterPath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ask/AsksState.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ask/AsksState.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bid/BidsState.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bid/BidsState.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/CounterDrpcTopology.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/CounterDrpcTopology.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../resources/numbers.txt" afterPath="$PROJECT_DIR$/../resources/numbers.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/Counter.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/Counter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/DCounter.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/DCounter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/OCounter.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/OCounter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/QCounter.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/QCounter.java" />
     </list>
     <ignored path="storm.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -122,10 +120,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="FinanceTopology.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="FinanceTopology.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="116" column="73" selection-start="4839" selection-end="4839" vertical-scroll-proportion="0.0">
+            <state line="121" column="132" selection-start="5189" selection-end="5195" vertical-scroll-proportion="0.26522595">
               <folding>
                 <element signature="e#4306#4314#0" expanded="true" />
               </folding>
@@ -136,19 +134,8 @@
       <file leaf-file-name="Counter.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/Counter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="86" column="51" selection-start="3060" selection-end="3060" vertical-scroll-proportion="0.0">
+            <state line="48" column="26" selection-start="1546" selection-end="1546" vertical-scroll-proportion="0.0">
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CounterDrpcTopology.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/CounterDrpcTopology.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="63" column="0" selection-start="2210" selection-end="2915" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#2487#2495#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -158,6 +145,18 @@
           <provider selected="true" editor-type-id="text-editor">
             <state line="22" column="0" selection-start="745" selection-end="745" vertical-scroll-proportion="0.0">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AsksBidsJoin.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/AsksBidsJoin.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="18" column="13" selection-start="418" selection-end="418" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1368#1374#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -174,10 +173,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BidsState.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="BidsState.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bid/BidsState.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="52" selection-start="702" selection-end="702" vertical-scroll-proportion="0.35823753">
+            <state line="25" column="49" selection-start="745" selection-end="745" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="e#1062#1069#0" expanded="true" />
               </folding>
@@ -188,7 +187,25 @@
       <file leaf-file-name="DCounter.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/DCounter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="84" column="37" selection-start="2999" selection-end="3013" vertical-scroll-proportion="0.0">
+            <state line="49" column="26" selection-start="1591" selection-end="1591" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OCounter.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/OCounter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="54" column="91" selection-start="1749" selection-end="1749" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="QCounter.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/QCounter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="61" column="69" selection-start="1900" selection-end="1900" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -199,26 +216,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state line="22" column="0" selection-start="745" selection-end="745" vertical-scroll-proportion="0.0">
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AxFinderFilter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/AxFinderFilter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="29" selection-start="898" selection-end="898" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CounterState.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/CounterState.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="69" selection-start="436" selection-end="436" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -246,10 +243,6 @@
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/CounterTopology.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/DoubleCounter.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/TCounter.java" />
-        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/OCounter.java" />
-        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/QCounter.java" />
-        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/DCounter.java" />
-        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/Counter.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/AxFinderFilter.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/CounterDrpcTopology.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java" />
@@ -257,6 +250,10 @@
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ask/AsksUpdater.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ask/AsksState.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bid/BidsState.java" />
+        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/Counter.java" />
+        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/DCounter.java" />
+        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/OCounter.java" />
+        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/QCounter.java" />
       </list>
     </option>
   </component>
@@ -675,13 +672,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/../lib/storm-0.8.3-wip3.jar!/src/jvm/storm/trident/testing/MemoryMapState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="17" selection-start="2207" selection-end="2207" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/../lib/storm-0.8.3-wip3.jar!/src/jvm/storm/trident/state/State.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="18" column="17" selection-start="869" selection-end="869" vertical-scroll-proportion="0.0">
@@ -705,20 +695,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/QCounter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="89" column="31" selection-start="3254" selection-end="3254" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/OCounter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="73" selection-start="2365" selection-end="2365" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/AxFinderFilter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="32" column="29" selection-start="898" selection-end="898" vertical-scroll-proportion="0.0">
@@ -735,34 +711,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/Counter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="86" column="51" selection-start="3060" selection-end="3060" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/DCounter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="37" selection-start="2999" selection-end="3013" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/CounterDrpcTopology.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="63" column="0" selection-start="2210" selection-end="2915" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="e#2487#2495#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="116" column="73" selection-start="4839" selection-end="4839" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#4306#4314#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -793,9 +746,56 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bid/BidsState.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="52" selection-start="702" selection-end="702" vertical-scroll-proportion="0.35823753">
+        <state line="25" column="49" selection-start="745" selection-end="745" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="e#1062#1069#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/AsksBidsJoin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="13" selection-start="418" selection-end="418" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1368#1374#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/Counter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="48" column="26" selection-start="1546" selection-end="1546" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/DCounter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="26" selection-start="1591" selection-end="1591" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/QCounter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="61" column="69" selection-start="1900" selection-end="1900" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/OCounter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="91" selection-start="1749" selection-end="1749" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="121" column="132" selection-start="5189" selection-end="5195" vertical-scroll-proportion="0.26522595">
+          <folding>
+            <element signature="e#4306#4314#0" expanded="true" />
           </folding>
         </state>
       </provider>

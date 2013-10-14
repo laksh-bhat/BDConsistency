@@ -47,7 +47,7 @@ public class DCounter {
         public void aggregate(Double val, TridentTuple tuple, TridentCollector collector) {
             count += 1;
             val = 1.0 * count;
-            if (val % 10000 == 0)
+            if (val % 1000 == 0)
                 collector.emit(new Values(count));
         }
 
