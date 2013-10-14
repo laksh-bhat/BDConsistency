@@ -50,7 +50,7 @@ public class Counter {
 
         @Override
         public void complete(Double val, TridentCollector collector) {
-            collector.emit(new Values(val));
+            //collector.emit(new Values(val));
         }
 
         @Override

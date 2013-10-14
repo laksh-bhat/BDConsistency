@@ -21,4 +21,22 @@ public class PrinterBolt extends BaseFilter {
         System.out.println(tuple);
         return true;
     }
+
+    public static class AsksPrinterBolt extends BaseFilter{
+
+        @Override
+        public boolean isKeep(TridentTuple tuple) {
+            System.out.print(MessageFormat.format("ASKS -- {0}", tuple));
+            return true;
+        }
+    }
+
+    public static class BidsPrinterBolt extends BaseFilter{
+
+        @Override
+        public boolean isKeep(TridentTuple tuple) {
+            System.out.print(MessageFormat.format("BIDS -- {0}", tuple));
+            return true;
+        }
+    }
 }

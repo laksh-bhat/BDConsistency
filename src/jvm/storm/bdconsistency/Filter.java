@@ -30,12 +30,12 @@ public class Filter {
 
     public static class CountAggregator implements Aggregator<CountAggregator.State> {
         public static class State{
-            static long count;
-            static long volume;
+            long count;
+            long volume;
         }
         @Override
         public CountAggregator.State init(Object batchId, TridentCollector collector) {
-            return new CountAggregator.State();
+            return new State();
         }
 
         @Override
@@ -46,7 +46,7 @@ public class Filter {
 
         @Override
         public void complete(State val, TridentCollector collector) {
-            collector.emit(new Values(State.count, State.volume));
+            collector.emit(new Values(val.count, val.volume));
         }
 
         @Override
@@ -68,13 +68,13 @@ public class Filter {
                 .each(new Fields("tradeString"), new AxFinderFilter.AsksFilter())
                 .aggregate(new Fields("tradeString"), new CountAggregator(), new Fields("count", "volume"))
                 .project(new Fields("count"))
-                .each(new Fields("count"), new PrinterBolt());
+                .each(new Fields("count"), new PrinterBolt.AsksPrinterBolt());
 
         bidsStream
                 .each(new Fields("tradeString"), new AxFinderFilter.BidsFilter())
                 .aggregate(new Fields("tradeString"), new CountAggregator(), new Fields("count","volume"))
-                .project(new Fields("count"))
-                .each(new Fields("count"), new PrinterBolt());
+                .project(new Fields("count", "volume"))
+                .each(new Fields("count", "volume"), new PrinterBolt.BidsPrinterBolt());
 
         return topology.build();
     }
