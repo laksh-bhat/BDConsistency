@@ -26,7 +26,7 @@ public class PrinterBolt extends BaseFilter {
 
         @Override
         public boolean isKeep(TridentTuple tuple) {
-            System.out.print(MessageFormat.format("ASKS -- {0}", tuple));
+            System.out.println(MessageFormat.format("ASKS -- {0}", tuple));
             return true;
         }
     }
@@ -35,7 +35,7 @@ public class PrinterBolt extends BaseFilter {
 
         @Override
         public boolean isKeep(TridentTuple tuple) {
-            System.out.print(MessageFormat.format("BIDS -- {0}", tuple));
+            System.out.println(MessageFormat.format("BIDS -- {0}", tuple));
             return true;
         }
     }

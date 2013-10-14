@@ -77,18 +77,24 @@ public class AxFinder {
                         //.parallelismHint(5)
                 .project(new Fields("AXF"));
 
-        startFeeding(fileName, asksSpout);
+        startFeeding(fileName, asksSpout, bidsSpout);
 
         return topology.build();
     }
 
-    private static void startFeeding(final String fileName, final FeederBatchSpout asksSpout) {
+    private static void startFeeding(final String fileName, final FeederBatchSpout asksSpout, final FeederBatchSpout bidsSpout) {
         new Thread("AsksFeeder") {
             @Override
             public void run() {
-
+                asksSpout.setWaitToEmit(true);
+                List<String> feed = new ArrayList<String>();
                 for (Scanner sc = new Scanner(fileName); sc.hasNextLine(); ) {
-                    asksSpout.feed(sc.next());
+                    feed.add(sc.nextLine());
+                    if (feed.size() > 1000){
+                        asksSpout.feed(feed);
+                        feed.clear();
+                    }
+
                     if (!sc.hasNextLine())
                         sc = new Scanner(fileName);
                 }
@@ -98,8 +104,15 @@ public class AxFinder {
         new Thread("BidsFeeder") {
             @Override
             public void run() {
+                bidsSpout.setWaitToEmit(true);
+                List<String> feed = new ArrayList<String>();
                 for (Scanner sc = new Scanner(fileName); sc.hasNextLine(); ) {
-                    asksSpout.feed(sc.next());
+                    feed.add(sc.nextLine());
+                    if (feed.size() > 1000){
+                        asksSpout.feed(feed);
+                        feed.clear();
+                    }
+
                     if (!sc.hasNextLine())
                         sc = new Scanner(fileName);
                 }

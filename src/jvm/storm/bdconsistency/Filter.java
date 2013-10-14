@@ -29,7 +29,7 @@ import java.util.Map;
 public class Filter {
 
     public static class CountAggregator implements Aggregator<CountAggregator.State> {
-        public static class State{
+        static class State{
             long count;
             long volume;
         }
