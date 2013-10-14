@@ -27,7 +27,10 @@ public class AxFinderFilter {
     public static class DummyFilter extends BaseFilter{
         @Override
         public boolean isKeep(TridentTuple tuple) {
-            return true;
+            if(tuple.getString(0).length() > 0)
+                return true;
+            else
+                return false;
         }
     }
 }
