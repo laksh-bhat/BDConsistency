@@ -40,6 +40,9 @@ public class Filter {
 
         @Override
         public void aggregate(CountAggregator.State val, TridentTuple tuple, TridentCollector collector) {
+            if(val == null)
+                val = new State();
+
             val.count += 1;
             val.volume = Long.valueOf(tuple.getString(0).split("\\|")[6]);
         }
@@ -67,8 +70,8 @@ public class Filter {
         asksStream
                 .each(new Fields("tradeString"), new AxFinderFilter.AsksFilter())
                 .aggregate(new Fields("tradeString"), new CountAggregator(), new Fields("count", "volume"))
-                .project(new Fields("count"))
-                .each(new Fields("count"), new PrinterBolt.AsksPrinterBolt());
+                .project(new Fields("count", "volume"))
+                .each(new Fields("count", "volume"), new PrinterBolt.AsksPrinterBolt());
 
         bidsStream
                 .each(new Fields("tradeString"), new AxFinderFilter.BidsFilter())

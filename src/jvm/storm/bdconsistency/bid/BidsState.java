@@ -4,6 +4,8 @@ import bdconsistency.trade.Trade;
 import storm.trident.state.State;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * User: lbhat@damsl
@@ -13,7 +15,7 @@ import java.util.*;
 public class BidsState implements State {
     public BidsState() {
         System.out.println("Bids State Constructed");
-        bids = new HashMap<Long, List<Trade>>();
+        bids = new ConcurrentHashMap<Long, List<Trade>>();
     }
 
     public void beginCommit(Long txid) {
@@ -23,36 +25,40 @@ public class BidsState implements State {
 
     }
 
-    public void addTrade(long broker, Trade trade) {
+    public synchronized void addTrade(long broker, Trade trade) {
         totalTrade++;
 
-        if(!getBids().containsKey(broker)){
+        if(!bids.containsKey(broker)){
             // register this broker
             List<Trade> brokerTransactions = new ArrayList<Trade>();
-            getBids().put(broker, brokerTransactions);
+            bids.put(broker, brokerTransactions);
         }
 
-        getBids().get(broker).add(trade);
+        bids.get(broker).add(trade);
     }
 
-    public void removeTrade(long broker, Trade trade) {
+    public synchronized void removeTrade(long broker, Trade trade) {
         totalTrade++;
         // If broker isn't registered, ignore this trade
-        if(!getBids().containsKey(broker))
+        if(!bids.containsKey(broker))
             return;
 
-        List<Trade> brokerTransactions = getBids().get(broker);
+        List<Trade> brokerTransactions = bids.get(broker);
         for (int i = 0; i < brokerTransactions.size(); i++){
             if(brokerTransactions.get(i).getOrderId() == trade.getOrderId()){
                 brokerTransactions.remove(i);
                 break;
             }
         }
-        if (getBids().get(broker).size() == 0)
-            getBids().remove(broker);
+        if (bids.get(broker).size() == 0)
+            bids.remove(broker);
     }
 
-    public Map<Long, List<Trade>> getBids() {
+    public synchronized void clearTrades(){
+        this.bids.clear();
+    }
+
+    public synchronized Map<Long, List<Trade>> getBids() {
         return bids;
     }
 
@@ -63,5 +69,5 @@ public class BidsState implements State {
     private long totalTrade;
 
     // Basically a multi-map
-    private Map<Long, List<Trade>> bids;
+    private ConcurrentMap<Long, List<Trade>> bids;
 }

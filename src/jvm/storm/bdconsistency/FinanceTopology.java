@@ -69,20 +69,6 @@ public class FinanceTopology {
 
     public static void main(String[] args) throws Exception {
         Config conf = new Config();
-        //conf.setDebug(true);
-
-/*        LocalDRPC drpc = new LocalDRPC();
-        LocalCluster cluster = new LocalCluster();
-        cluster.submitTopology("AXFinder", conf, buildTopology(drpc, args[0]));
-        Thread.sleep(2000);
-
-        System.out.println("DRPC RESULTS ==> : " + drpc.execute("AXF", "axfinder"));
-
-        cluster.shutdown();
-        drpc.shutdown();*/
-
-
-        //conf.setMaxSpoutPending(2);
         conf.put(Config.DRPC_SERVERS, Lists.newArrayList("localhost"));
         conf.setMaxSpoutPending(2);
         conf.put(Config.STORM_CLUSTER_MODE, "distributed");
