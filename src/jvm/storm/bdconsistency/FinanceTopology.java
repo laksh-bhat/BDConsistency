@@ -1,7 +1,6 @@
 package bdconsistency;
 
 import backtype.storm.Config;
-import backtype.storm.LocalCluster;
 import backtype.storm.LocalDRPC;
 import backtype.storm.StormSubmitter;
 import backtype.storm.generated.StormTopology;
@@ -23,7 +22,6 @@ import storm.trident.spout.ITridentSpout;
 import storm.trident.spout.RichSpoutBatchExecutor;
 import storm.trident.state.BaseQueryFunction;
 import storm.trident.state.StateUpdater;
-import storm.trident.testing.MemoryMapState;
 import storm.trident.tuple.TridentTuple;
 
 import java.text.MessageFormat;
@@ -83,10 +81,10 @@ public class FinanceTopology {
                 .newDRPCStream("AXF")
                 .each(new Fields("args"), new PrinterBolt())
                 .shuffle()
-                .stateQuery(asks, new BrokerEqualityQuery.SelectStarFromAsks(), new Fields("asks"))
+                .stateQuery(asks, new SelectQuery.SelectStarFromAsks(), new Fields("asks"))
                 .parallelismHint(5)
                 .shuffle()
-                .stateQuery(bids, new BrokerEqualityQuery.SelectStarFromBids(), new Fields("bids"))
+                .stateQuery(bids, new SelectQuery.SelectStarFromBids(), new Fields("bids"))
                 .parallelismHint(5)
                 .each(new Fields("asks", "bids"), new PrinterBolt())
                 .shuffle()

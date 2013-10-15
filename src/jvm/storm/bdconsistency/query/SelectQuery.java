@@ -9,10 +9,7 @@ import storm.trident.state.BaseQueryFunction;
 import storm.trident.tuple.TridentTuple;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * User: lbhat@damsl
@@ -20,13 +17,13 @@ import java.util.Map;
  * Time: 3:57 AM
  */
 
-public class BrokerEqualityQuery {
+public class SelectQuery {
 
     public static class SelectStarFromAsks extends BaseQueryFunction<AsksState, Map<Long, List<Trade>>> {
         public List<Map<Long, List<Trade>>> batchRetrieve(AsksState asksState, List<TridentTuple> inputs) {
             System.out.println(MessageFormat.format("-- SelectStarFromAsks -- {0}", asksState.getTotalTrade()));
             List<Map<Long, List<Trade>>> returnList = new ArrayList<Map<Long, List<Trade>>>(1);
-            returnList.add(asksState.getAsks());
+            returnList.add((Map<Long, List<Trade>>)((LinkedHashMap)asksState.getAsks()).clone());
             return returnList;
         }
 
@@ -41,7 +38,7 @@ public class BrokerEqualityQuery {
             System.out.println("-- SelectStarFromBids -- " + bidsState.getTotalTrade());
 
             List<Map<Long, List<Trade>>> returnList = new ArrayList<Map<Long, List<Trade>>>(1);
-            returnList.add(bidsState.getBids());
+            returnList.add((Map<Long, List<Trade>>)((LinkedHashMap)bidsState.getBids()).clone());
 
             return returnList;
         }
