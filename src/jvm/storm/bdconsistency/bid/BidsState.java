@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class BidsState implements State, Serializable {
     public BidsState(final long statesize) {
-        bids = new LinkedHashMap<Long, List<Trade>>((int) statesize + 1, .75F, true){
+        bids = new LinkedHashMap<Long, List<Trade>>((int) statesize + 1, .75F, false){
             // This method is called just after a new entry has been added
             public boolean removeEldestEntry(Map.Entry eldest) {
                 return size() > statesize;
