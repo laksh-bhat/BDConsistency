@@ -4,7 +4,6 @@
     <list default="true" id="3ce62a69-14b0-48fd-b6e9-6b6be8644430" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../BDConsistency" afterPath="$PROJECT_DIR$/../BDConsistency" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" afterPath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ask/AsksState.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ask/AsksState.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bid/BidsState.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bid/BidsState.java" />
     </list>
     <ignored path="storm.iws" />
@@ -172,21 +171,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BidsState.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="BidsState.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bid/BidsState.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="68" column="19" selection-start="1962" selection-end="1962" vertical-scroll-proportion="0.0">
+            <state line="22" column="10" selection-start="695" selection-end="695" vertical-scroll-proportion="0.25095785">
               <folding>
-                <element signature="e#1105#1112#0" expanded="true" />
+                <element signature="e#1055#1062#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SelectQuery.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="SelectQuery.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/SelectQuery.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="100" selection-start="1706" selection-end="1706" vertical-scroll-proportion="0.71647507">
+            <state line="40" column="100" selection-start="1706" selection-end="1706" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="e#848#872#0" expanded="true" />
                 <element signature="e#1580#1604#0" expanded="true" />
@@ -254,8 +253,8 @@
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/BrokerEqualityQuery.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ask/AsksState.java" />
-        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bid/BidsState.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/SelectQuery.java" />
+        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bid/BidsState.java" />
       </list>
     </option>
   </component>
@@ -786,21 +785,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bid/BidsState.java">
+    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/SelectQuery.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="68" column="19" selection-start="1962" selection-end="1962" vertical-scroll-proportion="0.0">
+        <state line="40" column="100" selection-start="1706" selection-end="1706" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#1105#1112#0" expanded="true" />
+            <element signature="e#848#872#0" expanded="true" />
+            <element signature="e#1580#1604#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/SelectQuery.java">
+    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bid/BidsState.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="100" selection-start="1706" selection-end="1706" vertical-scroll-proportion="0.71647507">
+        <state line="22" column="10" selection-start="695" selection-end="695" vertical-scroll-proportion="0.25095785">
           <folding>
-            <element signature="e#848#872#0" expanded="true" />
-            <element signature="e#1580#1604#0" expanded="true" />
+            <element signature="e#1055#1062#0" expanded="true" />
           </folding>
         </state>
       </provider>

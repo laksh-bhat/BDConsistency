@@ -21,7 +21,6 @@ public class BidsState implements State, Serializable {
                 return size() > statesize;
             }
         };
-        bids = Collections.synchronizedMap(bids);
         this.stateSize = statesize;
     }
 
