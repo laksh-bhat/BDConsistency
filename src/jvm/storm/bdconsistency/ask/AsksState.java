@@ -16,8 +16,8 @@ public class AsksState implements State, Serializable {
     public AsksState(final long statesize) {
         asks = new LinkedHashMap<Long, List<Trade>>((int) statesize + 1, .75F, false){
             // This method is called just after a new entry has been added
-            public boolean removeEldestEntry(Map.Entry eldest) {
-                return size() > statesize;
+            public boolean removeEldestEntry(Map.Entry<Long, List<Trade>> eldest) {
+                return eldest.getValue().size() > 100;
             }
         };
         this.stateSize = statesize;

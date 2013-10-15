@@ -26,11 +26,11 @@ public class AsksBidsJoin extends BaseFunction {
         for (long broker : keys) {
             long asksTotalVolume = 0, asksPrice = 0, bidsTotalVolume = 0, bidsPrice = 0;
 
-            for (Trade ask : Collections.synchronizedList(asksTable.get(broker))) {
+            for (Trade ask : asksTable.get(broker)) {
                 asksTotalVolume += ask.getVolume();
                 asksPrice += ask.getPrice();
             }
-            for (Trade bid : Collections.synchronizedList(bidsTable.get(broker))) {
+            for (Trade bid : bidsTable.get(broker)) {
                 bidsTotalVolume += bid.getVolume();
                 bidsPrice += bid.getPrice();
             }
