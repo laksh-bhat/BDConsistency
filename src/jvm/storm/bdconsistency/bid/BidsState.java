@@ -14,7 +14,7 @@ import java.util.*;
 
 public class BidsState implements State, Serializable {
     public BidsState(final long statesize) {
-        bids = new LinkedHashMap<Long, Trade>(100, .75F, false){
+        bids = new LinkedHashMap<Long, Trade>((int)statesize, .75F, false){
             // This method is called just after a new entry has been added
             public boolean removeEldestEntry(Map.Entry<Long, Trade> eldest) {
                 return size() > statesize;

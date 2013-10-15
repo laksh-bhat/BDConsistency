@@ -83,6 +83,7 @@ public class CounterDrpcTopology {
 
     public static void main(String[] args) throws AlreadyAliveException, InvalidTopologyException, InterruptedException, TException, DRPCExecutionException {
         Config conf = new Config();
+        conf.setNumWorkers(4);
         conf.setFallBackOnJavaSerialization(true);
         conf.setNumWorkers(20);
         conf.put(Config.DRPC_SERVERS, Lists.newArrayList("damsel", "qp4", "qp5", "qp6"));

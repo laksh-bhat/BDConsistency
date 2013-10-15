@@ -13,7 +13,7 @@ import java.util.*;
  */
 public class AsksState implements State, Serializable {
     public AsksState(final long statesize) {
-        asks = new LinkedHashMap<Long, Trade>(100, .75F, false){
+        asks = new LinkedHashMap<Long, Trade>((int)statesize, .75F, false){
             // This method is called just after a new entry has been added
             public boolean removeEldestEntry(Map.Entry<Long, Trade> eldest) {
                 return size() > statesize;

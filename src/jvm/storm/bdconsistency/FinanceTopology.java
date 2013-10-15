@@ -33,8 +33,9 @@ public class FinanceTopology {
     public static class CountUpdater implements StateUpdater<CounterState> {
         @Override
         public void updateState(CounterState state, List<TridentTuple> tuples, TridentCollector collector) {
-            for (TridentTuple t : tuples)
+            for (int i = 0; i < tuples.size(); i++) {
                 state.increment();
+            }
         }
         @Override
         public void prepare(Map conf, TridentOperationContext context) {}
@@ -78,7 +79,7 @@ public class FinanceTopology {
 
         // DRPC Service
         topology
-                .newDRPCStream("AXF")
+                .newDRPCStream("AXF", drpc)
                 .each(new Fields("args"), new PrinterBolt())
                 .shuffle()
                 .stateQuery(asks, new SelectQuery.SelectStarFromAsks(), new Fields("asks"))
@@ -88,7 +89,7 @@ public class FinanceTopology {
                 .parallelismHint(5)
                 .each(new Fields("asks", "bids"), new PrinterBolt())
                 .shuffle()
-                .each(new Fields("asks", "bids"), new AsksBidsJoin(), new Fields("AXF"))
+                .each(new Fields("asks", "bids"), new AxFinderAsksBidsJoin(), new Fields("AXF"))
                 .shuffle()
                 //.parallelismHint(5)
                 .project(new Fields("AXF"))
@@ -114,19 +115,23 @@ public class FinanceTopology {
 
 
     public static void main(String[] args) throws Exception {
+        if (args.length < 3){
+            System.out.println("args -- filename , statesize , sleeptime (30000 - 60000 ms)");
+            System.exit(0);
+        }
         Config conf = new Config();
         conf.setNumWorkers(20);
         conf.put(Config.DRPC_SERVERS, Lists.newArrayList("damsel", "qp4", "qp5", "qp6"));
         conf.setMaxSpoutPending(20);
         conf.put(Config.STORM_CLUSTER_MODE, "distributed");
-        StormSubmitter.submitTopology("AXFinder", conf, buildTopology(null, args[0], args[1] != null? Long.valueOf(args[1]) : 100000));
+        StormSubmitter.submitTopology("AXFinder", conf, buildTopology(null, args[0], Long.valueOf(args[1])));
         Thread.sleep(10000);
 
         DRPCClient client = new DRPCClient("localhost", 3772);
         // Fire AXFinder Query 100 times
         long duration = 0;
         for(int i = 0; i < 10; i++) {
-            Thread.sleep(30000);
+            Thread.sleep(Long.valueOf(args[2]));
             long startTime = System.currentTimeMillis();
             System.out.println("Result for AXF query is -> " + client.execute("AXF", "axfinder"));
             long endTime = System.currentTimeMillis();
@@ -134,7 +139,7 @@ public class FinanceTopology {
         }
 
         System.out.println("==================================================================");
-        System.out.println(MessageFormat.format("duration for 50 ax-finder queries {0} mill seconds", duration));
+        System.out.println(MessageFormat.format("duration for 10 ax-finder queries {0} mill seconds", duration));
         client.close();
     }
 }

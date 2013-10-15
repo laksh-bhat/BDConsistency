@@ -61,7 +61,7 @@ public class AxFinder {
                 .shuffle()
                 .stateQuery(bids, new MemoryQuery.BidsMemoryQuery(), new Fields("bidsize"))
                 .shuffle()
-                .each(new Fields("asks", "bids"), new AsksBidsJoin(), new Fields("AXF"))
+                .each(new Fields("asks", "bids"), new AxFinderAsksBidsJoin(), new Fields("AXF"))
                 .shuffle()
                 .parallelismHint(8)
                 .project(new Fields("AXF", "asksize", "bidsize"));

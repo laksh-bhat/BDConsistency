@@ -14,10 +14,11 @@ import java.util.*;
  * Date: 10/9/13
  * Time: 6:48 PM
  */
-public class AsksBidsJoin extends BaseFunction {
+public class AxFinderAsksBidsJoin extends BaseFunction {
     @Override
     public void execute(TridentTuple tuple, TridentCollector collector) {
-        System.out.println(" -- AsksBidsJoin -- ");
+        System.out.println(" -- AxFinderAsksBidsJoin -- ");
+
         Map<Long, List<Trade>> asksTable = (Map<Long, List<Trade>>) tuple.getValueByField("asks");
         Map<Long, List<Trade>> bidsTable = (Map<Long, List<Trade>>) tuple.getValueByField("bids");
 

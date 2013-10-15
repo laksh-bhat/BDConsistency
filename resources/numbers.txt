@@ -13,3 +13,12 @@
 8 - 1min -- 120000 -- 2000/s
 
 
+
+state size vs query times vs count
+-----------------------------------------
+10,000 --  10 ax-finder queries 2,906 milli seconds - 123250
+100,000 -- 10 ax-finder queries 3,576 milli seconds   - 150000
+1000,000 -- 10  ax-finder queries 4,867 milli seconds - 120750
+10,000,000 -- 10 ax-finder queries 5,040 mill seconds - 142250
+
+
