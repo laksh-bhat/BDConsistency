@@ -60,7 +60,7 @@ public class AsksState implements State, Serializable {
     }
 
     public synchronized Map<Long, List<Trade>> getAsks() {
-        return Collections.synchronizedMap(asks);
+        return asks;
     }
 
     public long getTotalTrade() {
