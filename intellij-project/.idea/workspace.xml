@@ -4,9 +4,10 @@
     <list default="true" id="3ce62a69-14b0-48fd-b6e9-6b6be8644430" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../BDConsistency" afterPath="$PROJECT_DIR$/../BDConsistency" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" afterPath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/AsksBidsJoin.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/AsksBidsJoin.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ask/AsksState.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ask/AsksState.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/SelectQuery.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/SelectQuery.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="storm.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,7 +27,7 @@
     <file path="/BidsState.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381800455822" ignored="false" />
     <file path="/BrokerEqualityQuery.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381738053822" ignored="false" />
     <file path="/BrokerTradeFilter.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381211464432" ignored="false" />
-    <file path="/AsksState.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381802102173" ignored="false" />
+    <file path="/AsksState.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381803422478" ignored="false" />
     <file path="/AsksBrokerEqualityFilter.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381030103458" ignored="false" />
     <file path="/Trade.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381513781572" ignored="false" />
     <file path="/test.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381032904402" ignored="false" />
@@ -59,7 +60,7 @@
     <file path="/DoubleCounter.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381789358316" ignored="false" />
     <file path="/TCounter.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381789484536" ignored="false" />
     <file path="/OCounter.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381789528627" ignored="false" />
-    <file path="/SelectQuery.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381801151199" ignored="false" />
+    <file path="/SelectQuery.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381803816273" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,10 +121,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="FinanceTopology.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="FinanceTopology.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="122" column="74" selection-start="5161" selection-end="5161" vertical-scroll-proportion="0.0">
+            <state line="116" column="10" selection-start="4787" selection-end="4787" vertical-scroll-proportion="0.6660118">
               <folding>
                 <element signature="e#4207#4215#0" expanded="true" />
               </folding>
@@ -165,14 +166,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AsksState.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="AsksState.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ask/AsksState.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="59" selection-start="673" selection-end="682" vertical-scroll-proportion="0.4559387">
+            <state line="7" column="33" selection-start="146" selection-end="146" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1054#1061#0" expanded="true" />
+                <element signature="e#973#980#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LinkedHashMultimap.class" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/lib/guava-13.0.jar!/com/google/common/collect/LinkedHashMultimap.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="7" column="19" selection-start="257" selection-end="257" vertical-scroll-proportion="-4.08">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -213,10 +223,10 @@
       <file leaf-file-name="SelectQuery.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/SelectQuery.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="49" selection-start="1731" selection-end="1731" vertical-scroll-proportion="0.0">
+            <state line="24" column="0" selection-start="781" selection-end="781" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="e#848#872#0" expanded="true" />
-                <element signature="e#1592#1616#0" expanded="true" />
+                <element signature="e#849#873#0" expanded="true" />
+                <element signature="e#1593#1617#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -250,12 +260,12 @@
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/DCounter.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/OCounter.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/QCounter.java" />
-        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/BrokerEqualityQuery.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bid/BidsState.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/AsksBidsJoin.java" />
-        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/SelectQuery.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ask/AsksState.java" />
+        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/SelectQuery.java" />
+        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java" />
       </list>
     </option>
   </component>
@@ -674,13 +684,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/DCounter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="26" selection-start="1591" selection-end="1591" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/QCounter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="61" column="5" selection-start="1900" selection-end="1900" vertical-scroll-proportion="0.0">
@@ -720,15 +723,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="122" column="74" selection-start="5161" selection-end="5161" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#4207#4215#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/QuerySpout.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="18" column="13" selection-start="454" selection-end="454" vertical-scroll-proportion="0.0">
@@ -752,33 +746,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/AsksBidsJoin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="68" selection-start="1110" selection-end="1110" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1382#1388#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bid/BidsUpdater.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="9" selection-start="873" selection-end="873" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/SelectQuery.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="49" selection-start="1731" selection-end="1731" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#848#872#0" expanded="true" />
-            <element signature="e#1592#1616#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ObjectSizeCalculator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="42" column="13" selection-start="1512" selection-end="1512" vertical-scroll-proportion="0.0">
@@ -797,12 +764,55 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/lib/guava-13.0.jar!/com/google/common/collect/LinkedHashMultimap.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="19" selection-start="257" selection-end="257" vertical-scroll-proportion="-4.08">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/ask/AsksState.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="59" selection-start="673" selection-end="682" vertical-scroll-proportion="0.4559387">
+        <state line="7" column="33" selection-start="146" selection-end="146" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1054#1061#0" expanded="true" />
+            <element signature="e#973#980#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bid/BidsUpdater.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="9" selection-start="873" selection-end="873" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/AsksBidsJoin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="68" selection-start="1110" selection-end="1110" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1382#1388#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/query/SelectQuery.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="0" selection-start="781" selection-end="781" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#849#873#0" expanded="true" />
+            <element signature="e#1593#1617#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/FinanceTopology.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="116" column="10" selection-start="4787" selection-end="4787" vertical-scroll-proportion="0.6660118">
+          <folding>
+            <element signature="e#4207#4215#0" expanded="true" />
           </folding>
         </state>
       </provider>
