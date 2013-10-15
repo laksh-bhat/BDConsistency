@@ -8,6 +8,7 @@ import storm.trident.tuple.TridentTuple;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -20,8 +21,8 @@ public class AsksBidsJoin extends BaseFunction {
     @Override
     public void execute(TridentTuple tuple, TridentCollector collector) {
         System.out.println(" -- AsksBidsJoin -- ");
-        Map<Long, List<Trade>> asksTable = (Map<Long, List<Trade>>) tuple.getValueByField("asks");
-        Map<Long, List<Trade>> bidsTable = (Map<Long, List<Trade>>) tuple.getValueByField("bids");
+        Map<Long, List<Trade>> asksTable = Collections.synchronizedMap((Map<Long, List<Trade>>) tuple.getValueByField("asks"));
+        Map<Long, List<Trade>> bidsTable = Collections.synchronizedMap((Map<Long, List<Trade>>) tuple.getValueByField("bids"));
 
         for (long broker : asksTable.keySet()) {
             long asksTotalVolume = 0, asksPrice = 0, bidsTotalVolume = 0, bidsPrice = 0;
@@ -36,7 +37,7 @@ public class AsksBidsJoin extends BaseFunction {
             }
 
 
-            if(Math.abs(bidsPrice - asksPrice) > 1000)  {
+            if (Math.abs(bidsPrice - asksPrice) > 1000) {
                 List<Long> axf = new ArrayList<Long>();
                 axf.add(broker);
                 axf.add(asksTotalVolume - bidsTotalVolume);
