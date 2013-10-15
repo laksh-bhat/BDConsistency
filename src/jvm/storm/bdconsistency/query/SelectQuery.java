@@ -10,6 +10,8 @@ import storm.trident.tuple.TridentTuple;
 
 import java.text.MessageFormat;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * User: lbhat@damsl
@@ -21,12 +23,21 @@ public class SelectQuery {
 
     public static class SelectStarFromAsks extends BaseQueryFunction<AsksState, Map<Long, List<Trade>>> {
         public List<Map<Long, List<Trade>>> batchRetrieve(AsksState asksState, List<TridentTuple> inputs) {
+
             System.out.println(MessageFormat.format("-- SelectStarFromAsks -- {0}", asksState.getTotalTrade()));
 
-            List<Map<Long, List<Trade>>> returnList = new ArrayList<Map<Long, List<Trade>>>(1);
-            for (TridentTuple t : inputs) {
-                returnList.add(asksState.getAsks());
+            Map<Long, List<Trade>> concurrentMap = new ConcurrentHashMap<Long, List<Trade>>();
+            for (long key : asksState.getAsks().keySet()){
+                Trade t = asksState.getTradeByKey(key);
+                if(t == null) continue;
+                if(!concurrentMap.containsKey(t.getBrokerId()))
+                    concurrentMap.put(t.getBrokerId(), new CopyOnWriteArrayList<Trade>());
+
+                concurrentMap.get(t.getBrokerId()).add(t);
             }
+
+            List<Map<Long, List<Trade>>> returnList = new ArrayList<Map<Long, List<Trade>>>(1);
+            returnList.add(concurrentMap);
             return returnList;
         }
 
@@ -39,58 +50,24 @@ public class SelectQuery {
     public static class SelectStarFromBids extends BaseQueryFunction<BidsState, Map<Long, List<Trade>>> {
         public List<Map<Long, List<Trade>>> batchRetrieve(BidsState bidsState, List<TridentTuple> inputs) {
             System.out.println("-- SelectStarFromBids -- " + bidsState.getTotalTrade());
-            List<Map<Long, List<Trade>>> returnList = new ArrayList<Map<Long, List<Trade>>>(1);
-            for (TridentTuple t : inputs) {
-                returnList.add(bidsState.getBids());
+            Map<Long, List<Trade>> concurrentMap = new ConcurrentHashMap<Long, List<Trade>>();
+            for (long key : bidsState.getBids().keySet()){
+                Trade t = bidsState.getTradeByKey(key);
+                if(t == null) continue;
+                if(!concurrentMap.containsKey(t.getBrokerId()))
+                    concurrentMap.put(t.getBrokerId(), new CopyOnWriteArrayList<Trade>());
+
+                concurrentMap.get(t.getBrokerId()).add(t);
             }
+
+            List<Map<Long, List<Trade>>> returnList = new ArrayList<Map<Long, List<Trade>>>(1);
+            returnList.add(concurrentMap);
             return returnList;
         }
 
         @Override
         public void execute(TridentTuple tuple, Map<Long, List<Trade>> result, TridentCollector collector) {
             collector.emit(new Values(result));
-        }
-    }
-
-    public static class AsksEquiJoinBidsOnBrokerIdAndGroupByBrokerId extends BaseQueryFunction<BidsState, List<Long>> {
-
-        @Override
-        public List<List<Long>> batchRetrieve(BidsState state, List<TridentTuple> inputs) {
-            System.out.println("AsksEquiJoinBidsOnBrokerIdAndGroupByBrokerId -- " + inputs.get(0));
-            Map<Long, List<Trade>> bidsTable = state.getBids();
-            Map<Long, List<TridentTuple>> asksTable = new HashMap<Long, List<TridentTuple>>();
-            for (TridentTuple tuple : inputs) {
-                long broker = tuple.getLongByField("brokerId");
-                if (!asksTable.containsKey(broker))
-                    asksTable.put(broker, new ArrayList<TridentTuple>());
-                asksTable.get(broker).add(tuple);
-            }
-
-            List<List<Long>> result = new ArrayList<List<Long>>(inputs.size());
-            for (long broker : asksTable.keySet()) {
-                long asksVolume = 0, asksPrice = 0, bidsVolume = 0, bidsPrice = 0;
-                for (Object ask : asksTable.get(broker)) {
-                    asksVolume += ((TridentTuple) ask).getLongByField("volume");
-                    asksPrice += ((TridentTuple) ask).getLongByField("price");
-                }
-                for (Trade bid : bidsTable.get(broker)) {
-                    bidsVolume += bid.getVolume();
-                    bidsPrice += bid.getPrice();
-                }
-                List<Long> resultRow = new ArrayList<Long>();
-                resultRow.add(broker);
-                resultRow.add(asksVolume - bidsVolume);
-                resultRow.add(Math.abs(asksPrice - bidsPrice));
-
-                result.add(resultRow);
-            }
-            return result;
-        }
-
-        @Override
-        public void execute(TridentTuple tuple, List<Long> result, TridentCollector collector) {
-            if (result.get(2) > 1000)
-                collector.emit(new Values(result));
         }
     }
 }

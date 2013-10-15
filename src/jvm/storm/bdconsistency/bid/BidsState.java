@@ -1,81 +1,64 @@
 package bdconsistency.bid;
 
-import bdconsistency.trade.Trade;
 import storm.trident.state.State;
+import bdconsistency.trade.Trade;
 
 import java.io.Serializable;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 /**
  * User: lbhat@damsl
  * Date: 10/3/13
  * Time: 11:53 PM
  */
+
 public class BidsState implements State, Serializable {
     public BidsState(final long statesize) {
-        bids = new LinkedHashMap<Long, List<Trade>>((int) statesize + 1, .75F, false){
+        bids = new LinkedHashMap<Long, Trade>(100, .75F, false){
             // This method is called just after a new entry has been added
-            public boolean removeEldestEntry(Map.Entry eldest) {
+            public boolean removeEldestEntry(Map.Entry<Long, Trade> eldest) {
                 return size() > statesize;
             }
         };
+        bids = Collections.synchronizedMap(bids);
         this.stateSize = statesize;
     }
 
-    public void beginCommit(Long txid) {
-    }
+    public void beginCommit(Long txid) {}
 
-    public void commit(Long txid) {
+    public void commit(Long txid) {}
 
-    }
-
-    public synchronized void addTrade(long broker, Trade trade) {
+    public synchronized void addTrade(long key, Trade trade) {
         totalTrade++;
-
-        if (!bids.containsKey(broker)) {
-            // register this broker
-            List<Trade> brokerTransactions = new ArrayList<Trade>();
-            bids.put(broker, brokerTransactions);
+        if(!bids.containsKey(key)){
+            bids.put(key, trade);
         }
-
-        bids.get(broker).add(trade);
     }
 
-    public synchronized void removeTrade(long broker, Trade trade) {
+    public synchronized void removeTrade(long key) {
         totalTrade--;
-        // If broker isn't registered, ignore this trade
-        if (!bids.containsKey(broker))
+        if(!bids.containsKey(key))
             return;
 
-        List<Trade> brokerTransactions = bids.get(broker);
-        for (int i = 0; i < brokerTransactions.size(); i++) {
-            if (brokerTransactions.get(i).getOrderId() == trade.getOrderId()) {
-                brokerTransactions.remove(i);
-                break;
-            }
-        }
-        if (bids.get(broker).size() == 0)
-            bids.remove(broker);
+        if (bids.containsKey(key))
+            bids.remove(key);
     }
 
-    public synchronized void clearTrades() {
-        this.bids.clear();
+    public synchronized Trade getTradeByKey(long key) {
+        if(bids.containsKey(key))
+            return bids.get(key);
+        else
+            return null;
     }
 
-    public synchronized Map<Long, List<Trade>> getBids() {
+    public synchronized Map<Long, Trade> getBids() {
         return bids;
     }
 
     public long getTotalTrade() {
         return totalTrade;
     }
-
     private long totalTrade;
-
-    public final long stateSize;
-
-    // Basically a multi-map
-    private Map<Long, List<Trade>> bids;
+    public long stateSize;
+    private Map<Long, Trade> bids;
 }

@@ -114,7 +114,7 @@ public class FinanceTopology {
 
     public static void main(String[] args) throws Exception {
         Config conf = new Config();
-        //conf.setNumWorkers(20);
+        conf.setNumWorkers(20);
         conf.put(Config.DRPC_SERVERS, Lists.newArrayList("damsel", "qp4", "qp5", "qp6"));
         conf.setMaxSpoutPending(20);
         conf.put(Config.STORM_CLUSTER_MODE, "distributed");

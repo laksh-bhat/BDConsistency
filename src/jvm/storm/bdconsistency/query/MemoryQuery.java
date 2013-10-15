@@ -6,10 +6,7 @@ import bdconsistency.ask.AsksState;
 import bdconsistency.bid.BidsState;
 import storm.trident.operation.TridentCollector;
 import storm.trident.state.BaseQueryFunction;
-import storm.trident.state.QueryFunction;
-import storm.trident.state.State;
 import storm.trident.tuple.TridentTuple;
-import java.lang.instrument.Instrumentation;
 
 import java.util.ArrayList;
 import java.util.List;

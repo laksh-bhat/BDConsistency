@@ -57,7 +57,7 @@ public class Trade implements Serializable{
         return orderId;
     }
 
-    public int getBrokerId() {
+    public long getBrokerId() {
         return brokerId;
     }
 

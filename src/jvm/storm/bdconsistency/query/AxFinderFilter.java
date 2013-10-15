@@ -27,7 +27,7 @@ public class AxFinderFilter {
     public static class DummyFilter extends BaseFilter{
         @Override
         public boolean isKeep(TridentTuple tuple) {
-            if(tuple.getString(0).length() > 0)
+            if(tuple.getString(0).startsWith("BIDS") || tuple.getString(0).startsWith("ASKS"))
                 return true;
             else
                 return false;
