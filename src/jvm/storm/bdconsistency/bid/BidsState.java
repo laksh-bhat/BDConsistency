@@ -3,6 +3,7 @@ package bdconsistency.bid;
 import bdconsistency.trade.Trade;
 import storm.trident.state.State;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -12,7 +13,7 @@ import java.util.concurrent.ConcurrentMap;
  * Date: 10/3/13
  * Time: 11:53 PM
  */
-public class BidsState implements State {
+public class BidsState implements State, Serializable {
     public BidsState(final long statesize) {
         bids = new LinkedHashMap<Long, List<Trade>>((int) statesize + 1, .75F, true){
             // This method is called just after a new entry has been added

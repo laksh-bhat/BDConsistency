@@ -2,6 +2,8 @@ package bdconsistency.ask;
 
 import storm.trident.state.State;
 import bdconsistency.trade.Trade;
+
+import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -10,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Date: 10/3/13
  * Time: 11:53 PM
  */
-public class AsksState implements State {
+public class AsksState implements State, Serializable {
     public AsksState(final long statesize) {
         asks = new LinkedHashMap<Long, List<Trade>>((int) statesize + 1, .75F, true){
             // This method is called just after a new entry has been added
