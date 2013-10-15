@@ -7,10 +7,7 @@ import storm.trident.operation.TridentCollector;
 import storm.trident.tuple.TridentTuple;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * User: lbhat@damsl
@@ -24,14 +21,16 @@ public class AsksBidsJoin extends BaseFunction {
         Map<Long, List<Trade>> asksTable = Collections.synchronizedMap((Map<Long, List<Trade>>) tuple.getValueByField("asks"));
         Map<Long, List<Trade>> bidsTable = Collections.synchronizedMap((Map<Long, List<Trade>>) tuple.getValueByField("bids"));
 
-        for (long broker : asksTable.keySet()) {
+        final Set<Long> keys = Collections.synchronizedSet(asksTable.keySet());
+
+        for (long broker : keys) {
             long asksTotalVolume = 0, asksPrice = 0, bidsTotalVolume = 0, bidsPrice = 0;
 
-            for (Trade ask : asksTable.get(broker)) {
+            for (Trade ask : Collections.synchronizedList(asksTable.get(broker))) {
                 asksTotalVolume += ask.getVolume();
                 asksPrice += ask.getPrice();
             }
-            for (Trade bid : bidsTable.get(broker)) {
+            for (Trade bid : Collections.synchronizedList(bidsTable.get(broker))) {
                 bidsTotalVolume += bid.getVolume();
                 bidsPrice += bid.getPrice();
             }
