@@ -6,6 +6,7 @@ import bdconsistency.trade.Trade;
 import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import com.google.common.cache.*;
 
 /**
  * User: lbhat@damsl
@@ -14,10 +15,10 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class AsksState implements State, Serializable {
     public AsksState(final long statesize) {
-        asks = new LinkedHashMap<Long, List<Trade>>((int) statesize + 1, .75F, false){
+        asks = new LinkedHashMap<Long, List<Trade>>(100, .75F, false){
             // This method is called just after a new entry has been added
             public boolean removeEldestEntry(Map.Entry<Long, List<Trade>> eldest) {
-                return eldest.getValue().size() > 100;
+                return eldest.getValue().size() > statesize;
             }
         };
         this.stateSize = statesize;

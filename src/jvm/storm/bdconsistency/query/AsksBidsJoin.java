@@ -18,8 +18,8 @@ public class AsksBidsJoin extends BaseFunction {
     @Override
     public void execute(TridentTuple tuple, TridentCollector collector) {
         System.out.println(" -- AsksBidsJoin -- ");
-        Map<Long, List<Trade>> asksTable = Collections.synchronizedMap((Map<Long, List<Trade>>) tuple.getValueByField("asks"));
-        Map<Long, List<Trade>> bidsTable = Collections.synchronizedMap((Map<Long, List<Trade>>) tuple.getValueByField("bids"));
+        Map<Long, List<Trade>> asksTable = (Map<Long, List<Trade>>) tuple.getValueByField("asks");
+        Map<Long, List<Trade>> bidsTable = (Map<Long, List<Trade>>) tuple.getValueByField("bids");
 
         final Set<Long> keys = Collections.synchronizedSet(asksTable.keySet());
 

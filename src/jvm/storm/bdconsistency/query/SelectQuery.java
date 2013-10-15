@@ -23,7 +23,9 @@ public class SelectQuery {
         public List<Map<Long, List<Trade>>> batchRetrieve(AsksState asksState, List<TridentTuple> inputs) {
             System.out.println(MessageFormat.format("-- SelectStarFromAsks -- {0}", asksState.getTotalTrade()));
             List<Map<Long, List<Trade>>> returnList = new ArrayList<Map<Long, List<Trade>>>(1);
-            returnList.add((Map<Long, List<Trade>>)((LinkedHashMap)asksState.getAsks()).clone());
+            for (TridentTuple t : inputs) {
+                returnList.add(asksState.getAsks());
+            }
             return returnList;
         }
 
@@ -36,10 +38,10 @@ public class SelectQuery {
     public static class SelectStarFromBids extends BaseQueryFunction<BidsState, Map<Long, List<Trade>>> {
         public List<Map<Long, List<Trade>>> batchRetrieve(BidsState bidsState, List<TridentTuple> inputs) {
             System.out.println("-- SelectStarFromBids -- " + bidsState.getTotalTrade());
-
             List<Map<Long, List<Trade>>> returnList = new ArrayList<Map<Long, List<Trade>>>(1);
-            returnList.add((Map<Long, List<Trade>>)((LinkedHashMap)bidsState.getBids()).clone());
-
+            for (TridentTuple t : inputs) {
+                returnList.add(bidsState.getBids());
+            }
             return returnList;
         }
 
