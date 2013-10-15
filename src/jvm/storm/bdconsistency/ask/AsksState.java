@@ -20,7 +20,6 @@ public class AsksState implements State, Serializable {
                 return size() > statesize;
             }
         };
-        asks = Collections.synchronizedMap(asks);
         this.stateSize = statesize;
     }
 
@@ -61,7 +60,7 @@ public class AsksState implements State, Serializable {
     }
 
     public synchronized Map<Long, List<Trade>> getAsks() {
-        return asks;
+        return Collections.synchronizedMap(asks);
     }
 
     public long getTotalTrade() {

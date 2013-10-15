@@ -66,7 +66,7 @@ public class BidsState implements State, Serializable {
     }
 
     public synchronized Map<Long, List<Trade>> getBids() {
-        return bids;
+        return Collections.synchronizedMap(bids);
     }
 
     public long getTotalTrade() {
