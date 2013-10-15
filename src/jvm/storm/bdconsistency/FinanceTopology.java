@@ -96,9 +96,10 @@ public class FinanceTopology {
                 .stateQuery(count, new BaseQueryFunction<CounterState, Object>() {
                     @Override
                     public List<Object> batchRetrieve(CounterState state, List<TridentTuple> args) {
-                        List<Object> returnList = new ArrayList<Object>();
-                        returnList.add(state.getCount());
-                        return returnList;
+                        List<Object> batch = new ArrayList<Object>();
+                        for (TridentTuple c : args)
+                            batch.add(state.getCount());
+                        return batch;
                     }
 
                     @Override

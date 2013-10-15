@@ -31,7 +31,7 @@ public class SelectQuery {
                 Trade t = asksState.getTradeByKey(key);
                 if(t == null) continue;
                 if(!concurrentMap.containsKey(t.getBrokerId()))
-                    concurrentMap.put(t.getBrokerId(), new CopyOnWriteArrayList<Trade>());
+                    concurrentMap.put(t.getBrokerId(), new ArrayList<Trade>());
 
                 concurrentMap.get(t.getBrokerId()).add(t);
             }
@@ -56,7 +56,7 @@ public class SelectQuery {
                 Trade t = bidsState.getTradeByKey(key);
                 if(t == null) continue;
                 if(!concurrentMap.containsKey(t.getBrokerId()))
-                    concurrentMap.put(t.getBrokerId(), new CopyOnWriteArrayList<Trade>());
+                    concurrentMap.put(t.getBrokerId(), new ArrayList<Trade>());
 
                 concurrentMap.get(t.getBrokerId()).add(t);
             }
