@@ -36,9 +36,10 @@ public class SelectQuery {
                 concurrentMap.get(t.getBrokerId()).add(t);
             }
 
-            List<Map<Long, List<Trade>>> returnList = new ArrayList<Map<Long, List<Trade>>>(1);
-            returnList.add(concurrentMap);
-            return returnList;
+            List<Map<Long, List<Trade>>> batch = new ArrayList<Map<Long, List<Trade>>>(1);
+            for (TridentTuple tuple : inputs)
+                batch.add(concurrentMap);
+            return batch;
         }
 
         @Override
@@ -60,9 +61,10 @@ public class SelectQuery {
                 concurrentMap.get(t.getBrokerId()).add(t);
             }
 
-            List<Map<Long, List<Trade>>> returnList = new ArrayList<Map<Long, List<Trade>>>(1);
-            returnList.add(concurrentMap);
-            return returnList;
+            List<Map<Long, List<Trade>>> batch = new ArrayList<Map<Long, List<Trade>>>(1);
+            for (TridentTuple tuple : inputs)
+                batch.add(concurrentMap);
+            return batch;
         }
 
         @Override
