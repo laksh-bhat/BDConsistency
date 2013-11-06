@@ -75,7 +75,6 @@ public class Query3Topology {
     }
 
     public static void main (String[] args) throws Exception {
-        FinanceTopology.checkArguments(args);
         Config config = PropertiesReader.getStormConfig();
         SubmitTopologyAndRunDrpcQueries(args, "Q3", config);
     }
