@@ -58,8 +58,8 @@ public class Filter {
 
     public static StormTopology buildTopology(String fileName) {
         TridentTopology topology = new TridentTopology();
-        final ITridentSpout asksSpout = new RichSpoutBatchExecutor(new NonTransactionalFileStreamingSpout(fileName));
-        final ITridentSpout bidsSpout = new RichSpoutBatchExecutor(new NonTransactionalFileStreamingSpout(fileName));
+        final ITridentSpout asksSpout = new RichSpoutBatchExecutor(new NonTransactionalFileStreamingSpout(fileName, "tradeString"));
+        final ITridentSpout bidsSpout = new RichSpoutBatchExecutor(new NonTransactionalFileStreamingSpout(fileName, "tradeString"));
 
         Stream asksStream = topology.newStream("asks", asksSpout);
         Stream bidsStream = topology.newStream("bids", bidsSpout);

@@ -50,7 +50,7 @@ public class CounterDrpcTopology {
 
     public static StormTopology buildTopology(String fileName) {
         TridentTopology topology = new TridentTopology();
-        final ITridentSpout asksSpout = new RichSpoutBatchExecutor(new NonTransactionalFileStreamingSpout(fileName));
+        final ITridentSpout asksSpout = new RichSpoutBatchExecutor(new NonTransactionalFileStreamingSpout(fileName, "tradeString"));
         Stream counts = topology
                 .newStream("spout", asksSpout);
 
