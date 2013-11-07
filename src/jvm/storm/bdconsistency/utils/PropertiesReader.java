@@ -18,9 +18,9 @@ public class PropertiesReader {
         Config conf = new Config();
         conf.setNumAckers(8);
         conf.setNumWorkers(8);
-        conf.setMaxSpoutPending(16);
-        conf.put("topology.spout.max.batch.size", 5000);
-        conf.put("topology.trident.batch.emit.interval.millis", 100);
+        conf.setMaxSpoutPending(2);
+        conf.put("topology.spout.max.batch.size", 1000);
+        conf.put("topology.trident.batch.emit.interval.millis", 500);
         //conf.put(Config.DRPC_SERVERS, Lists.newArrayList("damsel", "qp4", "qp5", "qp6"));
         conf.put(Config.STORM_CLUSTER_MODE, "distributed");
         return conf;
