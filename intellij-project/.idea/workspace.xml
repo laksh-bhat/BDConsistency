@@ -157,16 +157,25 @@
       <file leaf-file-name="Query3Topology.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/tpch/Query3Topology.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="83" column="53" selection-start="3792" selection-end="3792" vertical-scroll-proportion="0.48387095">
+            <state line="69" column="24" selection-start="3115" selection-end="3115" vertical-scroll-proportion="0.55787474">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CounterDrpcTopology.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/counting/CounterDrpcTopology.java">
+      <file leaf-file-name="GroupedStream.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/../lib/storm-0.8.3-wip3.jar!/src/jvm/storm/trident/fluent/GroupedStream.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="52" column="129" selection-start="1896" selection-end="1909" vertical-scroll-proportion="0.0">
+            <state line="42" column="22" selection-start="1557" selection-end="1557" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ChainedAggregatorDeclarer.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/../lib/storm-0.8.3-wip3.jar!/src/jvm/storm/trident/fluent/ChainedAggregatorDeclarer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="129" column="41" selection-start="5421" selection-end="5421" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -233,17 +242,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state line="85" column="80" selection-start="3268" selection-end="3272" vertical-scroll-proportion="0.0">
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Split.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bolt/trident/basefunction/Split.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="102" selection-start="759" selection-end="765" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -709,29 +707,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://Z:/Java/jdk1.7.0_40/src.zip!/java/lang/String.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3018" column="61" selection-start="120392" selection-end="120392" vertical-scroll-proportion="0.39697543">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/../lib/storm-0.8.3-wip3.jar!/src/jvm/storm/trident/Stream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="169" column="24" selection-start="6887" selection-end="6887" vertical-scroll-proportion="0.8756661">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/state/tpch/TpchStateUpdater.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="26" selection-start="578" selection-end="589" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/state/tpch/TpchState.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="47" column="47" selection-start="1669" selection-end="1669" vertical-scroll-proportion="0.0">
@@ -836,9 +811,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$PROJECT_DIR$/../lib/storm-0.8.3-wip3.jar!/src/jvm/storm/trident/Stream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="43" selection-start="2575" selection-end="2585" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../lib/storm-0.8.3-wip3.jar!/src/jvm/storm/trident/fluent/ChainedAggregatorDeclarer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="129" column="41" selection-start="5421" selection-end="5421" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../lib/storm-0.8.3-wip3.jar!/src/jvm/storm/trident/fluent/GroupedStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="22" selection-start="1557" selection-end="1557" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/tpch/Query3Topology.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="83" column="53" selection-start="3792" selection-end="3792" vertical-scroll-proportion="0.48387095">
+        <state line="69" column="24" selection-start="3115" selection-end="3115" vertical-scroll-proportion="0.55787474">
           <folding />
         </state>
       </provider>

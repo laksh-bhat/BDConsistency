@@ -66,8 +66,8 @@ public class Query3Topology {
                 .stateQuery(tpchState, new TpchQuery.Query3(), new Fields("orderkey", "orderdate", "shippriority", "extendedprice", "discount"))
                 .parallelismHint(8)
                 .groupBy(new Fields("orderkey", "orderdate", "shippriority"))
-                .aggregate(new Fields("orderkey", "orderdate", "shippriority", "extendedprice", "discount")
-                        , new TpchQuery.Query3Aggregator()
+                .aggregate(/*new Fields("orderkey", "orderdate", "shippriority", "extendedprice", "discount")*/
+                        new TpchQuery.Query3Aggregator()
                         , new Fields("orderkey", "orderdate", "shippriority", "query3"))
         ;
 
