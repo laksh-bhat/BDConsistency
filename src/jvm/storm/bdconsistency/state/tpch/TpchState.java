@@ -770,7 +770,8 @@ public class TpchState implements State, IBackingMap<ITpchTable>, Serializable {
     public static StateFactory FACTORY = new StateFactory() {
         public State makeState (Map conf, IMetricsContext metrics, int partitionIndex, int numPartitions) {
             // our logic is fully idempotent => no Opaque Map or Transactional Map required here
-            return NonTransactionalMap.build(new TpchState());
+            //return NonTransactionalMap.build(new TpchState());
+            return new TpchState();
         }
     };
 }
