@@ -59,7 +59,7 @@ public class Query3Topology {
                 .partitionBy(new Fields("orderkey", "custkey"))
                 //.persistentAggregate(TpchState.FACTORY, new Fields("table", "agendaObject"), new TpchStateBuilder(), new Fields("tpchTable"))
                 .partitionPersist(TpchState.FACTORY, new Fields("agendaObject"), new TpchStateUpdater())
-                .parallelismHint(16);
+                .parallelismHint(8);
 
 
         // DRPC Service
@@ -85,13 +85,13 @@ public class Query3Topology {
 
     public static void SubmitTopologyAndRunDrpcQueries (String[] args, String topologyAndDrpcServiceName, Config config) throws AlreadyAliveException, InvalidTopologyException, InterruptedException, TException, DRPCExecutionException {
         long duration = 0;
-        DRPCClient client = new DRPCClient("localhost", 3772);
+        DRPCClient client = new DRPCClient("qp-hd1", 3772);
         StormSubmitter.submitTopology(topologyAndDrpcServiceName, config, buildTopology(null, args[0], topologyAndDrpcServiceName));
         for (int i = 0; i < NUM_QUERIES; i++) {
             Thread.sleep(20000);
             long startTime = System.currentTimeMillis();
             System.out.println(MessageFormat.format("Result for Q3 query is -> {0}",
-                                                    client.execute(topologyAndDrpcServiceName, "1,1024,1" /*Query Arguments in order -- marketsegment, orderdate, shipdate*/)));
+                                                    client.execute(topologyAndDrpcServiceName, "1080548553,19960327,19960400" /*Query Arguments in order -- marketsegment, orderdate, shipdate*/)));
             long endTime = System.currentTimeMillis();
             duration += endTime - startTime;
         }
