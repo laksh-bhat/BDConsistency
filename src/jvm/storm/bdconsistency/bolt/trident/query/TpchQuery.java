@@ -22,22 +22,17 @@ public class TpchQuery {
 
         @Override
         public void aggregate (Query3Result query3Result, final TridentTuple tuple, final TridentCollector collector) {
-            if (query3Result == null) {
+            if (query3Result == null)
                 query3Result = new Query3Result();
-                query3Result.orderDate = tuple.getIntegerByField("orderdate");
-                query3Result.orderKey = tuple.getIntegerByField("orderkey");
-                query3Result.shipPriority = tuple.getIntegerByField("shippriority");
-            }
             query3Result.query3 += tuple.getDoubleByField("extendedprice") * (1 - tuple.getDoubleByField("discount"));
         }
 
         @Override
         public void complete (final Query3Result val, final TridentCollector collector) {
-            collector.emit(new Values(val.orderKey, val.orderDate, val.shipPriority, val.query3));
+            collector.emit(new Values(val.query3));
         }
 
         class Query3Result {
-            int orderKey, orderDate, shipPriority;
             double query3;
         }
     }
