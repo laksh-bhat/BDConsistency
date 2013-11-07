@@ -81,7 +81,7 @@ public class Query3Topology {
 
     public static void SubmitTopologyAndRunDrpcQueries (String[] args, String topologyAndDrpcServiceName, Config config) throws AlreadyAliveException, InvalidTopologyException, InterruptedException, TException, DRPCExecutionException {
         long duration = 0;
-        DRPCClient client = new DRPCClient("qp-hd1", 3772);
+        DRPCClient client = new DRPCClient("localhost", 3772);
         StormSubmitter.submitTopology(topologyAndDrpcServiceName, config, buildTopology(null, args[0], topologyAndDrpcServiceName));
         for (int i = 0; i < NUM_QUERIES; i++) {
             Thread.sleep(20000);
