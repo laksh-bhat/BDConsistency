@@ -44,8 +44,8 @@ import static bdconsistency.topology.TopologyBase.printTimings;
 public class Query3Topology {
 
     public static StormTopology buildTopology (LocalDRPC drpc, String fileName, String drpcFunctionName) {
-        //final ITridentSpout agendaSpout = new TransactionalTextFileSpout("agenda", fileName, "UTF-8");
-        final ITridentSpout agendaSpout = new RichSpoutBatchExecutor(new NonTransactionalFileStreamingSpout(fileName, "agenda"));
+        final ITridentSpout agendaSpout = new TransactionalTextFileSpout("agenda", fileName, "UTF-8");
+        //final ITridentSpout agendaSpout = new RichSpoutBatchExecutor(new NonTransactionalFileStreamingSpout(fileName, "agenda"));
         final TridentTopology topology = new TridentTopology();
 
         final Stream basicStream = topology.newStream("agenda-spout", agendaSpout);
