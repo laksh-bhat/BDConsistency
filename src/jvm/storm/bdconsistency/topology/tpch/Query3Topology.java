@@ -11,6 +11,7 @@ import backtype.storm.tuple.Fields;
 import backtype.storm.utils.DRPCClient;
 import bdconsistency.bolt.trident.basefunction.Split;
 import bdconsistency.bolt.trident.query.TpchQuery;
+import bdconsistency.spouts.NonTransactionalFileStreamingSpout;
 import bdconsistency.spouts.TransactionalTextFileSpout;
 import bdconsistency.state.counter.CounterState;
 import bdconsistency.state.tpch.TpchState;
@@ -24,6 +25,7 @@ import storm.trident.TridentTopology;
 import storm.trident.operation.TridentCollector;
 import storm.trident.operation.TridentOperationContext;
 import storm.trident.spout.ITridentSpout;
+import storm.trident.spout.RichSpoutBatchExecutor;
 import storm.trident.state.StateUpdater;
 import storm.trident.tuple.TridentTuple;
 
@@ -42,7 +44,8 @@ import static bdconsistency.topology.TopologyBase.printTimings;
 public class Query3Topology {
 
     public static StormTopology buildTopology (LocalDRPC drpc, String fileName, String drpcFunctionName) {
-        final ITridentSpout agendaSpout = new TransactionalTextFileSpout("agenda", fileName, "UTF-8");
+        //final ITridentSpout agendaSpout = new TransactionalTextFileSpout("agenda", fileName, "UTF-8");
+        final ITridentSpout agendaSpout = new RichSpoutBatchExecutor(new NonTransactionalFileStreamingSpout(fileName, "agenda"));
         final TridentTopology topology = new TridentTopology();
 
         final Stream basicStream = topology.newStream("agenda-spout", agendaSpout);
@@ -76,6 +79,7 @@ public class Query3Topology {
 
     public static void main (String[] args) throws Exception {
         Config config = PropertiesReader.getStormConfig();
+        config.setDebug(true);
         SubmitTopologyAndRunDrpcQueries(args, "Q3", config);
     }
 
