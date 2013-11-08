@@ -65,7 +65,6 @@ public class Query3Topology {
         // DRPC Service
         topology
                 .newDRPCStream(drpcFunctionName, drpc)
-                .shuffle()
                 .broadcast()
                 .parallelismHint(8)
                 .stateQuery(tpchState,

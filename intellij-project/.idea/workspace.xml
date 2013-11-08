@@ -167,7 +167,7 @@
       <file leaf-file-name="Query3Topology.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/tpch/Query3Topology.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="71" column="95" selection-start="3124" selection-end="3124" vertical-scroll-proportion="0.28273246">
+            <state line="68" column="38" selection-start="3010" selection-end="3010" vertical-scroll-proportion="0.47628084">
               <folding />
             </state>
           </provider>
@@ -999,14 +999,14 @@
     </entry>
     <entry file="jar://$PROJECT_DIR$/../lib/storm-0.8.3-wip3.jar!/src/jvm/storm/trident/Stream.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="97" column="18" selection-start="3781" selection-end="3781" vertical-scroll-proportion="0.0">
+        <state line="107" column="52" selection-start="4101" selection-end="4111" vertical-scroll-proportion="0.39658445">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/tpch/Query3Topology.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="95" selection-start="3124" selection-end="3124" vertical-scroll-proportion="0.28273246">
+        <state line="68" column="38" selection-start="3010" selection-end="3010" vertical-scroll-proportion="0.47628084">
           <folding />
         </state>
       </provider>
