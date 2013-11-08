@@ -47,7 +47,7 @@ public class TpchAgenda {
     private float totalPrice;
 
     public String TpchObjectConstructAndReport(String agenda) {
-        String[] agendaAttributes = agenda.split("\\|");
+        String[] agendaAttributes = agenda.split(",");
         event = Integer.valueOf(agendaAttributes[1]);
         accountBalance = Float.valueOf(agendaAttributes[2]);
         address = Integer.valueOf(agendaAttributes[3]);
