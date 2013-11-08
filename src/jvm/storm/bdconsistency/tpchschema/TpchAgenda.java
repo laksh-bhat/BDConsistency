@@ -1,11 +1,13 @@
 package bdconsistency.tpchschema;
 
+import java.io.Serializable;
+
 /**
  * User: lbhat@damsl
  * Date: 11/4/13
  * Time: 12:10 PM
  */
-public class TpchAgenda {
+public class TpchAgenda implements Serializable {
     private int event;
     private int address;
     private int availQty;

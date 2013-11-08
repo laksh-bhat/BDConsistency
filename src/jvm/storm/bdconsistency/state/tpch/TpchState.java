@@ -5,7 +5,6 @@ import bdconsistency.tpchschema.TpchAgenda;
 import storm.trident.state.State;
 import storm.trident.state.StateFactory;
 import storm.trident.state.map.IBackingMap;
-import storm.trident.state.map.NonTransactionalMap;
 
 import java.io.Serializable;
 import java.util.*;
@@ -14,7 +13,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
 
 public class TpchState implements State, IBackingMap<ITpchTable>, Serializable {
     private enum TpchTableEnum {
-        customer, lineitem, part, partsupp, supplier, region, nation, orders;
+        customer, lineitem, part, partsupp, supplier, region, nation, orders
     }
 
     private Map<String, ITpchTable> tables;
