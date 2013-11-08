@@ -207,7 +207,7 @@
       <file leaf-file-name="TpchAgenda.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/tpchschema/TpchAgenda.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="56" selection-start="1301" selection-end="1301" vertical-scroll-proportion="0.3148148">
+            <state line="137" column="40" selection-start="4391" selection-end="4391" vertical-scroll-proportion="0.59074074">
               <folding />
             </state>
           </provider>
@@ -1001,7 +1001,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/tpchschema/TpchAgenda.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="56" selection-start="1301" selection-end="1301" vertical-scroll-proportion="0.3148148">
+        <state line="137" column="40" selection-start="4391" selection-end="4391" vertical-scroll-proportion="0.59074074">
           <folding />
         </state>
       </provider>
