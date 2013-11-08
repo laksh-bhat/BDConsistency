@@ -5,7 +5,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../BDConsistency" afterPath="$PROJECT_DIR$/../BDConsistency" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" afterPath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/tpch/Query3Topology.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/tpch/Query3Topology.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/state/tpch/TpchStateUpdater.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/state/tpch/TpchStateUpdater.java" />
     </list>
     <ignored path="storm.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -164,10 +163,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Query3Topology.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Query3Topology.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/tpch/Query3Topology.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="85" column="61" selection-start="3810" selection-end="3810" vertical-scroll-proportion="0.3548387">
+            <state line="47" column="56" selection-start="1884" selection-end="1884" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RichSpoutBatchExecutor.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="jar://$PROJECT_DIR$/../lib/storm-0.8.3-wip3.jar!/src/jvm/storm/trident/spout/RichSpoutBatchExecutor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="81" column="33" selection-start="2838" selection-end="2849" vertical-scroll-proportion="0.6611111">
               <folding />
             </state>
           </provider>
@@ -248,15 +256,6 @@
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/spouts/NonTransactionalFileStreamingSpout.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="71" column="36" selection-start="1896" selection-end="1896" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Filter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bolt/trident/filter/Filter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="85" column="80" selection-start="3268" selection-end="3272" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -887,20 +886,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/../lib/storm-0.8.3-wip3.jar!/src/jvm/storm/trident/Stream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="43" selection-start="2575" selection-end="2585" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/../lib/storm-0.8.3-wip3.jar!/src/jvm/storm/trident/fluent/ChainedAggregatorDeclarer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="129" column="41" selection-start="5421" selection-end="5421" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/../lib/storm-0.8.3-wip3.jar!/src/jvm/storm/trident/fluent/GroupedStream.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="42" column="22" selection-start="1557" selection-end="1557" vertical-scroll-proportion="0.0">
@@ -1011,7 +996,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/tpch/Query3Topology.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="61" selection-start="3810" selection-end="3810" vertical-scroll-proportion="0.3548387">
+        <state line="47" column="56" selection-start="1884" selection-end="1884" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bolt/trident/filter/Filter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="85" column="80" selection-start="3268" selection-end="3272" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../lib/storm-0.8.3-wip3.jar!/src/jvm/storm/trident/spout/RichSpoutBatchExecutor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="81" column="33" selection-start="2838" selection-end="2849" vertical-scroll-proportion="0.6611111">
           <folding />
         </state>
       </provider>
