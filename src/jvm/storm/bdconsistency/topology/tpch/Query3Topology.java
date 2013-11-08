@@ -66,7 +66,10 @@ public class Query3Topology {
         topology
                 .newDRPCStream(drpcFunctionName, drpc)
                 .broadcast()
-                .stateQuery(tpchState, new TpchQuery.Query3(), new Fields("orderkey", "orderdate", "shippriority", "extendedprice", "discount"))
+                .stateQuery(tpchState,
+                            new Fields("args"),
+                            new TpchQuery.Query3(),
+                            new Fields("orderkey", "orderdate", "shippriority", "extendedprice", "discount"))
                 .parallelismHint(8)
                 .groupBy(new Fields("orderkey", "orderdate", "shippriority"))
                 .aggregate(new Fields("orderkey", "orderdate", "shippriority", "extendedprice", "discount")
