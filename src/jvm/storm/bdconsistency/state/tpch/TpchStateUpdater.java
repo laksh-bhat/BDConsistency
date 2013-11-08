@@ -13,7 +13,7 @@ public class TpchStateUpdater extends BaseStateUpdater<TpchState> {
     @Override
     public void updateState (final TpchState state, final List<TridentTuple> tuples, final TridentCollector collector) {
         for (TridentTuple tuple : tuples){
-            String tableName = tuple.getStringByField("table").intern();
+            String tableName = tuple.getStringByField("table").toLowerCase().intern();
             state.updateTable(tableName, (TpchAgenda) tuple.getValueByField("agendaObject"));
         }
     }
