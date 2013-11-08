@@ -88,15 +88,18 @@ public class TpchQuery {
             ITpchTable customer = state.getTable("customer");
             ITpchTable lineItem = state.getTable("lineitem");
 
-            filterCustomers(customer);
-            filterOrders(orders);
-            filterLineItems(lineItem);
-            computeIntermediateJoinResults(results, orders, customer, lineItem);
+            if (orders != null && customer != null && lineItem != null) {
+                filterCustomers(customer);
+                filterOrders(orders);
+                filterLineItems(lineItem);
+                computeIntermediateJoinResults(results, orders, customer, lineItem);
+            }
             returnList.add(results);
+
 
             // The return list must have the same number of elements as that of the keys.
             // These "null" will be ignored while emitting tuples.
-            for (int i = 1; i < args.size(); i++) returnList.add(null);
+            for (int i = returnList.size() ; i < args.size(); i++) returnList.add(null);
             return returnList;
         }
 
