@@ -90,7 +90,7 @@ public class TpchQuery {
             ITpchTable lineItem = state.getTable("lineitem");
 
             if (orders != null && customer != null && lineItem != null) {
-                //filterCustomers(customer);
+                filterCustomers(customer);
                 filterOrders(orders);
                 filterLineItems(lineItem);
                 computeIntermediateJoinResults(results, orders, customer, lineItem);
@@ -132,6 +132,7 @@ public class TpchQuery {
         }
 
         private void filterCustomers (final ITpchTable customer) {
+            System.out.println(MessageFormat.format("Debug: filterCustomers -- start -- {0}", customer.getRows().size()));
             final Set rows = customer.getRows();
             Iterator<TpchState.Customer.CustBean> iterator = rows.iterator();
             while (iterator.hasNext()) {
@@ -139,6 +140,7 @@ public class TpchQuery {
                 if (bean.getMarketSegment() != marketSegment)
                     iterator.remove();
             }
+            System.out.println(MessageFormat.format("Debug: filterCustomers -- end -- {0}", customer.getRows().size()));
         }
 
         private void filterLineItems (final ITpchTable lineItem) {
@@ -147,7 +149,7 @@ public class TpchQuery {
             Iterator<TpchState.LineItem.LineItemBean> iterator = rows.iterator();
             while (iterator.hasNext()) {
                 final TpchState.LineItem.LineItemBean bean = iterator.next();
-                if (bean.getShipDate() > maxShipDate)
+                if (bean.getShipDate() <= maxShipDate)
                     iterator.remove();
             }
             System.out.println(MessageFormat.format("Debug: filterLineItems -- end -- {0}", lineItem.getRows().size()));
@@ -159,7 +161,7 @@ public class TpchQuery {
             Iterator<TpchState.Orders.OrderBean> iterator = rows.iterator();
             while (iterator.hasNext()) {
                 final TpchState.Orders.OrderBean bean = iterator.next();
-                if (bean.getOrderDate() > maxOrderDate)
+                if (bean.getOrderDate() <= maxOrderDate)
                     iterator.remove();
             }
             System.out.println(MessageFormat.format("Debug: filterOrders -- end -- {0}", orders.getRows().size()));
