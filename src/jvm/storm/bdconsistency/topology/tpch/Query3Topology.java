@@ -82,7 +82,7 @@ public class Query3Topology {
 
     public static void main (String[] args) throws Exception {
         Config config = PropertiesReader.getStormConfig();
-        //config.setDebug(true);
+        config.setDebug(true);
         SubmitTopologyAndRunDrpcQueries(args, "Q3", config);
     }
 

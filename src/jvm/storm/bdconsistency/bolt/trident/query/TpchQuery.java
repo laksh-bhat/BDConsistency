@@ -9,6 +9,7 @@ import storm.trident.state.BaseQueryFunction;
 import storm.trident.tuple.TridentTuple;
 
 import java.io.Serializable;
+import java.text.MessageFormat;
 import java.util.*;
 
 
@@ -90,8 +91,8 @@ public class TpchQuery {
 
             if (orders != null && customer != null && lineItem != null) {
                 //filterCustomers(customer);
-                //filterOrders(orders);
-                //filterLineItems(lineItem);
+                filterOrders(orders);
+                filterLineItems(lineItem);
                 computeIntermediateJoinResults(results, orders, customer, lineItem);
             }
             returnList.add(results);
@@ -105,25 +106,29 @@ public class TpchQuery {
 
         @Override
         public void execute (final TridentTuple tuple, final List<Query3IntermediateResult> results, final TridentCollector collector) {
-            if (results != null)
+            if (results != null) {
+                System.out.println(MessageFormat.format("No. of Query3IntermediateResults -- {0}", results.size()));
                 for (Query3IntermediateResult result : results)
                     collector.emit(new Values(result.orderKey, result.orderDate, result.shipPriority, result.extendedPrice));
+            }
         }
 
         private void computeIntermediateJoinResults (final List<Query3IntermediateResult> results, final ITpchTable orders, final ITpchTable customer, final ITpchTable lineItem) {
+            System.out.println("Debug: computeIntermediateJoinResults -- start");
             for (Object l : lineItem.getRows()) {
                 TpchState.LineItem.LineItemBean lBean = (TpchState.LineItem.LineItemBean) l;
                 for (Object o : orders.getRows()) {
                     TpchState.Orders.OrderBean orderBean = (TpchState.Orders.OrderBean) o;
                     for (Object c : customer.getRows()) {
                         TpchState.Customer.CustBean cBean = (TpchState.Customer.CustBean) c;
-                        //if (orderBean.getCustomerKey() == cBean.getCustomerKey() && lBean.getOrderKey() == orderBean.getOrderKey()) {
+                        if (orderBean.getCustomerKey() == cBean.getCustomerKey() && lBean.getOrderKey() == orderBean.getOrderKey()) {
                             results.add(new Query3IntermediateResult(orderBean.getOrderKey(), orderBean.getOrderDate(),
                                                                      orderBean.getShipPriority(), lBean.getExtendedPrice(), lBean.getDiscount()));
-                        //}
+                        }
                     }
                 }
             }
+            System.out.println(MessageFormat.format("Debug: computeIntermediateJoinResults -- end -- {0}", results.size()));
         }
 
         private void filterCustomers (final ITpchTable customer) {
@@ -137,6 +142,7 @@ public class TpchQuery {
         }
 
         private void filterLineItems (final ITpchTable lineItem) {
+            System.out.println(MessageFormat.format("Debug: filterLineItems -- start -- {0}", lineItem.getRows().size()));
             final Set rows = lineItem.getRows();
             Iterator<TpchState.LineItem.LineItemBean> iterator = rows.iterator();
             while (iterator.hasNext()) {
@@ -144,9 +150,11 @@ public class TpchQuery {
                 if (bean.getShipDate() > maxShipDate)
                     iterator.remove();
             }
+            System.out.println(MessageFormat.format("Debug: filterLineItems -- end -- {0}", lineItem.getRows().size()));
         }
 
         private void filterOrders (final ITpchTable orders) {
+            System.out.println(MessageFormat.format("Debug: filterOrders -- start -- {0}", orders.getRows().size()));
             final Set rows = orders.getRows();
             Iterator<TpchState.Orders.OrderBean> iterator = rows.iterator();
             while (iterator.hasNext()) {
@@ -154,6 +162,7 @@ public class TpchQuery {
                 if (bean.getOrderDate() > maxOrderDate)
                     iterator.remove();
             }
+            System.out.println(MessageFormat.format("Debug: filterOrders -- end -- {0}", orders.getRows().size()));
         }
     }
 }
