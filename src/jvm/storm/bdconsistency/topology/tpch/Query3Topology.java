@@ -58,7 +58,7 @@ public class Query3Topology {
         TridentState tpchState = tpchStream
                 .partitionBy(new Fields("orderkey", "custkey"))
                 //.persistentAggregate(TpchState.FACTORY, new Fields("table", "agendaObject"), new TpchStateBuilder(), new Fields("tpchTable"))
-                .partitionPersist(TpchState.FACTORY, new Fields("agendaObject"), new TpchStateUpdater())
+                .partitionPersist(TpchState.FACTORY, new Fields("table", "agendaObject"), new TpchStateUpdater())
                 .parallelismHint(8);
 
 
