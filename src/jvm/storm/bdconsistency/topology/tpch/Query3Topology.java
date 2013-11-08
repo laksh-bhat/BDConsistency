@@ -94,7 +94,7 @@ public class Query3Topology {
             Thread.sleep(20000);
             long startTime = System.currentTimeMillis();
             System.out.println(MessageFormat.format("Result for Q3 query is -> {0}",
-                                                    client.execute(topologyAndDrpcServiceName, "1080548553,19960327,19960400" /*Query Arguments in order -- marketsegment, orderdate, shipdate*/)));
+                                                    client.execute(topologyAndDrpcServiceName, "-1828219609,19850000,19850000" /*Query Arguments in order -- marketsegment, orderdate, shipdate*/)));
             long endTime = System.currentTimeMillis();
             duration += endTime - startTime;
         }
