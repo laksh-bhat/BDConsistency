@@ -90,8 +90,8 @@ public class TpchQuery {
 
             if (orders != null && customer != null && lineItem != null) {
                 //filterCustomers(customer);
-                filterOrders(orders);
-                filterLineItems(lineItem);
+                //filterOrders(orders);
+                //filterLineItems(lineItem);
                 computeIntermediateJoinResults(results, orders, customer, lineItem);
             }
             returnList.add(results);
@@ -117,10 +117,10 @@ public class TpchQuery {
                     TpchState.Orders.OrderBean orderBean = (TpchState.Orders.OrderBean) o;
                     for (Object c : customer.getRows()) {
                         TpchState.Customer.CustBean cBean = (TpchState.Customer.CustBean) c;
-                        if (orderBean.getCustomerKey() == cBean.getCustomerKey() && lBean.getOrderKey() == orderBean.getOrderKey()) {
+                        //if (orderBean.getCustomerKey() == cBean.getCustomerKey() && lBean.getOrderKey() == orderBean.getOrderKey()) {
                             results.add(new Query3IntermediateResult(orderBean.getOrderKey(), orderBean.getOrderDate(),
                                                                      orderBean.getShipPriority(), lBean.getExtendedPrice(), lBean.getDiscount()));
-                        }
+                        //}
                     }
                 }
             }
