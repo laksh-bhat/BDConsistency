@@ -4,7 +4,7 @@
     <list default="true" id="3ce62a69-14b0-48fd-b6e9-6b6be8644430" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../BDConsistency" afterPath="$PROJECT_DIR$/../BDConsistency" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" afterPath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/tpch/Query3Topology.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/tpch/Query3Topology.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/state/tpch/TpchState.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/state/tpch/TpchState.java" />
     </list>
     <ignored path="storm.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -82,7 +82,7 @@
     <file path="/Query3Topology.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383803998621" ignored="false" />
     <file path="/Split.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383715391753" ignored="false" />
     <file path="/TpchObjectConstructor.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383586706755" ignored="false" />
-    <file path="/TpchState.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383865272641" ignored="false" />
+    <file path="/TpchState.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383885762921" ignored="false" />
     <file path="/a.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383605850638" ignored="false" />
     <file path="/sample.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383605966590" ignored="false" />
     <file path="/TpchStateFactory.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383611224014" ignored="false" />
@@ -164,10 +164,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Query3Topology.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Query3Topology.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/tpch/Query3Topology.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="70" selection-start="2767" selection-end="2767" vertical-scroll-proportion="0.7096774">
+            <state line="57" column="86" selection-start="2488" selection-end="2488" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -184,22 +184,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TpchState.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="TpchState.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/state/tpch/TpchState.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="27" selection-start="746" selection-end="757" vertical-scroll-proportion="0.0">
+            <state line="9" column="18" selection-start="290" selection-end="290" vertical-scroll-proportion="0.28333333">
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#4747#4757#0" expanded="true" />
-                <element signature="e#8143#8157#0" expanded="true" />
-                <element signature="e#10387#10399#0" expanded="true" />
-                <element signature="e#12656#12667#0" expanded="true" />
-                <element signature="e#14737#14753#0" expanded="true" />
-                <element signature="e#16987#16997#0" expanded="true" />
-                <element signature="e#18668#18680#0" expanded="true" />
-                <element signature="e#20618#20632#0" expanded="true" />
-                <element signature="e#21178#21520#0" expanded="true" />
-                <element signature="e#21513#21514#0" expanded="true" />
+                <element signature="e#4686#4696#0" expanded="true" />
+                <element signature="e#8070#8084#0" expanded="true" />
+                <element signature="e#10302#10314#0" expanded="true" />
+                <element signature="e#12559#12570#0" expanded="true" />
+                <element signature="e#14628#14644#0" expanded="true" />
+                <element signature="e#16866#16876#0" expanded="true" />
+                <element signature="e#18535#18547#0" expanded="true" />
+                <element signature="e#20473#20487#0" expanded="true" />
+                <element signature="e#21033#21375#0" expanded="true" />
+                <element signature="e#21368#21369#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -285,8 +284,8 @@
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bolt/trident/query/TpchQuery.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/state/tpch/TpchStateUpdater.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/tpchschema/TpchAgenda.java" />
-        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/state/tpch/TpchState.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/tpch/Query3Topology.java" />
+        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/state/tpch/TpchState.java" />
       </list>
     </option>
   </component>
@@ -878,13 +877,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/../lib/storm-0.8.3-wip3.jar!/src/jvm/storm/trident/fluent/GroupedStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="22" selection-start="1557" selection-end="1557" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/spouts/NonTransactionalFileStreamingSpout.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="71" column="36" selection-start="1896" selection-end="1896" vertical-scroll-proportion="0.0">
@@ -972,25 +964,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/state/tpch/TpchState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="27" selection-start="746" selection-end="757" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4747#4757#0" expanded="true" />
-            <element signature="e#8143#8157#0" expanded="true" />
-            <element signature="e#10387#10399#0" expanded="true" />
-            <element signature="e#12656#12667#0" expanded="true" />
-            <element signature="e#14737#14753#0" expanded="true" />
-            <element signature="e#16987#16997#0" expanded="true" />
-            <element signature="e#18668#18680#0" expanded="true" />
-            <element signature="e#20618#20632#0" expanded="true" />
-            <element signature="e#21178#21520#0" expanded="true" />
-            <element signature="e#21513#21514#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/state/tpch/TpchStateUpdater.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="15" column="53" selection-start="524" selection-end="540" vertical-scroll-proportion="0.0">
@@ -1002,8 +975,33 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/tpch/Query3Topology.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="70" selection-start="2767" selection-end="2767" vertical-scroll-proportion="0.7096774">
+        <state line="57" column="86" selection-start="2488" selection-end="2488" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://Z:/Java/jdk1.7.0_40/src.zip!/java/util/HashSet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="55" column="10" selection-start="1821" selection-end="1821" vertical-scroll-proportion="0.36296296">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/state/tpch/TpchState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="18" selection-start="290" selection-end="290" vertical-scroll-proportion="0.28333333">
+          <folding>
+            <element signature="e#4686#4696#0" expanded="true" />
+            <element signature="e#8070#8084#0" expanded="true" />
+            <element signature="e#10302#10314#0" expanded="true" />
+            <element signature="e#12559#12570#0" expanded="true" />
+            <element signature="e#14628#14644#0" expanded="true" />
+            <element signature="e#16866#16876#0" expanded="true" />
+            <element signature="e#18535#18547#0" expanded="true" />
+            <element signature="e#20473#20487#0" expanded="true" />
+            <element signature="e#21033#21375#0" expanded="true" />
+            <element signature="e#21368#21369#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -8,7 +8,6 @@ import storm.trident.state.map.IBackingMap;
 
 import java.io.Serializable;
 import java.util.*;
-import java.util.concurrent.CopyOnWriteArraySet;
 
 
 public class TpchState implements State, IBackingMap<ITpchTable>, Serializable {
@@ -158,7 +157,7 @@ public class TpchState implements State, IBackingMap<ITpchTable>, Serializable {
 
         }
 
-        private Set<CustBean> customerInfo = new CopyOnWriteArraySet<CustBean>();
+        private Set<CustBean> customerInfo = new HashSet<CustBean>();
 
         public void add (TpchAgenda agenda) {
             CustBean bean = new CustBean();
@@ -285,7 +284,7 @@ public class TpchState implements State, IBackingMap<ITpchTable>, Serializable {
 
         }
 
-        private Set<LineItemBean> lineItem = new CopyOnWriteArraySet<LineItemBean>();
+        private Set<LineItemBean> lineItem = new HashSet<LineItemBean>();
 
         public void add (TpchAgenda agenda) {
             LineItemBean bean = new LineItemBean();
@@ -360,7 +359,7 @@ public class TpchState implements State, IBackingMap<ITpchTable>, Serializable {
 
         }
 
-        private Set<NationBean> nation = new CopyOnWriteArraySet<NationBean>();
+        private Set<NationBean> nation = new HashSet<NationBean>();
 
         public void add (TpchAgenda agenda) {
             NationBean bean = new NationBean();
@@ -448,7 +447,7 @@ public class TpchState implements State, IBackingMap<ITpchTable>, Serializable {
 
         }
 
-        private Set<OrderBean> orders = new CopyOnWriteArraySet<OrderBean>();
+        private Set<OrderBean> orders = new HashSet<OrderBean>();
 
         public void add (TpchAgenda agenda) {
             OrderBean bean = new OrderBean();
@@ -521,7 +520,7 @@ public class TpchState implements State, IBackingMap<ITpchTable>, Serializable {
 
         }
 
-        private Set<PartSupplyBean> partsSupply = new CopyOnWriteArraySet<PartSupplyBean>();
+        private Set<PartSupplyBean> partsSupply = new HashSet<PartSupplyBean>();
 
         public void add (TpchAgenda agenda) {
             PartSupplyBean bean = new PartSupplyBean();
@@ -610,7 +609,7 @@ public class TpchState implements State, IBackingMap<ITpchTable>, Serializable {
 
         }
 
-        private Set<PartBean> part = new CopyOnWriteArraySet<PartBean>();
+        private Set<PartBean> part = new HashSet<PartBean>();
 
         public void add (TpchAgenda agenda) {
             PartBean bean = new PartBean();
@@ -673,7 +672,7 @@ public class TpchState implements State, IBackingMap<ITpchTable>, Serializable {
 
         }
 
-        private Set<RegionBean> region = new CopyOnWriteArraySet<RegionBean>();
+        private Set<RegionBean> region = new HashSet<RegionBean>();
 
         public void add (TpchAgenda agenda) {
             RegionBean bean = new RegionBean();
@@ -750,7 +749,7 @@ public class TpchState implements State, IBackingMap<ITpchTable>, Serializable {
 
         }
 
-        private Set<SupplierBean> supplier = new CopyOnWriteArraySet<SupplierBean>();
+        private Set<SupplierBean> supplier = new HashSet<SupplierBean>();
 
         public void add (TpchAgenda agenda) {
             SupplierBean bean = new SupplierBean();
