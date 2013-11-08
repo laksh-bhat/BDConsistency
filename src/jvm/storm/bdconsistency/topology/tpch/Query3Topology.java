@@ -70,7 +70,7 @@ public class Query3Topology {
                             new Fields("args"),
                             new TpchQuery.Query3(),
                             new Fields("orderkey", "orderdate", "shippriority", "extendedprice", "discount"))
-                .parallelismHint(100)
+                .parallelismHint(16)
                 .groupBy(new Fields("orderkey", "orderdate", "shippriority"))
                 .aggregate(new Fields("orderkey", "orderdate", "shippriority", "extendedprice", "discount")
                         , new TpchQuery.Query3Aggregator()
