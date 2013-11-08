@@ -65,7 +65,9 @@ public class Query3Topology {
         // DRPC Service
         topology
                 .newDRPCStream(drpcFunctionName, drpc)
+                .shuffle()
                 .broadcast()
+                .parallelismHint(8)
                 .stateQuery(tpchState,
                             new Fields("args"),
                             new TpchQuery.Query3(),
@@ -75,6 +77,7 @@ public class Query3Topology {
                 .aggregate(new Fields("orderkey", "orderdate", "shippriority", "extendedprice", "discount")
                         , new TpchQuery.Query3Aggregator()
                         , new Fields("query3"))
+                 .project(new Fields("orderkey", "orderdate", "shippriority", "query3"))
         ;
 
         return topology.build();
