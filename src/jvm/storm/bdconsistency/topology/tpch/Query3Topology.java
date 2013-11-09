@@ -10,6 +10,7 @@ import backtype.storm.generated.StormTopology;
 import backtype.storm.tuple.Fields;
 import backtype.storm.utils.DRPCClient;
 import bdconsistency.bolt.trident.basefunction.Split;
+import bdconsistency.bolt.trident.filter.PrinterBolt;
 import bdconsistency.bolt.trident.query.TpchQuery;
 import bdconsistency.spouts.NonTransactionalFileStreamingSpout;
 import bdconsistency.spouts.TransactionalTextFileSpout;
@@ -71,12 +72,13 @@ public class Query3Topology {
                             new TpchQuery.Query3(),
                             new Fields("orderkey", "orderdate", "shippriority", "extendedprice", "discount"))
                 .parallelismHint(16)
+                .each(new Fields("orderkey", "orderdate", "shippriority", "extendedprice", "discount"), new PrinterBolt())
                 .groupBy(new Fields("orderkey", "orderdate", "shippriority"))
                 .aggregate(new Fields("orderkey", "orderdate", "shippriority", "extendedprice", "discount")
                         , new TpchQuery.Query3Aggregator()
                         , new Fields("query3"))
                 .parallelismHint(16)
-                 .project(new Fields("orderkey", "orderdate", "shippriority", "query3"))
+                .project(new Fields("orderkey", "orderdate", "shippriority", "query3"))
         ;
 
         return topology.build();

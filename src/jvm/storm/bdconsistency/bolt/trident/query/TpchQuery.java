@@ -83,7 +83,7 @@ public class TpchQuery {
                 maxShipDate   = Integer.valueOf(predicates[2]);
             } catch ( NumberFormatException ignore ) {}
 
-            List<List<Query3IntermediateResult>> returnList = new LinkedList<List<Query3IntermediateResult>>();
+            List<List<Query3IntermediateResult>> returnList = new ArrayList<List<Query3IntermediateResult>>();
             List<Query3IntermediateResult> results = new ArrayList<Query3IntermediateResult>();
             ITpchTable orders = state.getTable("orders");
             ITpchTable customer = state.getTable("customer");
@@ -96,11 +96,6 @@ public class TpchQuery {
                 computeIntermediateJoinResults(results, orders, customer, lineItem);
             }
             returnList.add(results);
-
-
-            // The return list must have the same number of elements as that of the keys.
-            // These "null" will be ignored while emitting tuples.
-            for (int i = returnList.size() ; i < args.size(); i++) returnList.add(null);
             return returnList;
         }
 
@@ -124,6 +119,8 @@ public class TpchQuery {
                         //if (orderBean.getCustomerKey() == cBean.getCustomerKey() && lBean.getOrderKey() == orderBean.getOrderKey()) {
                             results.add(new Query3IntermediateResult(orderBean.getOrderKey(), orderBean.getOrderDate(),
                                                                      orderBean.getShipPriority(), lBean.getExtendedPrice(), lBean.getDiscount()));
+                            if (results.size() > 5000)
+                                return;
                         //}
                     }
                 }
