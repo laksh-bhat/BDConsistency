@@ -18,7 +18,7 @@ public class TpchQuery {
     public static class Query3Aggregator extends BaseAggregator<Query3Aggregator.Query3Result> {
         @Override
         public Query3Result init (final Object batchId, final TridentCollector collector) {
-            return null;
+            return new Query3Result();
         }
 
         @Override

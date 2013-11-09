@@ -92,7 +92,7 @@
     <file path="/NonTransactionalFileStreamingSpout.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383615758917" ignored="false" />
     <file path="/TpchStateBuilder.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383618993248" ignored="false" />
     <file path="/TpchFilter.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383621662164" ignored="false" />
-    <file path="/TpchQuery.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383964218822" ignored="false" />
+    <file path="/TpchQuery.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383965365125" ignored="false" />
     <file path="/AxFinderSelectQuery.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383668955505" ignored="false" />
     <file path="/TpchAgenda.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383883060615" ignored="false" />
     <file path="/ITpchTable.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383957954705" ignored="false" />
@@ -236,11 +236,11 @@
       <file leaf-file-name="TpchQuery.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bolt/trident/query/TpchQuery.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="105" column="52" selection-start="4495" selection-end="4501" vertical-scroll-proportion="-0.22580644">
+            <state line="36" column="25" selection-start="1292" selection-end="1298" vertical-scroll-proportion="0.7096774">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3418#3449#0" expanded="true" />
-                <element signature="e#3516#3542#0" expanded="true" />
+                <element signature="e#3432#3463#0" expanded="true" />
+                <element signature="e#3530#3556#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1016,11 +1016,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bolt/trident/query/TpchQuery.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="105" column="52" selection-start="4495" selection-end="4501" vertical-scroll-proportion="-0.22580644">
+        <state line="36" column="25" selection-start="1292" selection-end="1298" vertical-scroll-proportion="0.7096774">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3418#3449#0" expanded="true" />
-            <element signature="e#3516#3542#0" expanded="true" />
+            <element signature="e#3432#3463#0" expanded="true" />
+            <element signature="e#3530#3556#0" expanded="true" />
           </folding>
         </state>
       </provider>
