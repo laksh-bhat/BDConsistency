@@ -172,6 +172,12 @@ public class TpchState implements State, IBackingMap<ITpchTable>, Serializable {
             customerInfo.add(bean);
         }
 
+        @Override
+        public void add (final Object bean) {
+            if (bean instanceof CustBean)
+                customerInfo.add((CustBean)bean);
+        }
+
     }
 
     public static class LineItem implements ITpchTable {
@@ -307,6 +313,12 @@ public class TpchState implements State, IBackingMap<ITpchTable>, Serializable {
             lineItem.add(bean);
         }
 
+        @Override
+        public void add (final Object bean) {
+                if (bean instanceof LineItemBean)
+                    lineItem.add((LineItemBean)bean);
+        }
+
     }
 
     public static class Nation implements ITpchTable {
@@ -368,6 +380,12 @@ public class TpchState implements State, IBackingMap<ITpchTable>, Serializable {
             bean.nationKey = agenda.getNationKey();
             bean.regionKey = agenda.getRegionKey();
             nation.add(bean);
+        }
+
+        @Override
+        public void add (final Object bean) {
+            if (bean instanceof NationBean)
+                nation.add((NationBean)bean);
         }
 
     }
@@ -463,6 +481,12 @@ public class TpchState implements State, IBackingMap<ITpchTable>, Serializable {
             orders.add(bean);
         }
 
+        @Override
+        public void add (final Object bean) {
+            if (bean instanceof OrderBean)
+                orders.add((OrderBean)bean);
+        }
+
     }
 
     public static class PartSupply implements ITpchTable {
@@ -530,6 +554,12 @@ public class TpchState implements State, IBackingMap<ITpchTable>, Serializable {
             bean.supplyCost = agenda.getSupplyCost();
             bean.supplyKey = agenda.getSupplierKey();
             partsSupply.add(bean);
+        }
+
+        @Override
+        public void add (final Object bean) {
+            if (bean instanceof PartSupplyBean)
+                partsSupply.add((PartSupplyBean)bean);
         }
 
     }
@@ -625,6 +655,12 @@ public class TpchState implements State, IBackingMap<ITpchTable>, Serializable {
             part.add(bean);
         }
 
+        @Override
+        public void add (final Object bean) {
+            if (bean instanceof PartBean)
+                part.add((PartBean)bean);
+        }
+
     }
 
     public static class Region implements ITpchTable {
@@ -680,6 +716,12 @@ public class TpchState implements State, IBackingMap<ITpchTable>, Serializable {
             bean.name = agenda.getName();
             bean.regionKey = agenda.getRegionKey();
             region.add(bean);
+        }
+
+        @Override
+        public void add (final Object bean) {
+            if (bean instanceof RegionBean)
+                region.add((RegionBean)bean);
         }
 
     }
@@ -761,6 +803,12 @@ public class TpchState implements State, IBackingMap<ITpchTable>, Serializable {
             bean.phone = agenda.getPhone();
             bean.nationKey = agenda.getNationKey();
             supplier.add(bean);
+        }
+
+        @Override
+        public void add (final Object bean) {
+            if (bean instanceof SupplierBean)
+                supplier.add((SupplierBean)bean);
         }
 
     }

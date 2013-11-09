@@ -90,9 +90,9 @@ public class TpchQuery {
             ITpchTable lineItem = state.getTable("lineitem");
 
             if (orders != null && customer != null && lineItem != null) {
-                filterCustomers(customer);
-                filterOrders(orders);
-                filterLineItems(lineItem);
+                customer = filterCustomers(customer);
+                orders = filterOrders(orders);
+                lineItem = filterLineItems(lineItem);
                 computeIntermediateJoinResults(results, orders, customer, lineItem);
             }
             returnList.add(results);
@@ -131,40 +131,46 @@ public class TpchQuery {
             System.out.println(MessageFormat.format("Debug: computeIntermediateJoinResults -- end -- {0}", results.size()));
         }
 
-        private void filterCustomers (final ITpchTable customer) {
+        private ITpchTable filterCustomers (final ITpchTable customer) {
+            ITpchTable filteredCustomer = new TpchState.Customer();
             System.out.println(MessageFormat.format("Debug: filterCustomers -- start -- {0}", customer.getRows().size()));
             final Set rows = customer.getRows();
             Iterator<TpchState.Customer.CustBean> iterator = rows.iterator();
             while (iterator.hasNext()) {
                 final TpchState.Customer.CustBean bean = iterator.next();
-                if (bean.getMarketSegment() != marketSegment)
-                    iterator.remove();
+                if (bean.getMarketSegment() == marketSegment)
+                    filteredCustomer.add(bean);
             }
-            System.out.println(MessageFormat.format("Debug: filterCustomers -- end -- {0}", customer.getRows().size()));
+            System.out.println(MessageFormat.format("Debug: filterCustomers -- end -- {0}", filteredCustomer.getRows().size()));
+            return filteredCustomer;
         }
 
-        private void filterLineItems (final ITpchTable lineItem) {
+        private ITpchTable filterLineItems (final ITpchTable lineItem) {
+            ITpchTable filteredLineItems = new TpchState.LineItem();
             System.out.println(MessageFormat.format("Debug: filterLineItems -- start -- {0}", lineItem.getRows().size()));
             final Set rows = lineItem.getRows();
             Iterator<TpchState.LineItem.LineItemBean> iterator = rows.iterator();
             while (iterator.hasNext()) {
                 final TpchState.LineItem.LineItemBean bean = iterator.next();
-                if (bean.getShipDate() <= maxShipDate)
-                    iterator.remove();
+                if (bean.getShipDate() > maxShipDate)
+                    filteredLineItems.add(bean);
             }
-            System.out.println(MessageFormat.format("Debug: filterLineItems -- end -- {0}", lineItem.getRows().size()));
+            System.out.println(MessageFormat.format("Debug: filterLineItems -- end -- {0}", filteredLineItems.getRows().size()));
+            return filteredLineItems;
         }
 
-        private void filterOrders (final ITpchTable orders) {
+        private ITpchTable filterOrders (final ITpchTable orders) {
+            ITpchTable filteredOrders = new TpchState.Orders();
             System.out.println(MessageFormat.format("Debug: filterOrders -- start -- {0}", orders.getRows().size()));
             final Set rows = orders.getRows();
             Iterator<TpchState.Orders.OrderBean> iterator = rows.iterator();
             while (iterator.hasNext()) {
                 final TpchState.Orders.OrderBean bean = iterator.next();
-                if (bean.getOrderDate() <= maxOrderDate)
-                    iterator.remove();
+                if (bean.getOrderDate() > maxOrderDate)
+                    filteredOrders.add(bean);
             }
-            System.out.println(MessageFormat.format("Debug: filterOrders -- end -- {0}", orders.getRows().size()));
+            System.out.println(MessageFormat.format("Debug: filterOrders -- end -- {0}", filteredOrders.getRows().size()));
+            return filteredOrders;
         }
     }
 }

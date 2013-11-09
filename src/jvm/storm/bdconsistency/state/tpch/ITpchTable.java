@@ -11,4 +11,5 @@ public interface ITpchTable extends State, Serializable {
     public Set<Object> getRows ();
     public void append (ITpchTable table);
     public void add (TpchAgenda agenda);
+    public void add (Object bean);
 }
