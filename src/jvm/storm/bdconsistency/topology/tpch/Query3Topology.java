@@ -63,7 +63,7 @@ public class Query3Topology {
                 .parallelismHint(8);
 
 
-        // DRPC Service
+        // DRPC Query Service
         topology
                 .newDRPCStream(drpcFunctionName, drpc)
                 .broadcast()
@@ -72,7 +72,6 @@ public class Query3Topology {
                             new TpchQuery.Query3(),
                             new Fields("orderkey", "orderdate", "shippriority", "extendedprice", "discount"))
                 .parallelismHint(16)
-                .each(new Fields("orderkey", "orderdate", "shippriority", "extendedprice", "discount"), new PrinterBolt())
                 .groupBy(new Fields("orderkey", "orderdate", "shippriority"))
                 .aggregate(new Fields("orderkey", "orderdate", "shippriority", "extendedprice", "discount")
                         , new TpchQuery.Query3Aggregator()
@@ -94,19 +93,22 @@ public class Query3Topology {
         long duration = 0;
         DRPCClient client = new DRPCClient("localhost", 3772);
         StormSubmitter.submitTopology(topologyAndDrpcServiceName, config, buildTopology(null, args[0], topologyAndDrpcServiceName));
+        Thread.sleep(120000);
+
         for (int i = 0; i < NUM_QUERIES; i++) {
-            Thread.sleep(20000);
             long startTime = System.currentTimeMillis();
             System.out.println(MessageFormat.format("Result for Q3 query is -> {0}",
-                                                    client.execute(topologyAndDrpcServiceName, "-1828219609,19950000,19940000" /*Query Arguments in order -- marketsegment, orderdate, shipdate*/)));
+                                                    client.execute(topologyAndDrpcServiceName, "1080548553,19950315,19950315" /*Query Arguments in order -- marketsegment, orderdate, shipdate*/)));
             long endTime = System.currentTimeMillis();
             duration += endTime - startTime;
+
+            Thread.sleep(60000);
         }
         printTimings(duration, NUM_QUERIES);
         cleanup(client);
     }
 
-    private static final int NUM_QUERIES = 10;
+    private static final int NUM_QUERIES = 5;
 }
 
 

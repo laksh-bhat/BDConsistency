@@ -13,73 +13,69 @@ import backtype.storm.task.TopologyContext;
 import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Values;
 
-@SuppressWarnings({ "serial", "rawtypes" })
+@SuppressWarnings ({"serial", "rawtypes"})
 public class NonTransactionalFileStreamingSpout implements IRichSpout {
     SpoutOutputCollector _collector;
     private Scanner scanner;
-    private String fileName;
-    private String fieldName;
+    private String  fileName;
+    private String  fieldName;
 
-    public NonTransactionalFileStreamingSpout(String fileName, String fieldName) {
+    public NonTransactionalFileStreamingSpout (String fileName, String fieldName) {
         this.fileName = fileName;
         this.fieldName = fieldName;
     }
 
     @Override
-    public void declareOutputFields(OutputFieldsDeclarer declarer) {
+    public void declareOutputFields (OutputFieldsDeclarer declarer) {
         declarer.declare(new Fields(fieldName));
     }
 
     @Override
-    public Map<String, Object> getComponentConfiguration() {
+    public Map<String, Object> getComponentConfiguration () {
         return new Config();
     }
 
     @Override
-    public void open(Map conf, TopologyContext context, SpoutOutputCollector collector) {
-        System.err.println("Open Spout instance");
+    public void open (Map conf, TopologyContext context, SpoutOutputCollector collector) {
+        System.err.println("Debug: Opening NonTransactionalFileStreamingSpout Instance...");
         _collector = collector;
         try {
             scanner = new Scanner(new File(fileName));
-        } catch(IOException e) {
+        } catch ( IOException e ) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
-    public void close() {
+    public void close () {
         scanner.close();
     }
 
     @Override
-    public void activate() {
-        if(scanner != null)
+    public void activate () {
+        if (scanner != null)
             scanner.close();
         scanner = new Scanner(fileName);
     }
 
     @Override
-    public void deactivate() {
-        scanner.reset();
-    }
-
-    @Override
-    public void nextTuple() {
-        try {
-            Thread.sleep(0);
-            if (!scanner.hasNextLine())
-                scanner = new Scanner(fileName);
-
-            _collector.emit(new Values(scanner.nextLine()));
-        } catch (InterruptedException ignore) {}
-    }
-
-    @Override
-    public void ack(Object msgId) {
-    }
-
-    @Override
-    public void fail(Object msgId) {
+    public void deactivate () {
         scanner.close();
     }
+
+    @Override
+    public void nextTuple () {
+        try {
+            Thread.sleep(0);
+            if (scanner.hasNextLine())
+                _collector.emit(new Values(scanner.nextLine()));
+
+        } catch ( InterruptedException ignore ) {}
+    }
+
+    @Override
+    public void ack (Object msgId) {}
+
+    @Override
+    public void fail (Object msgId) {}
 }
