@@ -226,7 +226,7 @@
       <file leaf-file-name="TpchQuery.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bolt/trident/query/TpchQuery.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="126" column="26" selection-start="5995" selection-end="5995" vertical-scroll-proportion="0.686907">
+            <state line="95" column="46" selection-start="3935" selection-end="3965" vertical-scroll-proportion="0.46110058">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3406#3438#0" expanded="true" />
@@ -993,7 +993,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bolt/trident/query/TpchQuery.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="126" column="26" selection-start="5995" selection-end="5995" vertical-scroll-proportion="0.686907">
+        <state line="95" column="46" selection-start="3935" selection-end="3965" vertical-scroll-proportion="0.46110058">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#3406#3438#0" expanded="true" />

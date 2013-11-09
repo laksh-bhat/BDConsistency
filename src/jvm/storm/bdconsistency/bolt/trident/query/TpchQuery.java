@@ -107,7 +107,7 @@ public class TpchQuery {
         @Override
         public void execute (final TridentTuple tuple, final List<Query3IntermediateResult> results, final TridentCollector collector) {
             if (results != null) {
-                System.out.println(MessageFormat.format("No. of Query3IntermediateResults -- {0}", results.size()));
+                System.out.println(MessageFormat.format("Debug: No. of Query3IntermediateResults -- {0}", results.size()));
                 for (Query3IntermediateResult result : results)
                     collector.emit(new Values(result.orderKey, result.orderDate, result.shipPriority, result.extendedPrice));
             }
