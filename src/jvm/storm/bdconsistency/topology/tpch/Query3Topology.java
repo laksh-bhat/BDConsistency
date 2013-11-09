@@ -57,15 +57,16 @@ public class Query3Topology {
         final Stream tpchStream = basicStream
                 .each(new Fields("agenda"),
                       new Split.AgendaTableSplit(), new Fields("table", "orderkey", "custkey", "agendaObject"))
-                .project(new Fields("table", "orderkey", "custkey", "agendaObject"));
+                .project(new Fields("table", "orderkey", "custkey", "agendaObject"))
+        ;
 
         // In this state we will save the tables
         TridentState tpchState = tpchStream
                 .partitionBy(new Fields("orderkey", "custkey"))
                 //.persistentAggregate(TpchState.FACTORY, new Fields("table", "agendaObject"), new TpchStateBuilder(), new Fields("tpchTable"))
                 .partitionPersist(TpchState.FACTORY, new Fields("table", "agendaObject"), new TpchStateUpdater())
-                .parallelismHint(8);
-
+                .parallelismHint(32)
+        ;
 
         // DRPC Query Service
         topology
@@ -75,7 +76,7 @@ public class Query3Topology {
                             new Fields("args"),
                             new TpchQuery.Query3(),
                             new Fields("orderkey", "orderdate", "shippriority", "extendedprice", "discount"))
-                .parallelismHint(16)
+                .parallelismHint(32)
                 .groupBy(new Fields("orderkey", "orderdate", "shippriority"))
                 .aggregate(new Fields("orderkey", "orderdate", "shippriority", "extendedprice", "discount")
                         , new TpchQuery.Query3Aggregator()
