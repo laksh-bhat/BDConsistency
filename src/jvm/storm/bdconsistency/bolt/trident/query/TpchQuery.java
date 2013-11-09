@@ -57,11 +57,11 @@ public class TpchQuery {
             this.discount = discount;
         }
 
-        int orderKey, orderDate, shipPriority;
-        double extendedPrice, discount;
+        private int orderKey, orderDate, shipPriority;
+        private double extendedPrice, discount;
     }
 
-    public static class Query3 extends BaseQueryFunction<TpchState, List<Query3IntermediateResult>> {
+    public static class Query3 extends BaseQueryFunction<TpchState, Set<Query3IntermediateResult>> {
         int maxOrderDate, maxShipDate, marketSegment;
 
         public Query3 () {}
@@ -73,7 +73,7 @@ public class TpchQuery {
         }
 
         @Override
-        public List<List<Query3IntermediateResult>> batchRetrieve (final TpchState state, final List<TridentTuple> args) {
+        public List<Set<Query3IntermediateResult>> batchRetrieve (final TpchState state, final List<TridentTuple> args) {
             // Query predicates are passed in through the drpc stream
             // I know this is horrible, but I wanted to hack something quickly
             String[] predicates = args.get(0).getStringByField("args").split(",");
@@ -83,8 +83,8 @@ public class TpchQuery {
                 maxShipDate   = Integer.valueOf(predicates[2]);
             } catch ( NumberFormatException ignore ) {}
 
-            List<List<Query3IntermediateResult>> returnList = new ArrayList<List<Query3IntermediateResult>>();
-            List<Query3IntermediateResult> results = new ArrayList<Query3IntermediateResult>();
+            List<Set<Query3IntermediateResult>> returnList = new ArrayList<Set<Query3IntermediateResult>>();
+            Set<Query3IntermediateResult> results = new HashSet<Query3IntermediateResult>();
             ITpchTable orders = state.getTable("orders");
             ITpchTable customer = state.getTable("customer");
             ITpchTable lineItem = state.getTable("lineitem");
@@ -100,15 +100,15 @@ public class TpchQuery {
         }
 
         @Override
-        public void execute (final TridentTuple tuple, final List<Query3IntermediateResult> results, final TridentCollector collector) {
+        public void execute (final TridentTuple tuple, final Set<Query3IntermediateResult> results, final TridentCollector collector) {
             if (results != null) {
                 System.out.println(MessageFormat.format("Debug: No. of Query3IntermediateResults -- {0}", results.size()));
                 for (Query3IntermediateResult result : results)
-                    collector.emit(new Values(result.orderKey, result.orderDate, result.shipPriority, result.extendedPrice));
+                    collector.emit(new Values(result.orderKey, result.orderDate, result.shipPriority, result.extendedPrice, result.discount));
             }
         }
 
-        private void computeIntermediateJoinResults (final List<Query3IntermediateResult> results, final ITpchTable orders, final ITpchTable customer, final ITpchTable lineItem) {
+        private void computeIntermediateJoinResults (final Set<Query3IntermediateResult> results, final ITpchTable orders, final ITpchTable customer, final ITpchTable lineItem) {
             System.out.println("Debug: computeIntermediateJoinResults -- start");
             for (Object l : lineItem.getRows()) {
                 TpchState.LineItem.LineItemBean lBean = (TpchState.LineItem.LineItemBean) l;
