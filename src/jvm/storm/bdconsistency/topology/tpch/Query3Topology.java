@@ -30,6 +30,10 @@ import storm.trident.spout.RichSpoutBatchExecutor;
 import storm.trident.state.StateUpdater;
 import storm.trident.tuple.TridentTuple;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Map;
@@ -85,27 +89,39 @@ public class Query3Topology {
 
     public static void main (String[] args) throws Exception {
         Config config = PropertiesReader.getStormConfig();
-        //config.setDebug(true);
         SubmitTopologyAndRunDrpcQueries(args, "Q3", config);
     }
 
-    public static void SubmitTopologyAndRunDrpcQueries (String[] args, String topologyAndDrpcServiceName, Config config) throws AlreadyAliveException, InvalidTopologyException, InterruptedException, TException, DRPCExecutionException {
+    public static void SubmitTopologyAndRunDrpcQueries (String[] args, String topologyAndDrpcServiceName, Config config) throws AlreadyAliveException, InvalidTopologyException, InterruptedException, TException, DRPCExecutionException, IOException {
         long duration = 0;
+        BufferedWriter writer = new BufferedWriter(new FileWriter("query-result.dat", false /*append*/));
         DRPCClient client = new DRPCClient("localhost", 3772);
-        StormSubmitter.submitTopology(topologyAndDrpcServiceName, config, buildTopology(null, args[0], topologyAndDrpcServiceName));
-        Thread.sleep(120000);
+        try {
+            StormSubmitter.submitTopology(topologyAndDrpcServiceName, config, buildTopology(null, args[0], topologyAndDrpcServiceName));
+            Thread.sleep(120000);
 
-        for (int i = 0; i < NUM_QUERIES; i++) {
-            long startTime = System.currentTimeMillis();
-            System.out.println(MessageFormat.format("Result for Q3 query is -> {0}",
-                                                    client.execute(topologyAndDrpcServiceName, "1080548553,19950315,19950315" /*Query Arguments in order -- marketsegment, orderdate, shipdate*/)));
-            long endTime = System.currentTimeMillis();
-            duration += endTime - startTime;
-
-            Thread.sleep(60000);
+            for (int i = 0; i < NUM_QUERIES; i++) {
+                long startTime = System.currentTimeMillis();
+                String result = runQuery(topologyAndDrpcServiceName, client);
+                saveResults(writer, result);
+                long endTime = System.currentTimeMillis();
+                duration += endTime - startTime;
+                Thread.sleep(60000);
+            }
+        } finally {
+            cleanup(client, writer);
         }
         printTimings(duration, NUM_QUERIES);
-        cleanup(client);
+    }
+
+    private static void saveResults (final BufferedWriter writer, final String result) throws IOException {
+        writer.append(result);
+        writer.newLine();
+        System.err.println("Debug: Saved Results!");
+    }
+
+    private static String runQuery (final String topologyAndDrpcServiceName, final DRPCClient client) throws TException, DRPCExecutionException {/*Query Arguments in order -- marketsegment, orderdate, shipdate*/
+        return client.execute(topologyAndDrpcServiceName, "1080548553,19950315,19950315");
     }
 
     private static final int NUM_QUERIES = 5;

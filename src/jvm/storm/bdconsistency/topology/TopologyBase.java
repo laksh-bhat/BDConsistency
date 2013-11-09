@@ -2,6 +2,8 @@ package bdconsistency.topology;
 
 import backtype.storm.utils.DRPCClient;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.text.MessageFormat;
 
 /**
@@ -24,6 +26,11 @@ public class TopologyBase {
         System.out.println("==================================================================");
         System.out.println(MessageFormat.format("duration for {1} ax-finder queries {0} mill seconds",
                 duration, numQueries));
+    }
+
+    public static void cleanup(DRPCClient client, BufferedWriter writer) throws IOException {
+        writer.close();
+        client.close();
     }
 
     public static void cleanup(DRPCClient client) {
