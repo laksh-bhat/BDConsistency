@@ -66,10 +66,12 @@ public class NonTransactionalFileStreamingSpout implements IRichSpout {
     @Override
     public void nextTuple () {
         try {
-            Thread.sleep(0);
             if (scanner.hasNextLine())
                 _collector.emit(new Values(scanner.nextLine()));
-
+            else {
+                System.err.println("Debug: No More Tuples...");
+                Thread.sleep(60000);
+            }
         } catch ( InterruptedException ignore ) {}
     }
 

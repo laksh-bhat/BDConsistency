@@ -18,9 +18,9 @@ public class PropertiesReader {
         Config conf = new Config();
         conf.setNumAckers(8);
         conf.setNumWorkers(8);
-        conf.setMaxSpoutPending(1);
-        conf.put("topology.spout.max.batch.size", 50);
-        conf.put("topology.trident.batch.emit.interval.millis", 500 );
+        conf.setMaxSpoutPending(20);
+        conf.put("topology.spout.max.batch.size", 1000);
+        conf.put("topology.trident.batch.emit.interval.millis", 100 );
         conf.put(Config.DRPC_SERVERS, Lists.newArrayList("qp-hd1", "qp-hd9", "qp-hd3", "qp-hd4"));
         conf.put(Config.STORM_CLUSTER_MODE, "distributed");
         return conf;
@@ -29,8 +29,6 @@ public class PropertiesReader {
     public static Config getBaseConfig() throws IOException {
         Properties prop = new Properties();
         Config conf = new Config();
-        //load a properties file
-        //prop.load(new FileInputStream("storm.basic.properties"));
         prop.load(PropertiesReader.class.getClassLoader().getResourceAsStream("storm.basic.properties"));
         return conf;
     }
