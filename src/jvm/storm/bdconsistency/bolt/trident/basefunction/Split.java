@@ -12,13 +12,21 @@ import storm.trident.tuple.TridentTuple;
  * Time: 12:08 PM
  */
 public class Split {
-    public static class AgendaTableSplit extends BaseFunction{
-
+    public static class Query3AgendaTableSplit extends BaseFunction{
         @Override
         public void execute(TridentTuple tuple, TridentCollector collector) {
             TpchAgenda agenda = new TpchAgenda();
             String tableName = agenda.TpchObjectConstructAndReport(tuple.getStringByField("agenda"));
             collector.emit(new Values(tableName, agenda.getOrderKey(), agenda.getCustomerKey(), agenda));
+        }
+    }
+
+    public static class Query21AgendaTableSplit extends BaseFunction{
+        @Override
+        public void execute(TridentTuple tuple, TridentCollector collector) {
+            TpchAgenda agenda = new TpchAgenda();
+            String tableName = agenda.TpchObjectConstructAndReport(tuple.getStringByField("agenda"));
+            collector.emit(new Values(tableName, agenda.getOrderKey(), agenda.getSupplierKey(), agenda.getNationKey(), agenda));
         }
     }
 }

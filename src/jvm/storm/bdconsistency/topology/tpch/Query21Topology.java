@@ -34,7 +34,7 @@ import static bdconsistency.topology.TopologyBase.printTimings;
  * Date: 11/4/13
  * Time: 11:58 AM
  */
-public class Query3Topology {
+public class Query21Topology {
 
     public static StormTopology buildTopology (LocalDRPC drpc, String fileName, String drpcFunctionName) {
         //final ITridentSpout agendaSpout = new TransactionalTextFileSpout("agenda", fileName, "UTF-8");
@@ -44,17 +44,17 @@ public class Query3Topology {
         final Stream basicStream = topology.newStream("agenda-spout", agendaSpout);
         final Stream tpchStream = basicStream
                 .each(new Fields("agenda"),
-                      new Split.Query3AgendaTableSplit(), new Fields("table", "orderkey", "custkey", "agendaObject"))
-                .project(new Fields("table", "orderkey", "custkey", "agendaObject"))
-        ;
+                      new Split.Query21AgendaTableSplit(), new Fields("table", "orderkey", "supplierkey", "nationkey", "agendaObject"))
+                .project(new Fields("table", "orderkey", "supplierkey", "nationkey", "agendaObject"))
+                ;
 
         // In this state we will save the tables
         TridentState tpchState = tpchStream
-                .partitionBy(new Fields("orderkey", "custkey"))
-                //.persistentAggregate(TpchState.FACTORY, new Fields("table", "agendaObject"), new TpchStateBuilder(), new Fields("tpchTable"))
+                .partitionBy(new Fields("orderkey", "nationkey"))
+                        //.persistentAggregate(TpchState.FACTORY, new Fields("table", "agendaObject"), new TpchStateBuilder(), new Fields("tpchTable"))
                 .partitionPersist(TpchState.FACTORY, new Fields("table", "agendaObject"), new TpchStateUpdater())
-                .parallelismHint(32)
-        ;
+                .parallelismHint(16)
+                ;
 
         // DRPC Query Service
         topology
@@ -62,15 +62,14 @@ public class Query3Topology {
                 .broadcast()
                 .stateQuery(tpchState,
                             new Fields("args"),
-                            new TpchQuery.Query3(),
-                            new Fields("orderkey", "orderdate", "shippriority", "extendedprice", "discount"))
-                .parallelismHint(32)
-                .groupBy(new Fields("orderkey", "orderdate", "shippriority"))
-                .aggregate(new Fields("orderkey", "orderdate", "shippriority", "extendedprice", "discount")
-                        , new TpchQuery.Query3Aggregator()
-                        , new Fields("query3"))
+                            new TpchQuery.Query21(),
+                            new Fields("suppliername"))
                 .parallelismHint(16)
-                .project(new Fields("orderkey", "orderdate", "shippriority", "query3"))
+                .groupBy(new Fields("suppliername"))
+                .aggregate(new Fields("suppliername")
+                        , new TpchQuery.Query21Aggregator()
+                        , new Fields("suppliername", "count"))
+                .parallelismHint(16)
         ;
 
         return topology.build();
@@ -78,12 +77,12 @@ public class Query3Topology {
 
     public static void main (String[] args) throws Exception {
         Config config = PropertiesReader.getStormConfig();
-        SubmitTopologyAndRunDrpcQueries(args, "Q3", config);
+        SubmitTopologyAndRunDrpcQueries(args, "Q21", config);
     }
 
     public static void SubmitTopologyAndRunDrpcQueries (String[] args, String topologyAndDrpcServiceName, Config config) throws AlreadyAliveException, InvalidTopologyException, InterruptedException, TException, DRPCExecutionException, IOException {
         long duration = 0;
-        BufferedWriter writer = new BufferedWriter(new FileWriter("query-result.dat", false /*append*/));
+        BufferedWriter writer = new BufferedWriter(new FileWriter("query-result-21.dat", false /*append*/));
         DRPCClient client = new DRPCClient("localhost", 3772);
         try {
             StormSubmitter.submitTopology(topologyAndDrpcServiceName, config, buildTopology(null, args[0], topologyAndDrpcServiceName));
@@ -110,7 +109,7 @@ public class Query3Topology {
     }
 
     private static String runQuery (final String topologyAndDrpcServiceName, final DRPCClient client) throws TException, DRPCExecutionException {/*Query Arguments in order -- marketsegment, orderdate, shipdate*/
-        return client.execute(topologyAndDrpcServiceName, "1080548553,19950315,19950315");
+        return client.execute(topologyAndDrpcServiceName, "");
     }
 
     private static final int NUM_QUERIES = 5;

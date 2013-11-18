@@ -13,18 +13,6 @@ import java.text.MessageFormat;
 import java.util.*;
 
 
-/**
- * ** Implementing the following Tpch SQL query using storm.
- * SELECT o.orderkey, o.orderdate, o.shippriority, SUM(extendedprice * (1 - discount)) AS query3
- * FROM Customer c, Orders o, Lineitem l
- * WHERE c.mktsegment = 'BUILDING'
- * AND o.custkey = c.custkey
- * AND l.orderkey = o.orderkey
- * AND o.orderdate < DATE('1995-03-15')
- * AND l.shipdate > DATE('1995-03-15')
- * GROUP BY o.orderkey, o.orderdate, o.shippriority;
- */
-
 public class TpchQuery {
 
     public static class Query3Aggregator extends BaseAggregator<Query3Aggregator.Query3Result> {
@@ -47,6 +35,32 @@ public class TpchQuery {
 
         class Query3Result {
             double query3;
+        }
+    }
+
+    public static class Query21Aggregator extends BaseAggregator<Query21Aggregator.Query21Result> {
+        @Override
+        public Query21Result init (final Object batchId, final TridentCollector collector) {
+            return new Query21Result();
+        }
+
+        @Override
+        public void aggregate (Query21Result result, final TridentTuple tuple, final TridentCollector collector) {
+            if (result == null){
+                result = new Query21Result();
+                result.supplierName = tuple.getIntegerByField("suppliername");
+            }
+            result.count ++;
+        }
+
+        @Override
+        public void complete (final Query21Result val, final TridentCollector collector) {
+            collector.emit(new Values(val.supplierName, val.count));
+        }
+
+        class Query21Result {
+            int supplierName;
+            int count;
         }
     }
 
@@ -111,8 +125,8 @@ public class TpchQuery {
             String[] predicates = args.get(0).getStringByField("args").split(",");
             try {
                 marketSegment = Integer.valueOf(predicates[0]);
-                maxOrderDate  = Integer.valueOf(predicates[1]);
-                maxShipDate   = Integer.valueOf(predicates[2]);
+                maxOrderDate = Integer.valueOf(predicates[1]);
+                maxShipDate = Integer.valueOf(predicates[2]);
             } catch ( Exception ignore ) {
                 // Let's not fail here;
                 // We trust that the user intends to query with default values if he doesn't provide predicates/arguments
@@ -146,7 +160,7 @@ public class TpchQuery {
                     filteredCustomer.add(bean);
             }
             System.err.println(MessageFormat.format("Debug: filterCustomers -- filtered {0} rows",
-                                                customer.getRows().size() - filteredCustomer.getRows().size()));
+                                                    customer.getRows().size() - filteredCustomer.getRows().size()));
 
             return filteredCustomer;
         }
@@ -172,6 +186,154 @@ public class TpchQuery {
             while (iterator.hasNext()) {
                 final TpchState.Orders.OrderBean bean = iterator.next();
                 if (bean.getOrderDate() > maxOrderDate)
+                    filteredOrders.add(bean);
+            }
+            System.err.println(MessageFormat.format("Debug: filterOrders -- filtered {0} rows",
+                                                    orders.getRows().size() - filteredOrders.getRows().size()));
+            return filteredOrders;
+        }
+    }
+
+
+    // Query 21 Implementation
+    public static class Query21 extends BaseQueryFunction<TpchState, Set<Integer>> {
+        int nationName, orderStatus;
+
+        public Query21 () {}
+
+        @Override
+        public List<Set<Integer>> batchRetrieve (final TpchState state, final List<TridentTuple> args) {
+
+            setQueryPredicates(args);
+
+            List<Set<Integer>> returnList = new ArrayList<Set<Integer>>();
+            Set<Integer> results = new HashSet<Integer>();
+
+            ITpchTable orders = state.getTable("orders");
+            ITpchTable supplier = state.getTable("supplier");
+            ITpchTable lineItem = state.getTable("lineitem");
+            ITpchTable nation = state.getTable("nation");
+
+            if (nation != null && supplier != null && lineItem != null) {
+                lineItem = filterLineItems(lineItem);
+                nation = filterNation(nation);
+                computeIntermediateJoinResults(results, supplier, lineItem, nation);
+            }
+            returnList.add(results);
+            return returnList;
+        }
+
+        @Override
+        public void execute (final TridentTuple tuple, final Set<Integer> results, final TridentCollector collector) {
+            if (results != null) {
+                System.err.println(MessageFormat.format("Debug: No. of Query21IntermediateResults -- size is {0}", results.size()));
+                for (Integer result : results)
+                    collector.emit(new Values(result));
+            }
+        }
+
+        private void setQueryPredicates (final List<TridentTuple> args) {
+            // Query predicates are passed in through the drpc stream
+            // I know this is horrible, but I wanted to hack something quickly
+            String[] predicates = args.get(0).getStringByField("args").split(",");
+            try {
+                nationName = Integer.valueOf(predicates[0]);
+                orderStatus = Integer.valueOf(predicates[1]);
+            } catch ( Exception ignore ) {
+                // Let's not fail here;
+                // We trust that the user intends to query with default values if he doesn't provide predicates/arguments
+            }
+        }
+
+        private void computeIntermediateJoinResults (final Set<Integer> results, final ITpchTable lineItems, final ITpchTable suppliers, final ITpchTable nations) {
+            for (Object lineitem : lineItems.getRows()) {
+                TpchState.LineItem.LineItemBean l = (TpchState.LineItem.LineItemBean) lineitem;
+                for (Object nation : nations.getRows()) {
+                    TpchState.Nation.NationBean n = (TpchState.Nation.NationBean) nation;
+                    for (Object supplier : suppliers.getRows()) {
+                        TpchState.Supplier.SupplierBean s = (TpchState.Supplier.SupplierBean) supplier;
+                        addToResultsAfterMatchingJoinAndAntiJoinPredicates(results, lineItems, l, n, s);
+                    }
+                }
+            }
+            System.err.println(MessageFormat.format("Debug: computeIntermediateJoinResults -- result size -- {0}", results.size()));
+        }
+
+
+        /*
+            (EXISTS (SELECT * FROM Lineitem l2
+            WHERE l2.orderkey = l1.orderkey
+            AND l2.suppkey <> l1.suppkey))
+            AND
+            (NOT EXISTS
+            (SELECT * FROM Lineitem l3
+            WHERE l3.orderkey = l1.orderkey
+            AND l3.suppkey <> l1.suppkey))
+        */
+        private void addToResultsAfterMatchingJoinAndAntiJoinPredicates
+                (final Set<Integer> results,
+                 final ITpchTable lineItems,
+                 final TpchState.LineItem.LineItemBean l1,
+                 final TpchState.Nation.NationBean n,
+                 final TpchState.Supplier.SupplierBean s
+                )
+        {
+            if (l1.getSupplierKey() == l1.getSupplierKey() && s.getNationKey() == n.getNationKey()) {
+                boolean existsSupplierKeyNotEqual = false;
+                boolean notExistsReceiptDtGtCommitDt = true;
+
+                for (Object l2Rows : lineItems.getRows()) {
+                    TpchState.LineItem.LineItemBean l2 = (TpchState.LineItem.LineItemBean) l2Rows;
+                    if (l2.getSupplierKey() != l1.getSupplierKey()) {
+                        existsSupplierKeyNotEqual = true;
+                        if (l2.getReceiptDate() > l2.getCommitDate()) {
+                            notExistsReceiptDtGtCommitDt = false;
+                            break;
+                        }
+                    }
+                }
+                if (existsSupplierKeyNotEqual && notExistsReceiptDtGtCommitDt) {
+                    results.add(s.getName());
+                }
+            }
+        }
+
+        private ITpchTable filterLineItems (final ITpchTable lineItem) {
+            ITpchTable filteredLineItems = new TpchState.LineItem();
+            final Set rows = lineItem.getRows();
+            Iterator<TpchState.LineItem.LineItemBean> iterator = rows.iterator();
+            while (iterator.hasNext()) {
+                final TpchState.LineItem.LineItemBean bean = iterator.next();
+                if (bean.getReceiptDate() > bean.getCommitDate())
+                    filteredLineItems.add(bean);
+            }
+            System.err.println(MessageFormat.format("Debug: filterLineItems -- filtered {0} rows",
+                                                    lineItem.getRows().size() - filteredLineItems.getRows().size()));
+            return filteredLineItems;
+        }
+
+
+        private ITpchTable filterNation (final ITpchTable nation) {
+            ITpchTable filteredNation = new TpchState.Nation();
+            final Set rows = nation.getRows();
+            Iterator<TpchState.Nation.NationBean> iterator = rows.iterator();
+            while (iterator.hasNext()) {
+                final TpchState.Nation.NationBean bean = iterator.next();
+                if (bean.getName() == nationName)
+                    filteredNation.add(bean);
+            }
+            System.err.println(MessageFormat.format("Debug: filterNation -- filtered {0} rows",
+                                                    nation.getRows().size() - filteredNation.getRows().size()));
+            return filteredNation;
+        }
+
+        private ITpchTable filterOrders (final ITpchTable orders) {
+            ITpchTable filteredOrders = new TpchState.Orders();
+            final Set rows = orders.getRows();
+            Iterator<TpchState.Orders.OrderBean> iterator = rows.iterator();
+            while (iterator.hasNext()) {
+                final TpchState.Orders.OrderBean bean = iterator.next();
+                if (bean.getOrderStatus() == orderStatus)
                     filteredOrders.add(bean);
             }
             System.err.println(MessageFormat.format("Debug: filterOrders -- filtered {0} rows",

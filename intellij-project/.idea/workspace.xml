@@ -2,10 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3ce62a69-14b0-48fd-b6e9-6b6be8644430" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/tpch/Query21Topology.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../BDConsistency" afterPath="$PROJECT_DIR$/../BDConsistency" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" afterPath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/utils/PropertiesReader.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/utils/PropertiesReader.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/tpch/Query3Topology.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/tpch/Query3Topology.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bolt/trident/basefunction/Split.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bolt/trident/basefunction/Split.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bolt/trident/query/TpchQuery.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bolt/trident/query/TpchQuery.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="storm.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -15,7 +19,7 @@
     <file path="/FinanceTopology.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383258656940" ignored="false" />
     <file path="/AskSpout.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381201067384" ignored="false" />
     <file path="/TransactionMessage.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1380882421063" ignored="false" />
-    <file path="/fragment.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383714427180" ignored="false" />
+    <file path="/fragment.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384654483984" ignored="false" />
     <file path="/TradeStateFactory.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1380869707156" ignored="false" />
     <file path="/TradeState.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1380881529291" ignored="false" />
     <file path="/BidsStateFactory.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381742398216" ignored="false" />
@@ -31,9 +35,9 @@
     <file path="/test.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381966390025" ignored="false" />
     <file path="$PROJECT_DIR$/../../compgenomics/src/asgmt1/RnaTranscriber.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381082812640" ignored="false" />
     <file path="/RnaTranscriber.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381082811015" ignored="false" />
-    <file path="/RnaToProteinTranslator.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381082821495" ignored="false" />
-    <file path="$PROJECT_DIR$/../../compgenomics/src/asgmt1/RnaToProteinTranslator.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381085102990" ignored="false" />
-    <file path="$PROJECT_DIR$/../../compgenomics/src/asgmt3/RnaSplicer.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381085757105" ignored="false" />
+    <file path="/RnaToProteinTranslator.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384655975542" ignored="false" />
+    <file path="$PROJECT_DIR$/../../compgenomics/src/asgmt1/RnaToProteinTranslator.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384665819518" ignored="false" />
+    <file path="$PROJECT_DIR$/../../compgenomics/src/asgmt3/RnaSplicer.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384035398579" ignored="false" />
     <file path="/RnaSplicer.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381085756719" ignored="false" />
     <file path="$PROJECT_DIR$/../../compgenomics/src/asgmt3/GeneOrderEnumerator.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381091974459" ignored="false" />
     <file path="/GeneOrderEnumerator.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1381091550734" ignored="false" />
@@ -81,7 +85,7 @@
     <file path="/PropertiesReader.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383172704955" ignored="false" />
     <file path="/TopologyBase.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383972195781" ignored="false" />
     <file path="/Query3Topology.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383973532616" ignored="false" />
-    <file path="/Split.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383715391753" ignored="false" />
+    <file path="/Split.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384367532422" ignored="false" />
     <file path="/TpchObjectConstructor.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383586706755" ignored="false" />
     <file path="/TpchState.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383958242169" ignored="false" />
     <file path="/a.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383605850638" ignored="false" />
@@ -93,10 +97,35 @@
     <file path="/NonTransactionalFileStreamingSpout.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383970823431" ignored="false" />
     <file path="/TpchStateBuilder.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383618993248" ignored="false" />
     <file path="/TpchFilter.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383621662164" ignored="false" />
-    <file path="/TpchQuery.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383969858214" ignored="false" />
+    <file path="/TpchQuery.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384394871369" ignored="false" />
     <file path="/AxFinderSelectQuery.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383668955505" ignored="false" />
     <file path="/TpchAgenda.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383883060615" ignored="false" />
     <file path="/ITpchTable.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383957954705" ignored="false" />
+    <file path="$PROJECT_DIR$/../../compgenomics/src/aggmt4/LongestCommonSubstringFinder.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384035929272" ignored="false" />
+    <file path="/LongestCommonSubstringFinder.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384276132138" ignored="false" />
+    <file path="$PROJECT_DIR$/../../compgenomics/src/fileutils/FileUtils.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384035382765" ignored="false" />
+    <file path="$PROJECT_DIR$/../../compgenomics/src/asgmt4/LongestCommonSubstringFinder.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384276132138" ignored="false" />
+    <file path="$PROJECT_DIR$/../../compgenomics/src/asgmt4/SplicedMotifFinder.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384206607281" ignored="false" />
+    <file path="/SplicedMotifFinder.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384206606617" ignored="false" />
+    <file path="$PROJECT_DIR$/../../compgenomics/src/asgmt4/EditDistanceComputer.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384120680916" ignored="false" />
+    <file path="/EditDistanceComputer.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384120679386" ignored="false" />
+    <file path="$PROJECT_DIR$/../../compgenomics/src/asgmt4/EditDistanceAligner.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384133811846" ignored="false" />
+    <file path="/EditDistanceAligner.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384221782461" ignored="false" />
+    <file path="$PROJECT_DIR$/../../compgenomics/src/asgmt4/MinimumEditDistanceAligner.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384221886996" ignored="false" />
+    <file path="$PROJECT_DIR$/../../compgenomics/res/asgmt4/analysis.txt" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384275914253" ignored="false" />
+    <file path="/analysis.txt" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384792709292" ignored="false" />
+    <file path="$PROJECT_DIR$/../../compgenomics/readme.txt" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384792325957" ignored="false" />
+    <file path="/readme.txt" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384792325157" ignored="false" />
+    <file path="/Query21Topology.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384396647984" ignored="false" />
+    <file path="$PROJECT_DIR$/../../compgenomics/src/asgmt5/OrfProteinCoder.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384667746744" ignored="false" />
+    <file path="/OrfProteinCoder.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384666605771" ignored="false" />
+    <file path="/DnaReverseComplimenter.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384655037578" ignored="false" />
+    <file path="$PROJECT_DIR$/../../compgenomics/src/asgmt1/DnaReverseComplimenter.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384655038448" ignored="false" />
+    <file path="$PROJECT_DIR$/../../compgenomics/src/asgmt5/DrawDeBruijnGraph.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384671458400" ignored="false" />
+    <file path="/DrawDeBruijnGraph.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384733124371" ignored="false" />
+    <file path="$PROJECT_DIR$/../../compgenomics/res/asgmt5/analysis.txt" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384792735990" ignored="false" />
+    <file path="$PROJECT_DIR$/../../compgenomics/src/asgmt5/DeBruijnGrapher.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384671473857" ignored="false" />
+    <file path="$PROJECT_DIR$/../../compgenomics/src/asgmt5/DeBruijnGraphDrawer.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384744646261" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,19 +195,39 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Query3Topology.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Query3Topology.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/tpch/Query3Topology.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="69" column="20" selection-start="3042" selection-end="3042" vertical-scroll-proportion="0.29032257">
+            <state line="79" column="51" selection-start="3536" selection-end="3536" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PropertiesReader.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Query21Topology.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/tpch/Query21Topology.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="114" column="45" selection-start="5130" selection-end="5171" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Split.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bolt/trident/basefunction/Split.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="28" column="118" selection-start="1227" selection-end="1227" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PropertiesReader.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/utils/PropertiesReader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="70" selection-start="819" selection-end="819" vertical-scroll-proportion="0.0">
+            <state line="24" column="61" selection-start="786" selection-end="786" vertical-scroll-proportion="0.56666666">
               <folding />
             </state>
           </provider>
@@ -187,7 +236,7 @@
       <file leaf-file-name="TransactionalTextFileSpout.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/spouts/TransactionalTextFileSpout.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="113" selection-start="1699" selection-end="1699" vertical-scroll-proportion="0.0">
+            <state line="47" column="0" selection-start="1699" selection-end="1699" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -196,7 +245,7 @@
       <file leaf-file-name="NonTransactionalFileStreamingSpout.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/spouts/NonTransactionalFileStreamingSpout.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="76" column="49" selection-start="2128" selection-end="2128" vertical-scroll-proportion="0.0">
+            <state line="76" column="0" selection-start="2128" selection-end="2128" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="e#422#464#0" expanded="true" />
               </folding>
@@ -216,11 +265,13 @@
       <file leaf-file-name="TpchQuery.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bolt/trident/query/TpchQuery.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="152" column="67" selection-start="6973" selection-end="6973" vertical-scroll-proportion="0.0">
+            <state line="62" column="22" selection-start="2195" selection-end="2195" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2947#2978#0" expanded="true" />
-                <element signature="e#3045#3071#0" expanded="true" />
+                <element signature="e#3408#3439#0" expanded="true" />
+                <element signature="e#3506#3532#0" expanded="true" />
+                <element signature="e#9363#9377#0" expanded="true" />
+                <element signature="e#9427#9436#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -244,8 +295,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/counting/Counter.java" />
-        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/counting/OCounter.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/counting/DCounter.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/counting/QCounter.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bolt/trident/filter/Filter.java" />
@@ -255,11 +304,13 @@
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/tpchschema/TpchAgenda.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/state/tpch/ITpchTable.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/state/tpch/TpchState.java" />
-        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bolt/trident/query/TpchQuery.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/spouts/NonTransactionalFileStreamingSpout.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/TopologyBase.java" />
-        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/utils/PropertiesReader.java" />
+        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bolt/trident/basefunction/Split.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/tpch/Query3Topology.java" />
+        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bolt/trident/query/TpchQuery.java" />
+        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/tpch/Query21Topology.java" />
+        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/utils/PropertiesReader.java" />
       </list>
     </option>
   </component>
@@ -767,7 +818,7 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17147708" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17035775" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24959481" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39863715" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39863715" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
@@ -851,39 +902,11 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/state/tpch/ITpchTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="34" selection-start="412" selection-end="412" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/state/tpch/TpchState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="114" column="14" selection-start="3581" selection-end="3587" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4686#4696#0" expanded="true" />
-            <element signature="e#8237#8251#0" expanded="true" />
-            <element signature="e#10648#10660#0" expanded="true" />
-            <element signature="e#13070#13081#0" expanded="true" />
-            <element signature="e#15302#15318#0" expanded="true" />
-            <element signature="e#17718#17728#0" expanded="true" />
-            <element signature="e#19546#19558#0" expanded="true" />
-            <element signature="e#21649#21663#0" expanded="true" />
-            <element signature="e#22380#22722#0" expanded="true" />
-            <element signature="e#22715#22716#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/../lib/storm-0.8.3-wip3.jar!/src/jvm/backtype/storm/utils/DisruptorQueue.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="67" column="79" selection-start="2495" selection-end="2502" vertical-scroll-proportion="0.13398059">
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -911,17 +934,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bolt/trident/query/TpchQuery.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="152" column="67" selection-start="6973" selection-end="6973" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2947#2978#0" expanded="true" />
-            <element signature="e#3045#3071#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/tpchschema/TpchAgenda.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="67" column="62" selection-start="2225" selection-end="2279" vertical-scroll-proportion="0.0">
@@ -931,7 +943,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/spouts/NonTransactionalFileStreamingSpout.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="49" selection-start="2128" selection-end="2128" vertical-scroll-proportion="0.0">
+        <state line="76" column="0" selection-start="2128" selection-end="2128" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="e#422#464#0" expanded="true" />
           </folding>
@@ -940,7 +952,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/spouts/TransactionalTextFileSpout.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="113" selection-start="1699" selection-end="1699" vertical-scroll-proportion="0.0">
+        <state line="47" column="0" selection-start="1699" selection-end="1699" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -973,16 +985,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/utils/PropertiesReader.java">
+    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bolt/trident/basefunction/Split.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="70" selection-start="819" selection-end="819" vertical-scroll-proportion="0.0">
+        <state line="28" column="118" selection-start="1227" selection-end="1227" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bolt/trident/query/TpchQuery.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="62" column="22" selection-start="2195" selection-end="2195" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3408#3439#0" expanded="true" />
+            <element signature="e#3506#3532#0" expanded="true" />
+            <element signature="e#9363#9377#0" expanded="true" />
+            <element signature="e#9427#9436#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/tpch/Query21Topology.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="114" column="45" selection-start="5130" selection-end="5171" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/tpch/Query3Topology.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="20" selection-start="3042" selection-end="3042" vertical-scroll-proportion="0.29032257">
+        <state line="79" column="51" selection-start="3536" selection-end="3536" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/utils/PropertiesReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="61" selection-start="786" selection-end="786" vertical-scroll-proportion="0.56666666">
           <folding />
         </state>
       </provider>
