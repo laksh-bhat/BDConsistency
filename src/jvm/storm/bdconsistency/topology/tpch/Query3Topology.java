@@ -109,6 +109,7 @@ public class Query3Topology {
     private static void saveResults (final BufferedWriter writer, final String result) throws IOException {
         writer.append(result);
         writer.newLine();
+        writer.flush();
     }
 
     private static String runQuery (final String topologyAndDrpcServiceName, final DRPCClient client) throws TException, DRPCExecutionException {/*Query Arguments in order -- marketsegment, orderdate, shipdate*/

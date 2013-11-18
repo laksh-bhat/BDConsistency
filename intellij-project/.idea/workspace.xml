@@ -6,7 +6,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" afterPath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/utils/PropertiesReader.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/utils/PropertiesReader.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/tpch/Query3Topology.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/tpch/Query3Topology.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/TopologyBase.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/TopologyBase.java" />
     </list>
     <ignored path="storm.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -81,7 +80,7 @@
     <file path="/AxFinderNonTransactional.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383173479347" ignored="false" />
     <file path="/PropertiesReader.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383172704955" ignored="false" />
     <file path="/TopologyBase.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383972195781" ignored="false" />
-    <file path="/Query3Topology.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384797711456" ignored="false" />
+    <file path="/Query3Topology.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384800811600" ignored="false" />
     <file path="/Split.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1384367532422" ignored="false" />
     <file path="/TpchObjectConstructor.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383586706755" ignored="false" />
     <file path="/TpchState.java" changelist="3ce62a69-14b0-48fd-b6e9-6b6be8644430" time="1383958242169" ignored="false" />
@@ -195,7 +194,7 @@
       <file leaf-file-name="Query3Topology.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/tpch/Query3Topology.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="80" column="47" selection-start="3564" selection-end="3564" vertical-scroll-proportion="0.0">
+            <state line="108" column="57" selection-start="4984" selection-end="4984" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -233,7 +232,7 @@
       <file leaf-file-name="PropertiesReader.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/utils/PropertiesReader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="34" selection-start="500" selection-end="502" vertical-scroll-proportion="0.44074073">
+            <state line="22" column="71" selection-start="631" selection-end="631" vertical-scroll-proportion="0.5037037">
               <folding />
             </state>
           </provider>
@@ -1022,14 +1021,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/tpch/Query3Topology.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="80" column="47" selection-start="3564" selection-end="3564" vertical-scroll-proportion="0.0">
+        <state line="108" column="57" selection-start="4984" selection-end="4984" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/utils/PropertiesReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="34" selection-start="500" selection-end="502" vertical-scroll-proportion="0.44074073">
+        <state line="22" column="71" selection-start="631" selection-end="631" vertical-scroll-proportion="0.5037037">
           <folding />
         </state>
       </provider>
