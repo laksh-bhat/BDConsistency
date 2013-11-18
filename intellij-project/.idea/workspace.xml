@@ -4,6 +4,7 @@
     <list default="true" id="3ce62a69-14b0-48fd-b6e9-6b6be8644430" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../BDConsistency" afterPath="$PROJECT_DIR$/../BDConsistency" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" afterPath="$PROJECT_DIR$/../lib/storm-0.8.3-wip3/storm-0.8.3-wip3/bin/jzmq" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/spouts/NonTransactionalFileStreamingSpout.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/spouts/NonTransactionalFileStreamingSpout.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/utils/PropertiesReader.java" afterPath="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/utils/PropertiesReader.java" />
     </list>
     <ignored path="storm.iws" />
@@ -184,7 +185,7 @@
       <file leaf-file-name="FinanceTopology.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/finance/FinanceTopology.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="129" column="13" selection-start="5836" selection-end="5836" vertical-scroll-proportion="0.0">
+            <state line="128" column="67" selection-start="5822" selection-end="5822" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -193,7 +194,7 @@
       <file leaf-file-name="Query3Topology.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/tpch/Query3Topology.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="58" column="45" selection-start="2567" selection-end="2567" vertical-scroll-proportion="0.0">
+            <state line="80" column="49" selection-start="3566" selection-end="3566" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -240,7 +241,7 @@
       <file leaf-file-name="TransactionalTextFileSpout.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/spouts/TransactionalTextFileSpout.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="0" selection-start="1699" selection-end="1699" vertical-scroll-proportion="0.0">
+            <state line="160" column="57" selection-start="6104" selection-end="6104" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -249,19 +250,10 @@
       <file leaf-file-name="NonTransactionalFileStreamingSpout.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/spouts/NonTransactionalFileStreamingSpout.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="76" column="0" selection-start="2128" selection-end="2128" vertical-scroll-proportion="0.0">
+            <state line="69" column="63" selection-start="1932" selection-end="1932" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="e#422#464#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TpchAgenda.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/tpchschema/TpchAgenda.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="67" column="62" selection-start="2225" selection-end="2279" vertical-scroll-proportion="0.0">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -308,12 +300,12 @@
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/tpchschema/TpchAgenda.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/state/tpch/ITpchTable.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/state/tpch/TpchState.java" />
-        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/spouts/NonTransactionalFileStreamingSpout.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bolt/trident/basefunction/Split.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bolt/trident/query/TpchQuery.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/tpch/Query21Topology.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/TopologyBase.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/tpch/Query3Topology.java" />
+        <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/spouts/NonTransactionalFileStreamingSpout.java" />
         <option value="$PROJECT_DIR$/../src/jvm/storm/bdconsistency/utils/PropertiesReader.java" />
       </list>
     </option>
@@ -938,29 +930,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/tpchschema/TpchAgenda.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="62" selection-start="2225" selection-end="2279" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/spouts/NonTransactionalFileStreamingSpout.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="0" selection-start="2128" selection-end="2128" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#422#464#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/spouts/TransactionalTextFileSpout.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="0" selection-start="1699" selection-end="1699" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://Z:/Java/jdk1.7.0_40/src.zip!/java/io/BufferedWriter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="242" column="10" selection-start="7522" selection-end="7522" vertical-scroll-proportion="0.0">
@@ -975,18 +944,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/finance/FinanceTopology.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="129" column="13" selection-start="5836" selection-end="5836" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/bolt/trident/basefunction/Split.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="28" column="118" selection-start="1227" selection-end="1227" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/TopologyBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="23" selection-start="627" selection-end="627" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/spouts/TransactionalTextFileSpout.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="160" column="57" selection-start="6104" selection-end="6104" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/tpchschema/TpchAgenda.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="67" column="62" selection-start="2225" selection-end="2279" vertical-scroll-proportion="0.44074073">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/spouts/NonTransactionalFileStreamingSpout.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="69" column="63" selection-start="1932" selection-end="1932" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#422#464#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1011,16 +1003,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/TopologyBase.java">
+    <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/finance/FinanceTopology.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="23" selection-start="627" selection-end="627" vertical-scroll-proportion="0.0">
+        <state line="128" column="67" selection-start="5822" selection-end="5822" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/tpch/Query3Topology.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="45" selection-start="2567" selection-end="2567" vertical-scroll-proportion="0.0">
+        <state line="80" column="49" selection-start="3566" selection-end="3566" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
