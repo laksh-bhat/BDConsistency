@@ -115,7 +115,7 @@ public class Query3Topology {
         return client.execute(topologyAndDrpcServiceName, "1080548553,19950315,19950315");
     }
 
-    private static final int NUM_QUERIES = 5;
+    private static final int NUM_QUERIES = 10;
 }
 
 

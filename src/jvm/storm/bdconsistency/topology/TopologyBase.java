@@ -24,7 +24,7 @@ public class TopologyBase {
 
     public static void printTimings(long duration, int numQueries) {
         System.out.println("==================================================================");
-        System.out.println(MessageFormat.format("duration for {1} ax-finder queries {0} mill seconds",
+        System.out.println(MessageFormat.format("duration for {1} queries {0} mill seconds",
                 duration, numQueries));
     }
 
