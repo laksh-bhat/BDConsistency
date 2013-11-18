@@ -18,7 +18,7 @@ public class PropertiesReader {
         Config conf = new Config();
         conf.setNumAckers(8);
         conf.setNumWorkers(8);
-        conf.setMaxSpoutPending(4);
+        conf.setMaxSpoutPending(8);
         conf.put("topology.spout.max.batch.size", 100);
         conf.put("topology.trident.batch.emit.interval.millis", 100 );
         conf.put(Config.DRPC_SERVERS, Lists.newArrayList("qp-hd1", "qp-hd9", "qp-hd3", "qp-hd4"));

@@ -25,6 +25,7 @@ import storm.trident.spout.RichSpoutBatchExecutor;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.MessageFormat;
 
 import static bdconsistency.topology.TopologyBase.cleanup;
 import static bdconsistency.topology.TopologyBase.printTimings;
@@ -83,7 +84,8 @@ public class Query3Topology {
 
     public static void SubmitTopologyAndRunDrpcQueries (String[] args, String topologyAndDrpcServiceName, Config config) throws AlreadyAliveException, InvalidTopologyException, InterruptedException, TException, DRPCExecutionException, IOException {
         long duration = 0;
-        BufferedWriter writer = new BufferedWriter(new FileWriter("query-result.dat", false /*append*/));
+        String fileName = "Query3Result.dat";
+        BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, false /*append*/));
         DRPCClient client = new DRPCClient("localhost", 3772);
         try {
             StormSubmitter.submitTopology(topologyAndDrpcServiceName, config, buildTopology(null, args[0], topologyAndDrpcServiceName));
@@ -92,9 +94,10 @@ public class Query3Topology {
             for (int i = 0; i < NUM_QUERIES; i++) {
                 long startTime = System.currentTimeMillis();
                 String result = runQuery(topologyAndDrpcServiceName, client);
-                saveResults(writer, result);
                 long endTime = System.currentTimeMillis();
                 duration += endTime - startTime;
+                System.err.println(MessageFormat.format("Debug: Appending result to {0}", fileName));
+                saveResults(writer, result);
                 Thread.sleep(60000);
             }
         } finally {
@@ -106,7 +109,6 @@ public class Query3Topology {
     private static void saveResults (final BufferedWriter writer, final String result) throws IOException {
         writer.append(result);
         writer.newLine();
-        System.err.println("Debug: Saved Results!");
     }
 
     private static String runQuery (final String topologyAndDrpcServiceName, final DRPCClient client) throws TException, DRPCExecutionException {/*Query Arguments in order -- marketsegment, orderdate, shipdate*/
