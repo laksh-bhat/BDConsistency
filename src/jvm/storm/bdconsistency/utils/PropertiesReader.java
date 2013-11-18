@@ -16,8 +16,8 @@ import java.util.Properties;
 public class PropertiesReader {
     public static Config getStormConfig() {
         Config conf = new Config();
-        conf.setNumAckers(16);
-        conf.setNumWorkers(16);
+        conf.setNumAckers(8);
+        conf.setNumWorkers(8);
         conf.setMaxSpoutPending(16);
         conf.put("topology.spout.max.batch.size", 500);
         conf.put("topology.trident.batch.emit.interval.millis", 500 );

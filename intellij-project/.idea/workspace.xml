@@ -193,7 +193,7 @@
       <file leaf-file-name="Query3Topology.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/tpch/Query3Topology.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="108" column="57" selection-start="4984" selection-end="4984" vertical-scroll-proportion="0.0">
+            <state line="58" column="45" selection-start="2567" selection-end="2567" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -231,7 +231,7 @@
       <file leaf-file-name="PropertiesReader.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/utils/PropertiesReader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="74" selection-start="880" selection-end="880" vertical-scroll-proportion="0.6925926">
+            <state line="21" column="53" selection-start="556" selection-end="556" vertical-scroll-proportion="0.4722222">
               <folding />
             </state>
           </provider>
@@ -1020,14 +1020,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/topology/tpch/Query3Topology.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="108" column="57" selection-start="4984" selection-end="4984" vertical-scroll-proportion="0.0">
+        <state line="58" column="45" selection-start="2567" selection-end="2567" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../src/jvm/storm/bdconsistency/utils/PropertiesReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="74" selection-start="880" selection-end="880" vertical-scroll-proportion="0.6925926">
+        <state line="21" column="53" selection-start="556" selection-end="556" vertical-scroll-proportion="0.4722222">
           <folding />
         </state>
       </provider>
