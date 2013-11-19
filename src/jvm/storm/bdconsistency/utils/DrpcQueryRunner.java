@@ -19,19 +19,17 @@ public class DrpcQueryRunner {
             System.err.println("Where are the arguments?");
 
         long duration = 0;
-        DRPCClient drpcClient = new DRPCClient("localhost", 3772, 300000);
+        DRPCClient drpcClient = new DRPCClient("localhost", 3772, 900000);
         long startTime = System.currentTimeMillis();
         String result = runQuery(args[0], drpcClient);
         long endTime = System.currentTimeMillis();
         duration += endTime - startTime;
         System.out.println(result);
         drpcClient.close();
-        printTimings(duration, NUM_QUERIES);
+        printTimings(duration, 1);
     }
 
     private static String runQuery (final String topologyAndDrpcServiceName, final DRPCClient client) throws TException, DRPCExecutionException {/*Query Arguments in order -- marketsegment, orderdate, shipdate*/
         return client.execute(topologyAndDrpcServiceName, "1080548553,19950315,19950315");
     }
-
-    private static final int NUM_QUERIES = 10;
 }

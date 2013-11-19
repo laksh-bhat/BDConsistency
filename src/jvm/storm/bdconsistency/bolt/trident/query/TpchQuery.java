@@ -46,11 +46,11 @@ public class TpchQuery {
 
         @Override
         public void aggregate (Query21Result result, final TridentTuple tuple, final TridentCollector collector) {
-            if (result == null){
+            if (result == null) {
                 result = new Query21Result();
                 result.supplierName = tuple.getIntegerByField("suppliername");
             }
-            result.count ++;
+            result.count++;
         }
 
         @Override
@@ -138,13 +138,13 @@ public class TpchQuery {
                 TpchState.LineItem.LineItemBean lBean = (TpchState.LineItem.LineItemBean) l;
                 for (Object o : orders.getRows()) {
                     TpchState.Orders.OrderBean orderBean = (TpchState.Orders.OrderBean) o;
-                    for (Object c : customer.getRows()) {
+                    results.add(new Query3IntermediateResult(orderBean.getOrderKey(), orderBean.getOrderDate(),
+                                                             orderBean.getShipPriority(), lBean.getExtendedPrice(), lBean.getDiscount()));
+                    /* for (Object c : customer.getRows()) {
                         TpchState.Customer.CustBean cBean = (TpchState.Customer.CustBean) c;
-                        if (orderBean.getCustomerKey() == cBean.getCustomerKey() && lBean.getOrderKey() == orderBean.getOrderKey()) {
-                            results.add(new Query3IntermediateResult(orderBean.getOrderKey(), orderBean.getOrderDate(),
-                                                                     orderBean.getShipPriority(), lBean.getExtendedPrice(), lBean.getDiscount()));
+                       if (orderBean.getCustomerKey() == cBean.getCustomerKey() && lBean.getOrderKey() == orderBean.getOrderKey()) {
                         }
-                    }
+                    }*/
                 }
             }
             System.err.println(MessageFormat.format("Debug: computeIntermediateJoinResults -- result size -- {0}", results.size()));
@@ -209,14 +209,13 @@ public class TpchQuery {
             List<Set<Integer>> returnList = new ArrayList<Set<Integer>>();
             Set<Integer> results = new HashSet<Integer>();
 
-            ITpchTable orders = state.getTable("orders");
             ITpchTable supplier = state.getTable("supplier");
             ITpchTable lineItem = state.getTable("lineitem");
             ITpchTable nation = state.getTable("nation");
 
             if (nation != null && supplier != null && lineItem != null) {
-                lineItem = filterLineItems(lineItem);
-                nation = filterNation(nation);
+/*                lineItem = filterLineItems(lineItem);
+                nation = filterNation(nation);*/
                 computeIntermediateJoinResults(results, supplier, lineItem, nation);
             }
             returnList.add(results);
@@ -248,12 +247,9 @@ public class TpchQuery {
         private void computeIntermediateJoinResults (final Set<Integer> results, final ITpchTable lineItems, final ITpchTable suppliers, final ITpchTable nations) {
             for (Object lineitem : lineItems.getRows()) {
                 TpchState.LineItem.LineItemBean l = (TpchState.LineItem.LineItemBean) lineitem;
-                for (Object nation : nations.getRows()) {
-                    TpchState.Nation.NationBean n = (TpchState.Nation.NationBean) nation;
-                    for (Object supplier : suppliers.getRows()) {
-                        TpchState.Supplier.SupplierBean s = (TpchState.Supplier.SupplierBean) supplier;
-                        addToResultsAfterMatchingJoinAndAntiJoinPredicates(results, lineItems, l, n, s);
-                    }
+                for (Object supplier : suppliers.getRows()) {
+                    TpchState.Supplier.SupplierBean s = (TpchState.Supplier.SupplierBean) supplier;
+                    addToResultsAfterMatchingJoinAndAntiJoinPredicates(results, lineItems, l, s);
                 }
             }
             System.err.println(MessageFormat.format("Debug: computeIntermediateJoinResults -- result size -- {0}", results.size()));
@@ -271,14 +267,14 @@ public class TpchQuery {
             AND l3.suppkey <> l1.suppkey))
         */
         private void addToResultsAfterMatchingJoinAndAntiJoinPredicates
-                (final Set<Integer> results,
-                 final ITpchTable lineItems,
-                 final TpchState.LineItem.LineItemBean l1,
-                 final TpchState.Nation.NationBean n,
-                 final TpchState.Supplier.SupplierBean s
-                )
-        {
-            if (l1.getSupplierKey() == l1.getSupplierKey() && s.getNationKey() == n.getNationKey()) {
+        (
+                final Set<Integer> results,
+                final ITpchTable lineItems,
+                final TpchState.LineItem.LineItemBean l1,
+                final TpchState.Supplier.SupplierBean s
+        ) {
+            if (l1.getSupplierKey() == l1.getSupplierKey()) {
+            /* && s.getNationKey() == n.getNationKey() // We are already grouping by nation id*/
                 boolean existsSupplierKeyNotEqual = false;
                 boolean notExistsReceiptDtGtCommitDt = true;
 

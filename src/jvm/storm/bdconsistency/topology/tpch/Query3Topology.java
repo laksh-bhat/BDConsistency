@@ -80,33 +80,8 @@ public class Query3Topology {
         return topology.build();
     }
 
-    public static void main (String[] args) throws Exception {
-        Config config = PropertiesReader.getStormConfig();
-        SubmitTopologyAndRunDrpcQueries(args, "Q3", config);
-    }
-
     public static void SubmitTopologyAndRunDrpcQueries (String[] args, String topologyAndDrpcServiceName, Config config) throws AlreadyAliveException, InvalidTopologyException, InterruptedException, TException, DRPCExecutionException, IOException {
-        long duration = 0;
-        String fileName = "Query3Result.dat";
-        BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, false /*append*/));
-        DRPCClient client = new DRPCClient("localhost", 3772);
-        try {
-            StormSubmitter.submitTopology(topologyAndDrpcServiceName, config, buildTopology(null, args[0], topologyAndDrpcServiceName));
-            Thread.sleep(120000);
-
-            for (int i = 0; i < NUM_QUERIES; i++) {
-                long startTime = System.currentTimeMillis();
-                String result = runQuery(topologyAndDrpcServiceName, client);
-                long endTime = System.currentTimeMillis();
-                duration += endTime - startTime;
-                System.err.println(MessageFormat.format("Debug: Appending result to {0}", fileName));
-                saveResults(writer, result);
-                Thread.sleep(60000);
-            }
-        } finally {
-            cleanup(client, writer);
-        }
-        printTimings(duration, NUM_QUERIES);
+        StormSubmitter.submitTopology(topologyAndDrpcServiceName, config, buildTopology(null, args[0], topologyAndDrpcServiceName));
     }
 
     private static void saveResults (final BufferedWriter writer, final String result) throws IOException {
@@ -119,7 +94,10 @@ public class Query3Topology {
         return client.execute(topologyAndDrpcServiceName, "1080548553,19950315,19950315");
     }
 
-    private static final int NUM_QUERIES = 10;
+    public static void main (String[] args) throws Exception {
+        Config config = PropertiesReader.getStormConfig();
+        StormSubmitter.submitTopology("Q3", config, buildTopology(null, args[0], "Q3"));
+    }
 }
 
 
