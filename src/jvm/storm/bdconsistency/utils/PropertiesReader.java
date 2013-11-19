@@ -21,7 +21,7 @@ public class PropertiesReader {
         conf.setMaxSpoutPending(16);
         conf.put("topology.spout.max.batch.size", 1000);
         conf.put("topology.trident.batch.emit.interval.millis", 500);
-        conf.put(Config.DRPC_SERVERS, Lists.newArrayList("qp-hd1", "qp-hd-6", "qp-hd5", "qp-hd7", "qp-hd8", "qp-hd9", "qp-hd3", "qp-hd4"));
+        conf.put(Config.DRPC_SERVERS, Lists.newArrayList("qp-hd1", "qp-hd5", "qp-hd7", "qp-hd8", "qp-hd9", "qp-hd3", "qp-hd4"));
         conf.put(Config.STORM_CLUSTER_MODE, "distributed");
         //conf.put(Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS, 300);
         return conf;
