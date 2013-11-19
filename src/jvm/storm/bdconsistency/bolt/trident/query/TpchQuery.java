@@ -101,7 +101,7 @@ public class TpchQuery {
             ITpchTable lineItem = state.getTable("lineitem");
 
             if (orders != null && customer != null && lineItem != null) {
-/*                customer = filterCustomers(customer);
+                /*customer = filterCustomers(customer);
                 orders = filterOrders(orders);
                 lineItem = filterLineItems(lineItem);*/
                 computeIntermediateJoinResults(results, orders, customer, lineItem);

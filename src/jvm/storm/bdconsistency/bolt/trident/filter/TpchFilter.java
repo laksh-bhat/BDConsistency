@@ -11,9 +11,9 @@ import storm.trident.tuple.TridentTuple;
  */
 public class TpchFilter {
     public static class Query3Filter extends BaseFilter {
-        private Long orderDateKeepAfter, shipDateKeepAfter, marketSegment;
+        private long orderDateKeepAfter, shipDateKeepAfter, marketSegment;
 
-        public Query3Filter (Long marketSegment, Long maxOrderDate, Long maxShipDate) {
+        public Query3Filter (long marketSegment, long maxOrderDate, long maxShipDate) {
             this.orderDateKeepAfter = maxOrderDate;
             this.shipDateKeepAfter = maxShipDate;
             this.marketSegment = marketSegment;
@@ -27,9 +27,7 @@ public class TpchFilter {
                 return true;
             else if (table.equalsIgnoreCase("lineitem") && agenda.getShipDate() > shipDateKeepAfter)
                 return true;
-            else if (table.equalsIgnoreCase("customer") && agenda.getMarketSegment() == marketSegment)
-                return true;
-            else return true;
+            else return table.equalsIgnoreCase("customer") && agenda.getMarketSegment() == marketSegment;
         }
     }
 }
