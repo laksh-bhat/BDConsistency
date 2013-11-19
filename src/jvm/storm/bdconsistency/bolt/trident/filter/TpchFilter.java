@@ -1,12 +1,8 @@
 package bdconsistency.bolt.trident.filter;
 
-import bdconsistency.state.tpch.ITpchTable;
-import bdconsistency.state.tpch.TpchState;
+import bdconsistency.tpchschema.TpchAgenda;
 import storm.trident.operation.BaseFilter;
 import storm.trident.tuple.TridentTuple;
-
-import java.util.Iterator;
-import java.util.Set;
 
 /**
  * User: lbhat@damsl
@@ -15,32 +11,25 @@ import java.util.Set;
  */
 public class TpchFilter {
     public static class Query3Filter extends BaseFilter {
-        private int orderDateMax, shipDateMax;
-        public Query3Filter (int maxOrderDate, int maxShipDate) {
-            orderDateMax = maxOrderDate;
-            shipDateMax = maxShipDate;
+        private Long orderDateKeepAfter, shipDateKeepAfter, marketSegment;
+
+        public Query3Filter (Long marketSegment, Long maxOrderDate, Long maxShipDate) {
+            this.orderDateKeepAfter = maxOrderDate;
+            this.shipDateKeepAfter = maxShipDate;
+            this.marketSegment = marketSegment;
         }
+
         @Override
         public boolean isKeep (final TridentTuple tuple) {
-            ITpchTable table = (ITpchTable) tuple.getValueByField("tpchTable");
-            if (table instanceof TpchState.Orders) {
-                final Set rows = table.getRows();
-                Iterator<TpchState.Orders.OrderBean> iterator = rows.iterator();
-                while (iterator.hasNext()) {
-                    final TpchState.Orders.OrderBean bean = iterator.next();
-                    if (bean.getOrderDate() > orderDateMax)
-                        iterator.remove();
-                }
-            } else if (table instanceof TpchState.LineItem) {
-                final Set rows = table.getRows();
-                Iterator<TpchState.LineItem.LineItemBean> iterator = rows.iterator();
-                while (iterator.hasNext()) {
-                    final TpchState.LineItem.LineItemBean bean = iterator.next();
-                    if (bean.getShipDate() > shipDateMax)
-                        iterator.remove();
-                }
-            }
-            return true;
+            TpchAgenda agenda = (TpchAgenda) tuple.getValueByField("agendaObject");
+            String table = tuple.getStringByField("table");
+            if (table.equalsIgnoreCase("orders") && agenda.getOrderDate() > orderDateKeepAfter)
+                return true;
+            else if (table.equalsIgnoreCase("lineitem") && agenda.getShipDate() > shipDateKeepAfter)
+                return true;
+            else if (table.equalsIgnoreCase("customer") && agenda.getMarketSegment() == marketSegment)
+                return true;
+            else return true;
         }
     }
 }

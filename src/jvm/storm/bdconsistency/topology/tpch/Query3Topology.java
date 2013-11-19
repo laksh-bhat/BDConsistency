@@ -10,6 +10,8 @@ import backtype.storm.generated.StormTopology;
 import backtype.storm.tuple.Fields;
 import backtype.storm.utils.DRPCClient;
 import bdconsistency.bolt.trident.basefunction.Split;
+import bdconsistency.bolt.trident.filter.PrinterBolt;
+import bdconsistency.bolt.trident.filter.TpchFilter;
 import bdconsistency.bolt.trident.query.TpchQuery;
 import bdconsistency.spouts.NonTransactionalFileStreamingSpout;
 import bdconsistency.state.tpch.TpchState;
@@ -46,6 +48,7 @@ public class Query3Topology {
         final Stream tpchStream = basicStream
                 .each(new Fields("agenda"),
                       new Split.Query3AgendaTableSplit(), new Fields("table", "orderkey", "custkey", "agendaObject"))
+                .each(new Fields("table", "agendaObject"), new TpchFilter.Query3Filter(1080548553L, 19950315L, 19950315L))
                 .project(new Fields("table", "orderkey", "custkey", "agendaObject"))
         ;
 
