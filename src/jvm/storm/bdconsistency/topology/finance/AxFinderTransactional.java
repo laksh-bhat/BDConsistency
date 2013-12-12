@@ -21,6 +21,7 @@ import bdconsistency.utils.PropertiesReader;
 import storm.trident.Stream;
 import storm.trident.TridentState;
 import storm.trident.TridentTopology;
+import storm.trident.operation.MultiReducer;
 import storm.trident.operation.TridentCollector;
 import storm.trident.operation.TridentOperationContext;
 import storm.trident.spout.ITridentSpout;
@@ -42,7 +43,7 @@ public class AxFinderTransactional {
         public static class CountUpdater implements StateUpdater<CounterState> {
             @Override
             public void updateState(CounterState state, List<TridentTuple> tuples, TridentCollector collector) {
-                for (TridentTuple tuple : tuples) {
+                for (int i = 0; i < tuples.size(); i++) {
                     state.increment();
                 }
             }
@@ -123,6 +124,7 @@ public class AxFinderTransactional {
         public static void main(String[] args) throws Exception {
             FinanceTopology.checkArguments(args);
             Config conf = PropertiesReader.getStormConfig();
+            conf.put(Config.TOPOLOGY_SLEEP_SPOUT_WAIT_STRATEGY_TIME_MS, 1000);
             StormSubmitter.submitTopology("AXF", conf, buildTopology(null, args[0], Long.valueOf(args[1])));
             Thread.sleep(10000);
 

@@ -1,5 +1,6 @@
 package bdconsistency.utils;
 
+import backtype.storm.Config;
 import backtype.storm.generated.DRPCExecutionException;
 import backtype.storm.utils.DRPCClient;
 import org.apache.thrift7.TException;
@@ -28,6 +29,7 @@ public class DrpcQueryRunner {
         drpcClient.close();
         printTimings(duration, 1);
     }
+
 
     private static String runQuery (final String topologyAndDrpcServiceName, final DRPCClient client) throws TException, DRPCExecutionException {/*Query Arguments in order -- marketsegment, orderdate, shipdate*/
         return client.execute(topologyAndDrpcServiceName, "1080548553,19950315,19950315");
