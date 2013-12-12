@@ -1,0 +1,24 @@
+[5665000] -- 2 bolts - 5 mins
+
+10000 -- duration for 50 ax-finder queries 15,011 mill seconds
+100000 -- duration for 50 ax-finder queries 1,027 mill seconds
+1000000 -- duration for 50 ax-finder queries 1,039 mill seconds
+10000000 -- duration for 50 ax-finder queries 1,039 mill seconds
+
+
+
+1bolt - 1min - 240000 -- 4000/s
+2 - 1min -- 130000 -- 2166/s
+4 - 1min -- 121000 -- 2016/s
+8 - 1min -- 120000 -- 2000/s
+
+
+
+state size vs query times vs count
+-----------------------------------------
+10,000 --  10 ax-finder queries 2,906 milli seconds - 123250
+100,000 -- 10 ax-finder queries 3,576 milli seconds   - 150000
+1000,000 -- 10  ax-finder queries 4,867 milli seconds - 120750
+10,000,000 -- 10 ax-finder queries 5,040 mill seconds - 142250
+
+

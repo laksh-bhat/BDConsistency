@@ -2,13 +2,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>storm.starter</groupId>
-	<artifactId>storm-starter</artifactId>
+	<groupId>bdconsistency</groupId>
+	<artifactId>bdconsistency</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>storm-starter</name>
-	<url>https://github.com/nathanmarz/storm-starter</url>
+	<name>bdconsistency</name>
+	<url>https://github.com/lbhat1/bdconsistency</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -51,7 +51,6 @@
 
 	<build>
 		<sourceDirectory>src/jvm</sourceDirectory>
-		<testSourceDirectory>test/jvm</testSourceDirectory>
 <!-- 		<resources>
 			<resource>
 				<directory>${basedir}/multilang</directory>
@@ -105,19 +104,13 @@
 							<goal>compile</goal>
 						</goals>
 					</execution>
-					<execution>
-						<id>test</id>
-						<phase>test</phase>
-						<goals>
-							<goal>test</goal>
-						</goals>
-					</execution>
 				</executions>
 
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.0.2</version>
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>

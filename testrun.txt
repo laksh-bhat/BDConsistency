@@ -1,0 +1,4 @@
+
+git pull
+ 1998  mvn -f m2-pom.xml package
+ 1999  storm jar target/bdconsistency-0.0.1-SNAPSHOT.jar bdconsistency.FinanceTopology /damsl/software/storm/code/BDConsistency/resources/big_axfinder_agenda.csv
